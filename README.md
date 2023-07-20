@@ -32,7 +32,7 @@
 ```xml
 
 <dependency>
-    <groupId>com.guanmengyuan</groupId>
+    <groupId>com.guanmengyuan.spring-ex</groupId>
     <artifactId>spring-boot-starter-webflux</artifactId>
 </dependency>
 
