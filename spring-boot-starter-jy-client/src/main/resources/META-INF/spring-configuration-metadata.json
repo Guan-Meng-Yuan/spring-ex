@@ -1,0 +1,48 @@
+{
+  "groups": [
+    {
+      "name": "jy",
+      "type": "com.guanmengyuan.spring.ex.jy.config.JYProperties",
+      "sourceType": "com.guanmengyuan.spring.ex.jy.config.JYProperties"
+    }
+  ],
+  "properties": [
+    {
+      "name": "jy.api-url",
+      "type": "java.lang.String",
+      "description": "聚英电子openApiUrl",
+      "sourceType": "com.guanmengyuan.spring.ex.jy.config.JYProperties"
+    },
+    {
+      "name": "jy.app-key",
+      "type": "java.lang.String",
+      "description": "聚英电子appKey",
+      "sourceType": "com.guanmengyuan.spring.ex.jy.config.JYProperties"
+    },
+    {
+      "name": "jy.app-secret",
+      "type": "java.lang.String",
+      "description": "聚英电子app密钥",
+      "sourceType": "com.guanmengyuan.spring.ex.jy.config.JYProperties"
+    },
+    {
+      "name": "jy.app-secret-key",
+      "type": "java.lang.String",
+      "description": "聚英电子app密钥",
+      "sourceType": "com.guanmengyuan.spring.ex.jy.config.JYProperties"
+    },
+    {
+      "name": "jy.auth-url",
+      "type": "java.lang.String",
+      "description": "聚英电子认证apiUrl",
+      "sourceType": "com.guanmengyuan.spring.ex.jy.config.JYProperties"
+    },
+    {
+      "name": "jy.client-type",
+      "type": "java.lang.String",
+      "description": "聚英电子api客户端类型,默认:svr",
+      "sourceType": "com.guanmengyuan.spring.ex.jy.config.JYProperties"
+    }
+  ],
+  "hints": []
+}
