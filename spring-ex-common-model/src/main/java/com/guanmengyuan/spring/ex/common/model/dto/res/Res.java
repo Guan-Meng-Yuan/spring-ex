@@ -1,7 +1,6 @@
 package com.guanmengyuan.spring.ex.common.model.dto.res;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import com.guanmengyuan.spring.ex.common.model.enums.BaseResEnum;
 import com.guanmengyuan.spring.ex.common.model.enums.ResEnum;
 import com.guanmengyuan.spring.ex.common.model.exception.ServiceException;
@@ -62,8 +61,8 @@ public class Res<T> implements Serializable {
 
     public static <T> Res<PageRes<T>> page(Page<T> page, String traceId) {
         Res<PageRes<T>> res = new Res<>();
-        PageRes<T> pageRes = new PageRes<>(page.getRecords(), page.getPageNumber(), page.getPageSize(),
-                page.getTotalRow(), page.hasNext());
+
+        PageRes<T> pageRes = new PageRes<>(page.getRecords(), page.hasNext(), page.getTotalRow(), page.getPageSize(), page.getPageNumber());
         res.setData(pageRes);
         res.setTraceId(traceId);
         res.setSuccess(Boolean.TRUE);
@@ -119,22 +118,26 @@ public class Res<T> implements Serializable {
          * 分页数据
          */
         private List<T> list;
-        /**
-         * 当前页
-         */
-        private Integer pageNumber;
-        /**
-         * 每页条数
-         */
-        private Integer pageSize;
-        /**
-         * 总数
-         */
-        private Long totalRow;
+
         /**
          * 是否有下一页
          */
         private Boolean hasNext;
+
+        /**
+         * 数据总量
+         */
+        private Long total;
+
+        /**
+         * 每页数据量
+         */
+        private Integer pageSize;
+
+        /**
+         * 当前页码
+         */
+        private Integer current;
     }
 
 }

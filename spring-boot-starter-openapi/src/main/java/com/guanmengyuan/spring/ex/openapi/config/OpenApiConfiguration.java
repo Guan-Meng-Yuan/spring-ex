@@ -16,8 +16,10 @@ import lombok.RequiredArgsConstructor;
 import org.dromara.hutool.core.collection.CollUtil;
 import org.dromara.hutool.core.collection.ListUtil;
 import org.dromara.hutool.core.map.MapUtil;
+import org.dromara.hutool.core.regex.ReUtil;
 import org.dromara.hutool.core.text.StrUtil;
 import org.springdoc.core.customizers.GlobalOpenApiCustomizer;
+import org.springdoc.core.providers.JavadocProvider;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -30,6 +32,8 @@ import java.util.Map;
 @RequiredArgsConstructor
 public class OpenApiConfiguration implements GlobalOpenApiCustomizer {
     private final OpenApiConfigProperties openApiConfigProperties;
+    private final JavadocProvider javadocProvider;
+    private static final String PAGE_REGEX = "^Page[A-Z].*";
 
     @Bean
     public OpenAPI openAPI() {
@@ -58,38 +62,46 @@ public class OpenApiConfiguration implements GlobalOpenApiCustomizer {
             tagMap = CollUtil.fieldValueAsMap(tags, "name", "description");
             tags.forEach(tag -> tag.setName(tag.getDescription()));
         }
+
+        //设置全局响应类
+        Schema<Res> resSchema = modelConverters.readAllAsResolvedSchema(new AnnotatedType(Res.class)).schema;
+        String resClassDoc = javadocProvider.getClassJavadoc(Res.class);
+        resSchema.setDescription(resClassDoc);
+        resSchema.setType("object");
+        resSchema.set$id("res");
+        Map<String, Schema> resProperties = resSchema.getProperties();
+        Schema dataSchema = resProperties.get("data");
+        dataSchema.setType("object");
+        components.addSchemas("Res<T>", resSchema);
+
+        Schema<Res.PageRes> pageRes = modelConverters.readAllAsResolvedSchema(new AnnotatedType(Res.PageRes.class)).schema;
+        pageRes.set$id("pageRes");
+        components.addSchemas("PageRes<T>", pageRes);
+
         Map<String, Schema> allSchema = components.getSchemas();
         if (MapUtil.isNotEmpty(allSchema)) {
             allSchema.forEach((key, schema) -> {
-                if (StrUtil.startWith(key, "Page") && !StrUtil.equals(key, "PageReq")) {
+                if (ReUtil.isMatch(PAGE_REGEX, key) && !StrUtil.equalsAny(key, "PageRes<T>", "PageReq")) {
                     Schema pageSchema = allSchema.get(key);
                     Map<String, Schema> properties = pageSchema.getProperties();
-                    //修改集合
                     Schema records = properties.get("records");
-                    records.setName("list");
-                    records.setDescription("数据集合");
+                    records.setDescription("分页数据");
                     properties.put("list", records);
-                    //修改pageNumber
                     Schema pageNumber = properties.get("pageNumber");
                     pageNumber.setDescription("当前页码");
-                    //修改pageSize
-                    Schema pageSize = properties.get("pageSize");
-                    pageSize.setDescription("每页条数");
-                    //修改totalRow
+                    properties.put("current", pageNumber);
+                    properties.get("pageSize").setDescription("每页数据量");
                     Schema totalRow = properties.get("totalRow");
-                    totalRow.setDescription("数据总数");
-                    Schema<Boolean> hasNextSchema = new Schema(openApi.getSpecVersion());
-                    hasNextSchema.setDescription("是否有下一页");
+                    totalRow.setDescription("数据总量");
+                    properties.put("total", totalRow);
+                    Schema<Boolean> hasNextSchema = new Schema<>();
                     hasNextSchema.setType("boolean");
+                    hasNextSchema.setDescription("是否有下一页");
                     properties.put("hasNext", hasNextSchema);
-                    properties.remove("records");
-                    properties.remove("totalPage");
-                    properties.remove("optimizeCountQuery");
-                    properties.remove("empty");
+                    MapUtil.removeAny(properties, "pageNumber", "totalPage", "totalRow", "optimizeCountQuery", "empty", "records");
                 }
             });
         }
-
 
         Map<String, String> finalTagMap = tagMap;
         paths.forEach((s, pathItem) -> {
@@ -104,22 +116,6 @@ public class OpenApiConfiguration implements GlobalOpenApiCustomizer {
                 }
             });
         });
-        //设置全局响应类
-        Schema<Res> resSchema = modelConverters.readAllAsResolvedSchema(new AnnotatedType(Res.class)).schema;
-        resSchema.setDescription("全局响应");
-        resSchema.setType("object");
-        Map<String, Schema> resProperties = resSchema.getProperties();
-        Schema dataSchema = resProperties.get("data");
-        dataSchema.setType("object");
-        components.addSchemas("Res<T>", resSchema);
-        //设置PageRes类
-        Schema<Res.PageRes> pageResSchema = modelConverters.readAllAsResolvedSchema(new AnnotatedType(Res.PageRes.class)).schema;
-        pageResSchema.setDescription("全局分页响应");
-        pageResSchema.setType("object");
-        Map<String, Schema> pageResProperties = pageResSchema.getProperties();
-        Schema listSchema = pageResProperties.get("list");
-        listSchema.setType("array");
-        components.addSchemas("PageRes<T>", pageResSchema);
 
     }
 }

@@ -6,7 +6,7 @@
     <parent>
         <groupId>com.guanmengyuan</groupId>
         <artifactId>spring-ex</artifactId>
-        <version>1.0.2-jdk17on</version>
+        <version>1.0.3-jdk17on</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
     <groupId>com.guanmengyuan.spring-ex</groupId>

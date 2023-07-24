@@ -1,24 +1,20 @@
 package com.guanmengyuan.spring.ex.common.model.dto.req;
 
-import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
 import java.io.Serializable;
 
 /**
- * 分页请求体
+ * 分页参数
  */
 @Data
 public class PageReq implements Serializable {
     /**
-     * 当前页码
+     * 当前页,默认第一页
      */
-    @NotNull(message = "页码不能为空")
-    private Integer pageNumber;
+    private Integer current = 1;
     /**
-     * 每页条数
+     * 每页条数,默认10条
      */
-    @NotNull(message = "条数不能为空")
-    private Integer pageSize;
-
+    private Integer pageSize = 10;
 }
