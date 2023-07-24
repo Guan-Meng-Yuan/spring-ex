@@ -2,7 +2,7 @@ server:
   port: 80
 springdoc:
   title: spring-ex测试接口文档
-  version: 1.0.3-jdk17on
+  version: 1.0.4-jdk17on
   group-configs:
     - group: test
       display-name: 测试
