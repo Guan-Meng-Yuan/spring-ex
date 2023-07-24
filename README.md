@@ -23,8 +23,8 @@
 ```
 
 > 版本说明:
-> * **jdk17on** 适用于jdk17以上的版本
-> * **jdk8on**  适用于jdk8以上的版本
+> * [**jdk17on**](https://github.com/GMY-i/spring-ex/tree/main) 适用于jdk17以上的版本
+> * [**jdk8on**](https://github.com/GMY-i/spring-ex/tree/8)  适用于jdk8以上的版本
 
 ## 组件说明
 
