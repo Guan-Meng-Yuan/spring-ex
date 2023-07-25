@@ -1,6 +1,7 @@
 package com.guanmengyuan.spring.ex.test.controller;
 
 
+import com.guanmengyuan.spring.ex.alipay.service.AliPayService;
 import com.guanmengyuan.spring.ex.common.model.dto.req.PageReq;
 import com.guanmengyuan.spring.ex.test.model.domain.User;
 import com.guanmengyuan.spring.ex.test.service.UserService;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 public class UserController {
     private final UserService userService;
+    private final AliPayService aliPayService;
 
     /**
      * 新增用户

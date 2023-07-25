@@ -7,18 +7,22 @@
         <groupId>com.guanmengyuan</groupId>
         <artifactId>spring-ex</artifactId>
         <version>1.0.6-jdk17on</version>
-        <relativePath>../pom.xml</relativePath>
     </parent>
+
     <groupId>com.guanmengyuan.spring-ex</groupId>
-    <artifactId>spring-boot-starter-jy-client</artifactId>
-    <description>聚英电子配置</description>
+    <artifactId>spring-boot-starter-alipay</artifactId>
 
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
+
     <dependencies>
+        <dependency>
+            <groupId>com.alipay.sdk</groupId>
+            <artifactId>alipay-easysdk</artifactId>
+        </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-configuration-processor</artifactId>
@@ -28,24 +32,8 @@
             <artifactId>spring-boot-autoconfigure</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.github.lianjiatech</groupId>
-            <artifactId>retrofit-spring-boot-starter</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.dromara.hutool</groupId>
-            <artifactId>hutool-json</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.guanmengyuan.spring-ex</groupId>
-            <artifactId>spring-ex-common-model</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-api</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.dromara.hutool</groupId>
-            <artifactId>hutool-extra</artifactId>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
         </dependency>
 
     </dependencies>

@@ -24,6 +24,10 @@
         </dependency>
         <dependency>
             <groupId>com.guanmengyuan.spring-ex</groupId>
+            <artifactId>spring-boot-starter-alipay</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.guanmengyuan.spring-ex</groupId>
             <artifactId>spring-boot-starter-mybatis-flex</artifactId>
         </dependency>
         <dependency>
@@ -37,7 +41,7 @@
             <dependency>
                 <groupId>com.guanmengyuan</groupId>
                 <artifactId>spring-ex-dependencies</artifactId>
-                <version>1.0.5-jdk17on</version>
+                <version>1.0.6-jdk17on</version>
                 <scope>import</scope>
                 <type>pom</type>
             </dependency>
