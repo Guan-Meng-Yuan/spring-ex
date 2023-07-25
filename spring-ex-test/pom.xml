@@ -37,7 +37,7 @@
             <dependency>
                 <groupId>com.guanmengyuan</groupId>
                 <artifactId>spring-ex-dependencies</artifactId>
-                <version>1.0.4-jdk17on</version>
+                <version>1.0.5-jdk17on</version>
                 <scope>import</scope>
                 <type>pom</type>
             </dependency>

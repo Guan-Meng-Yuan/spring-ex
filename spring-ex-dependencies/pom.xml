@@ -5,7 +5,7 @@
 
     <groupId>com.guanmengyuan</groupId>
     <artifactId>spring-ex-dependencies</artifactId>
-    <version>1.0.4-jdk17on</version>
+    <version>1.0.5-jdk17on</version>
     <packaging>pom</packaging>
     <name>spring-ex-dependencies</name>
     <description>spring ex base pom</description>
@@ -32,7 +32,7 @@
     </scm>
 
     <properties>
-        <revision>1.0.4-jdk17on</revision>
+        <revision>1.0.5-jdk17on</revision>
         <java.version>17</java.version>
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
@@ -206,7 +206,7 @@
             </dependency>
             <dependency>
                 <groupId>com.guanmengyuan.spring-ex</groupId>
-                <artifactId>spring-boot-starter-wx-miniapp</artifactId>
+                <artifactId>spring-boot-starter-wx-mini-app</artifactId>
                 <version>${revision}</version>
             </dependency>
             <dependency>
