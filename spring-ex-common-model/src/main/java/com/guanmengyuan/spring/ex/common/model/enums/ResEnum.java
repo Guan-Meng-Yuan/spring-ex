@@ -11,6 +11,8 @@ public enum ResEnum implements BaseResEnum {
     SUCCESS(HttpStatus.OK, "ok", "操作成功"),
     UNAUTHORIZED(HttpStatus.UNAUTHORIZED, "unauthorized", "未授权"),
     NOT_AN_ENUMERATION(HttpStatus.NOT_ACCEPTABLE, "header enum not support", "网络异常"),
+    ID_CAN_NOT_BE_EMPTY(HttpStatus.BAD_REQUEST, "ID不能为空", "参数错误"),
+    BODY_CAN_NOT_BE_EMPTY(HttpStatus.BAD_REQUEST, "参数不能为空", "参数错误"),
     ;
     private final HttpStatusCode httpStatusCode;
     private final String message;

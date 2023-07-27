@@ -4,8 +4,10 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.mybatisflex.annotation.Column;
 import com.mybatisflex.annotation.Id;
 import com.mybatisflex.annotation.KeyType;
+import com.mybatisflex.core.activerecord.Model;
 import com.mybatisflex.core.keygen.KeyGenerators;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
@@ -15,7 +17,8 @@ import java.sql.Timestamp;
  */
 
 @Data
-public class BaseDomain implements Serializable {
+@EqualsAndHashCode(callSuper = true)
+public class BaseDomain<T extends Model<T>> extends Model<T> implements Serializable {
     /**
      * 主键ID
      */

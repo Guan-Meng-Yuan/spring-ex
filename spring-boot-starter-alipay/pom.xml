@@ -6,11 +6,12 @@
     <parent>
         <groupId>com.guanmengyuan</groupId>
         <artifactId>spring-ex</artifactId>
-        <version>1.0.6-jdk17on</version>
+        <version>1.0.7-jdk17on</version>
     </parent>
 
     <groupId>com.guanmengyuan.spring-ex</groupId>
     <artifactId>spring-boot-starter-alipay</artifactId>
+    <description>支付宝api starter</description>
 
     <properties>
         <maven.compiler.source>17</maven.compiler.source>

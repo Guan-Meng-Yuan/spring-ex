@@ -1,6 +1,7 @@
 package com.guanmengyuan.spring.ex.common.model.domain;
 
 import com.mybatisflex.annotation.Column;
+import com.mybatisflex.core.activerecord.Model;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -9,7 +10,7 @@ import lombok.EqualsAndHashCode;
  */
 @Data
 @EqualsAndHashCode(callSuper = true)
-public class TenantDomain extends BaseDomain {
+public class TenantDomain<T extends Model<T>> extends BaseDomain<T> {
     /**
      * 租户ID
      */

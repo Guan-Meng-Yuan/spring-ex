@@ -17,4 +17,9 @@ public class PageReq implements Serializable {
      * 每页条数,默认10条
      */
     private Integer pageSize = 10;
+
+    /**
+     * 查询关键字
+     */
+    private String keywords;
 }
