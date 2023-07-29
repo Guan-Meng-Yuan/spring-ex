@@ -14,6 +14,7 @@ import lombok.extern.slf4j.Slf4j;
 import okhttp3.Request;
 import okhttp3.Response;
 import okhttp3.ResponseBody;
+import okio.Buffer;
 import okio.BufferedSource;
 import org.dromara.hutool.core.thread.ThreadUtil;
 import org.dromara.hutool.extra.spring.SpringUtil;
@@ -50,7 +51,9 @@ public class JYRetryInterceptor extends RetryInterceptor {
             }
             String bodyJson = null;
             if (null != source) {
-                bodyJson = source.getBuffer().clone().readString(StandardCharsets.UTF_8);
+                try (Buffer clonedBuffer = source.getBuffer().clone()) {
+                    bodyJson = clonedBuffer.readString(StandardCharsets.UTF_8);
+                }
             }
             JYRes<?> jyRes = JSONUtil.toBean(bodyJson, JYRes.class);
             if (jyRes.getSuccess()) {

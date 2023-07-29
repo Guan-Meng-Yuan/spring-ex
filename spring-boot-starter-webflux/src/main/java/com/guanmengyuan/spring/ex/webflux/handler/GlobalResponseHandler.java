@@ -1,8 +1,8 @@
 package com.guanmengyuan.spring.ex.webflux.handler;
 
 import com.guanmengyuan.spring.ex.common.model.dto.res.Res;
-import com.mybatisflex.core.paginate.Page;
 import lombok.NonNull;
+import lombok.extern.slf4j.Slf4j;
 import org.dromara.hutool.core.text.StrUtil;
 import org.springframework.beans.factory.BeanInitializationException;
 import org.springframework.core.MethodParameter;
@@ -17,6 +17,7 @@ import reactor.core.publisher.Mono;
 
 import java.util.List;
 
+@Slf4j
 public class GlobalResponseHandler extends ResponseBodyResultHandler {
 
     private static final MethodParameter METHOD_PARAMETER;
@@ -27,7 +28,7 @@ public class GlobalResponseHandler extends ResponseBodyResultHandler {
             METHOD_PARAMETER = new MethodParameter(GlobalResponseHandler.class.getDeclaredMethod("methodForParams"),
                     -1);
         } catch (NoSuchMethodException | SecurityException e) {
-            e.printStackTrace();
+            log.error("methodForParams method not found , {}", e.getMessage());
             throw new BeanInitializationException(e.getMessage());
         }
     }
@@ -38,7 +39,7 @@ public class GlobalResponseHandler extends ResponseBodyResultHandler {
         setOrder(-1);
     }
 
-    @SuppressWarnings("unused")
+    @SuppressWarnings({"unused", "SameReturnValue"})
     private static Res<?> methodForParams() {
         return null;
     }
@@ -47,9 +48,6 @@ public class GlobalResponseHandler extends ResponseBodyResultHandler {
         if (body instanceof Res<?> res) {
             res.setTraceId(traceId);
             return res;
-        }
-        if (body instanceof Page<?> page) {
-            return Res.page(page, traceId);
         }
         return Res.success(body, traceId);
     }

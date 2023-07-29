@@ -12,6 +12,7 @@ public interface AliPayService {
      * @param appId appid
      * @return 自定义sdk配置
      */
+    @SuppressWarnings("unused")
     MultipleFactory switchOverTo(String appId);
 
     /**

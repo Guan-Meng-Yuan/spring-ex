@@ -2,7 +2,6 @@ package com.guanmengyuan.spring.ex.webflux.controller;
 
 
 import com.guanmengyuan.spring.ex.common.model.domain.BaseDomain;
-import com.guanmengyuan.spring.ex.common.model.dto.req.PageReq;
 import com.guanmengyuan.spring.ex.common.model.dto.res.Res;
 import com.guanmengyuan.spring.ex.common.model.enums.ResEnum;
 import com.mybatisflex.core.paginate.Page;
@@ -48,14 +47,16 @@ public class BaseController<T extends BaseDomain<T>> {
     /**
      * 分页数据
      *
-     * @param pageReq 分页参数
-     * @param param   条件参数
+     * @param page  分页参数
+     * @param param 条件参数
      * @return 分页数据
      */
     @GetMapping("page")
-    public Page<T> page(@ParameterObject PageReq pageReq, @ParameterObject T param) {
+    //没有用这些注解,不是引入kenif了吗 只用了他的ui 没有它的增强功能 那还是用的swagger? springdoc
+
+    public Page<T> page(@ParameterObject Page<T> page, @ParameterObject() T param) {
         QueryColumn createTime = TableDefs.getQueryColumn(param.getClass(), TableInfoFactory.ofEntityClass(param.getClass()).getTableNameWithSchema(), "create_time");
-        return param.orderBy(createTime.desc()).page(Page.of(pageReq.getCurrent(), pageReq.getPageSize()));
+        return param.orderBy(createTime.desc()).page(page);
     }
 
     /**

@@ -4,10 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.guanmengyuan.spring.ex.common.model.enums.BaseResEnum;
 import com.guanmengyuan.spring.ex.common.model.enums.ResEnum;
 import com.guanmengyuan.spring.ex.common.model.exception.ServiceException;
-import com.mybatisflex.core.paginate.Page;
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 import org.dromara.hutool.core.text.StrUtil;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
@@ -15,7 +12,6 @@ import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.server.ServerWebExchange;
 
 import java.io.Serializable;
-import java.util.List;
 
 /**
  * 统一响应dto
@@ -59,16 +55,7 @@ public class Res<T> implements Serializable {
         return res;
     }
 
-    public static <T> Res<PageRes<T>> page(Page<T> page, String traceId) {
-        Res<PageRes<T>> res = new Res<>();
 
-        PageRes<T> pageRes = new PageRes<>(page.getRecords(), page.hasNext(), page.getTotalRow(), page.getPageSize(), page.getPageNumber());
-        res.setData(pageRes);
-        res.setTraceId(traceId);
-        res.setSuccess(Boolean.TRUE);
-        setResEnum(res, ResEnum.SUCCESS);
-        return res;
-    }
 
     public static Res<?> error(Throwable error, ServerWebExchange exchange) {
         Res<?> res = new Res<>();
@@ -110,34 +97,6 @@ public class Res<T> implements Serializable {
         throw new ServiceException(resEnum);
     }
 
-    @Data
-    @AllArgsConstructor
-    @NoArgsConstructor
-    public static class PageRes<T> {
-        /**
-         * 分页数据
-         */
-        private List<T> list;
 
-        /**
-         * 是否有下一页
-         */
-        private Boolean hasNext;
-
-        /**
-         * 数据总量
-         */
-        private Long total;
-
-        /**
-         * 每页数据量
-         */
-        private Integer pageSize;
-
-        /**
-         * 当前页码
-         */
-        private Integer current;
-    }
 
 }

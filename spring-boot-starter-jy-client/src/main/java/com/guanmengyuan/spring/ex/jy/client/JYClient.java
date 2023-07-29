@@ -15,6 +15,7 @@ import retrofit2.http.POST;
 @RetrofitClient(baseUrl = "${jy.api-url}")
 @Retry
 public interface JYClient {
+    @SuppressWarnings("unused")
     @POST("equip-opr/equip-close-all")
     JYRes<String> closeAll(@Body JYOpr jyOpr);
 }

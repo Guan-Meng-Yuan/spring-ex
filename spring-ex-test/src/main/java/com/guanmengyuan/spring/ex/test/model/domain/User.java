@@ -17,5 +17,7 @@ public class User extends BaseDomain<User> {
     /**
      * 测试名称
      */
+
     private String name;
+
 }

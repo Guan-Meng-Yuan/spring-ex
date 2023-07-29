@@ -2,6 +2,7 @@ package com.guanmengyuan.spring.ex.common.model.exception;
 
 import com.guanmengyuan.spring.ex.common.model.enums.BaseResEnum;
 import lombok.EqualsAndHashCode;
+import lombok.Getter;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -9,6 +10,7 @@ import org.springframework.web.server.ResponseStatusException;
 public class ServiceException extends ResponseStatusException {
 
     private BaseResEnum resEnum;
+    @Getter
     private final String tips;
 
     public ServiceException(BaseResEnum resEnum) {
@@ -21,8 +23,5 @@ public class ServiceException extends ResponseStatusException {
         this.tips = tips;
     }
 
-    public String getTips() {
-        return tips;
-    }
 
 }

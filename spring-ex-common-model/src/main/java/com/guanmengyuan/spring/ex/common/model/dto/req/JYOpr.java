@@ -8,6 +8,7 @@ import lombok.Data;
  *
  * @author guanmengyuan
  */
+@SuppressWarnings("unused")
 @Data
 public class JYOpr {
     /**

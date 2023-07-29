@@ -67,9 +67,6 @@ public class AliPayProperties {
          */
         private String alipayRootCertPath;
 
-        public String getMerchantPrivateKeyPath() {
-            return merchantPrivateKeyPath;
-        }
 
         public void setMerchantPrivateKeyPath(String merchantPrivateKeyPath) {
             this.merchantPrivateKeyPath = merchantPrivateKeyPath;

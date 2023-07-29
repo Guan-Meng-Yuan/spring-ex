@@ -12,6 +12,7 @@ import java.util.Map;
 public class DefaultAliPayServiceImpl implements AliPayService {
     private static final Map<String, MultipleFactory> factories = new HashMap<>();
 
+    @SuppressWarnings("unused")
     @Override
     public MultipleFactory switchOverTo(String appId) {
         return factories.get(appId);
