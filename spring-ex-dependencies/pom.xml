@@ -6,7 +6,7 @@
 
     <groupId>com.guanmengyuan</groupId>
     <artifactId>spring-ex-dependencies</artifactId>
-    <version>1.0.8-jdk17on</version>
+    <version>1.0.9-jdk17on</version>
     <packaging>pom</packaging>
     <name>spring-ex-dependencies</name>
     <description>spring ex base pom</description>
@@ -33,7 +33,7 @@
     </scm>
 
     <properties>
-        <revision>1.0.8-jdk17on</revision>
+        <revision>1.0.9-jdk17on</revision>
         <java.version>17</java.version>
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
@@ -53,6 +53,7 @@
         <retrofit.version>3.0.2</retrofit.version>
         <alipay.version>2.2.3</alipay.version>
         <wx-java.version>4.5.3.B</wx-java.version>
+        <snakeyaml.version>2.0</snakeyaml.version>
         <!--        build start-->
         <maven-compiler-plugin.version>3.11.0</maven-compiler-plugin.version>
         <maven-gpg-plugin.version>3.1.0</maven-gpg-plugin.version>
@@ -178,6 +179,11 @@
                 <groupId>com.github.lianjiatech</groupId>
                 <artifactId>retrofit-spring-boot-starter</artifactId>
                 <version>${retrofit.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.yaml</groupId>
+                <artifactId>snakeyaml</artifactId>
+                <version>${snakeyaml.version}</version>
             </dependency>
             <!--            guanmengyuan.spring-ex-->
             <dependency>

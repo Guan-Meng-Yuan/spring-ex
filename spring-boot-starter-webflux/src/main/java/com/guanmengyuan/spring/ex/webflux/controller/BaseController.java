@@ -52,8 +52,6 @@ public class BaseController<T extends BaseDomain<T>> {
      * @return 分页数据
      */
     @GetMapping("page")
-    //没有用这些注解,不是引入kenif了吗 只用了他的ui 没有它的增强功能 那还是用的swagger? springdoc
-
     public Page<T> page(@ParameterObject Page<T> page, @ParameterObject() T param) {
         QueryColumn createTime = TableDefs.getQueryColumn(param.getClass(), TableInfoFactory.ofEntityClass(param.getClass()).getTableNameWithSchema(), "create_time");
         return param.orderBy(createTime.desc()).page(page);

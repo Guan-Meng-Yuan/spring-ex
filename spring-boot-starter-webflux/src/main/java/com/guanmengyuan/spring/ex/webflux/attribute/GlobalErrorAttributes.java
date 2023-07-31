@@ -16,7 +16,7 @@ public class GlobalErrorAttributes extends DefaultErrorAttributes {
     @Override
     public Map<String, Object> getErrorAttributes(ServerRequest request, ErrorAttributeOptions options) {
         Throwable error = getError(request);
-        log.error("web error , {}", error.getMessage());
+        log.error("web error , {}", error.getMessage(),error);
         return BeanUtil.beanToMap(Res.error(error, request.exchange()), false, true);
     }
 }

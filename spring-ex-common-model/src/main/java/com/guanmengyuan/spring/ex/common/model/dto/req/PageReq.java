@@ -7,6 +7,7 @@ import java.io.Serializable;
 /**
  * 分页参数
  */
+@SuppressWarnings("ALL")
 @Data
 public class PageReq implements Serializable {
     /**

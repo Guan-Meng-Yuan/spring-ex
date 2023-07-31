@@ -28,7 +28,7 @@ public class GlobalResponseHandler extends ResponseBodyResultHandler {
             METHOD_PARAMETER = new MethodParameter(GlobalResponseHandler.class.getDeclaredMethod("methodForParams"),
                     -1);
         } catch (NoSuchMethodException | SecurityException e) {
-            log.error("methodForParams method not found , {}", e.getMessage());
+            log.error("methodForParams method not found , {}", e.getMessage(), e);
             throw new BeanInitializationException(e.getMessage());
         }
     }

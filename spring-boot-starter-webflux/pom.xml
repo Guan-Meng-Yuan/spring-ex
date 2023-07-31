@@ -6,7 +6,7 @@
     <parent>
         <groupId>com.guanmengyuan</groupId>
         <artifactId>spring-ex</artifactId>
-        <version>1.0.8-jdk17on</version>
+        <version>1.0.9-jdk17on</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
     <groupId>com.guanmengyuan.spring-ex</groupId>
@@ -21,7 +21,14 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-webflux</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.yaml</groupId>
+                    <artifactId>snakeyaml</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
+
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
@@ -33,6 +40,11 @@
         <dependency>
             <groupId>com.guanmengyuan.spring-ex</groupId>
             <artifactId>spring-boot-starter-openapi</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.yaml</groupId>
+            <artifactId>snakeyaml</artifactId>
+            <version>2.0</version>
         </dependency>
     </dependencies>
 </project>
