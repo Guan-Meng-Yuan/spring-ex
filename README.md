@@ -1,5 +1,4 @@
 [![Maven Central](https://img.shields.io/maven-central/v/com.guanmengyuan/spring-ex?label=Maven%20Central)](https://central.sonatype.com/search?q=com.guanmengyuan&smo=true)
-[![Contributors](https://img.shields.io/github/contributors/gmy-i/spring-ex)](https://github.com/gmy-i/spring-ex/graphs/contributors)
 [![Apache Licence2](https://img.shields.io/:License-Apache2-blue.svg)](https://www.apache.org/licenses/LICENSE-2.0.txt)
 ## 介绍
 
