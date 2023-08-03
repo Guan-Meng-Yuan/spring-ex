@@ -1,8 +1,8 @@
 package com.guanmengyuan.spring.ex.webflux.converter;
 
-import com.guanmengyuan.spring.ex.common.model.dto.res.Res;
 import com.guanmengyuan.spring.ex.common.model.enums.ParamEnum;
 import com.guanmengyuan.spring.ex.common.model.enums.ResEnum;
+import com.guanmengyuan.spring.ex.common.model.exception.ServiceException;
 import lombok.NonNull;
 import lombok.SneakyThrows;
 import org.springframework.core.convert.converter.Converter;
@@ -27,7 +27,7 @@ public class AnyToEnumConverterFactory implements ConverterFactory<String, Param
                 return null;
             }
             if (!enumType.isEnum()) {
-                Res.cast(ResEnum.NOT_AN_ENUMERATION);
+                throw new ServiceException(ResEnum.NOT_AN_ENUMERATION);
             }
             return (T) enumType.getEnumConstants()[0].getInstanceByType(source.trim());
         }

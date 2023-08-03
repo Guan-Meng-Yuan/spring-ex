@@ -1,13 +1,18 @@
 package com.guanmengyuan.spring.ex.webflux.handler;
 
 import com.guanmengyuan.spring.ex.common.model.dto.res.Res;
+import com.guanmengyuan.spring.ex.webflux.config.WebFluxProperties;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
-import org.dromara.hutool.core.text.StrUtil;
+import org.dromara.hutool.core.collection.CollUtil;
+import org.dromara.hutool.core.collection.set.SetUtil;
 import org.springframework.beans.factory.BeanInitializationException;
 import org.springframework.core.MethodParameter;
 import org.springframework.core.ReactiveAdapterRegistry;
 import org.springframework.http.codec.HttpMessageWriter;
+import org.springframework.http.server.RequestPath;
+import org.springframework.util.AntPathMatcher;
+import org.springframework.util.PathMatcher;
 import org.springframework.web.reactive.HandlerResult;
 import org.springframework.web.reactive.accept.RequestedContentTypeResolver;
 import org.springframework.web.reactive.result.method.annotation.ResponseBodyResultHandler;
@@ -16,11 +21,17 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 import java.util.List;
+import java.util.Set;
 
 @Slf4j
 public class GlobalResponseHandler extends ResponseBodyResultHandler {
+    public static final Set<String> DEFAULT_PATH = SetUtil.of("/v3/api-docs/**", "/webjars/**", "/doc.html",
+            "/actuator/**",
+            "/swagger-ui.html");
 
+    private static PathMatcher pathMatcher;
     private static final MethodParameter METHOD_PARAMETER;
+    private final WebFluxProperties webFluxProperties;
 
     static {
         try {
@@ -34,8 +45,9 @@ public class GlobalResponseHandler extends ResponseBodyResultHandler {
     }
 
     public GlobalResponseHandler(List<HttpMessageWriter<?>> writers, RequestedContentTypeResolver resolver,
-                                 ReactiveAdapterRegistry registry) {
+                                 ReactiveAdapterRegistry registry, WebFluxProperties webFluxProperties) {
         super(writers, resolver, registry);
+        this.webFluxProperties = webFluxProperties;
         setOrder(-1);
     }
 
@@ -52,14 +64,31 @@ public class GlobalResponseHandler extends ResponseBodyResultHandler {
         return Res.success(body, traceId);
     }
 
+    private static PathMatcher getPathMatcher() {
+        if (null == pathMatcher) {
+            pathMatcher = new AntPathMatcher();
+        }
+        return pathMatcher;
+    }
+
+    private static Set<String> getPattern(Set<String> ignores) {
+        if (CollUtil.isEmpty(ignores)) {
+            return DEFAULT_PATH;
+        }
+        if (!CollUtil.containsAll(ignores, DEFAULT_PATH)) {
+            ignores.addAll(DEFAULT_PATH);
+        }
+        return ignores;
+    }
+
     @Override
     @NonNull
     public Mono<Void> handleResult(ServerWebExchange exchange, HandlerResult result) {
         Object returnValue = result.getReturnValue();
         String traceId = exchange.getRequest().getId();
-        if (StrUtil.startWithAny(exchange.getRequest().getPath().value(), "/v3/api-docs", "/webjars", "/doc.html",
-                "/actuator",
-                "/swagger-ui.html")) {
+        RequestPath path = exchange.getRequest().getPath();
+        Set<String> ignores = getPattern(webFluxProperties.getIgnores());
+        if (CollUtil.isNotEmpty(ignores) && ignores.stream().anyMatch(pattern -> getPathMatcher().match(pattern, path.value()))) {
             return super.handleResult(exchange, result);
         }
         if (returnValue instanceof Mono<?> mono) {

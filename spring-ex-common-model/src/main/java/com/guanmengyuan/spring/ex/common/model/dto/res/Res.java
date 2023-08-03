@@ -1,7 +1,6 @@
 package com.guanmengyuan.spring.ex.common.model.dto.res;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.guanmengyuan.spring.ex.common.model.enums.BaseResEnum;
 import com.guanmengyuan.spring.ex.common.model.enums.ResEnum;
 import com.guanmengyuan.spring.ex.common.model.exception.ServiceException;
 import lombok.Data;
@@ -63,7 +62,7 @@ public class Res<T> implements Serializable {
         res.setTraceId(exchange.getRequest().getId());
         res.setMessage(StrUtil.format("request path error,path:{},errorMessage:{}", exchange.getRequest().getPath(),
                 error.getMessage()));
-        res.setTips("网络异常");
+        res.setTips(ResEnum.NOT_AN_ENUMERATION.getTips());
         if (error instanceof ResponseStatusException responseStatusException) {
             HttpStatusCode statusCode = responseStatusException.getStatusCode();
             res.setHttpStatusCode(statusCode);
@@ -92,10 +91,6 @@ public class Res<T> implements Serializable {
         return res;
     }
 
-
-    public static void cast(BaseResEnum resEnum) {
-        throw new ServiceException(resEnum);
-    }
 
 
 

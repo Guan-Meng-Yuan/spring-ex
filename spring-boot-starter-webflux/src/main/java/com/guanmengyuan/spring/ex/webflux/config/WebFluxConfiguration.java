@@ -2,9 +2,11 @@ package com.guanmengyuan.spring.ex.webflux.config;
 
 import com.guanmengyuan.spring.ex.webflux.converter.AnyToEnumConverterFactory;
 import com.guanmengyuan.spring.ex.webflux.handler.GlobalResponseHandler;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.http.HttpMessageConverters;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.ReactiveAdapterRegistry;
@@ -17,7 +19,10 @@ import org.springframework.web.reactive.config.WebFluxConfigurer;
 import java.util.stream.Collectors;
 
 @Configuration
+@RequiredArgsConstructor
+@EnableConfigurationProperties(WebFluxProperties.class)
 public class WebFluxConfiguration implements WebFluxConfigurer {
+    private final WebFluxProperties webFluxProperties;
 
     @Override
     public void configureHttpMessageCodecs(ServerCodecConfigurer configurer) {
@@ -34,7 +39,7 @@ public class WebFluxConfiguration implements WebFluxConfigurer {
                                                  RequestedContentTypeResolver requestedContentTypeResolver,
                                                  ReactiveAdapterRegistry reactiveAdapterRegistry) {
         return new GlobalResponseHandler(serverCodecConfigurer.getWriters(), requestedContentTypeResolver,
-                reactiveAdapterRegistry);
+                reactiveAdapterRegistry, webFluxProperties);
     }
 
     /**

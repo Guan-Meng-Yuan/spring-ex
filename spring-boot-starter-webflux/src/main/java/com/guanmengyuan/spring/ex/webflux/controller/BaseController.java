@@ -2,8 +2,8 @@ package com.guanmengyuan.spring.ex.webflux.controller;
 
 
 import com.guanmengyuan.spring.ex.common.model.domain.BaseDomain;
-import com.guanmengyuan.spring.ex.common.model.dto.res.Res;
 import com.guanmengyuan.spring.ex.common.model.enums.ResEnum;
+import com.guanmengyuan.spring.ex.common.model.exception.ServiceException;
 import com.mybatisflex.core.paginate.Page;
 import com.mybatisflex.core.query.QueryColumn;
 import com.mybatisflex.core.service.IService;
@@ -66,7 +66,7 @@ public class BaseController<T extends BaseDomain<T>> {
     @PostMapping
     public Boolean save(@RequestBody T body) {
         if (BeanUtil.isEmpty(body)) {
-            Res.cast(ResEnum.BODY_CAN_NOT_BE_EMPTY);
+            throw new ServiceException(ResEnum.BODY_CAN_NOT_BE_EMPTY);
         }
         return body.save();
     }
@@ -80,10 +80,10 @@ public class BaseController<T extends BaseDomain<T>> {
     @PutMapping
     public Boolean updateById(@RequestBody T body) {
         if (BeanUtil.isEmpty(body)) {
-            Res.cast(ResEnum.BODY_CAN_NOT_BE_EMPTY);
+            throw new ServiceException(ResEnum.BODY_CAN_NOT_BE_EMPTY);
         }
         if (StrUtil.isEmpty(body.getId())) {
-            Res.cast(ResEnum.ID_CAN_NOT_BE_EMPTY);
+            throw new ServiceException(ResEnum.ID_CAN_NOT_BE_EMPTY);
         }
 
         return body.updateById();

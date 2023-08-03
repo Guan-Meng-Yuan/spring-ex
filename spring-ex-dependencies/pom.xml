@@ -6,7 +6,7 @@
 
     <groupId>com.guanmengyuan</groupId>
     <artifactId>spring-ex-dependencies</artifactId>
-    <version>1.0.9-jdk17on</version>
+    <version>1.0.10-jdk17on</version>
     <packaging>pom</packaging>
     <name>spring-ex-dependencies</name>
     <description>spring ex base pom</description>
@@ -33,7 +33,7 @@
     </scm>
 
     <properties>
-        <revision>1.0.9-jdk17on</revision>
+        <revision>1.0.10-jdk17on</revision>
         <java.version>17</java.version>
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
@@ -42,18 +42,19 @@
         <spring-boot.version>3.1.2</spring-boot.version>
         <spring-cloud.version>2022.0.3</spring-cloud.version>
         <spring-cloud-tencent.version>1.11.8-2022.0.1</spring-cloud-tencent.version>
-        <spring-cloud-alibaba.version>2022.0.0.0-RC2</spring-cloud-alibaba.version>
+        <spring-cloud-alibaba.version>2022.0.0.0</spring-cloud-alibaba.version>
         <!--        spring end-->
 
-        <mybatis-flex.version>1.5.4</mybatis-flex.version>
+        <mybatis-flex.version>1.5.5</mybatis-flex.version>
         <mybatis.version>3.0.2</mybatis.version>
-        <hutool.version>6.0.0-M4</hutool.version>
-        <knife4j.version>4.1.0</knife4j.version>
+        <hutool.version>6.0.0-M5</hutool.version>
+        <knife4j.version>4.2.0</knife4j.version>
         <therapi.version>0.15.0</therapi.version>
         <retrofit.version>3.0.2</retrofit.version>
         <alipay.version>2.2.3</alipay.version>
-        <wx-java.version>4.5.3.B</wx-java.version>
+        <wx-java.version>4.5.4.B</wx-java.version>
         <snakeyaml.version>2.0</snakeyaml.version>
+        <dubbo.version>3.2.4</dubbo.version>
         <!--        build start-->
         <maven-compiler-plugin.version>3.11.0</maven-compiler-plugin.version>
         <maven-gpg-plugin.version>3.1.0</maven-gpg-plugin.version>
@@ -158,10 +159,22 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
+            <dependency>
+                <groupId>org.apache.dubbo</groupId>
+                <artifactId>dubbo-bom</artifactId>
+                <version>${dubbo.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
             <!--            openapi-->
             <dependency>
                 <groupId>com.github.xiaoymin</groupId>
                 <artifactId>knife4j-openapi3-webflux-jakarta-spring-boot-starter</artifactId>
+                <version>${knife4j.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.github.xiaoymin</groupId>
+                <artifactId>knife4j-gateway-spring-boot-starter</artifactId>
                 <version>${knife4j.version}</version>
             </dependency>
             <dependency>

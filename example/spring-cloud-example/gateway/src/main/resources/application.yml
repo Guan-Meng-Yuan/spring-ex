@@ -1,0 +1,28 @@
+server:
+  port: 9911
+spring:
+  application:
+    name: gateway
+  cloud:
+    sentinel:
+      filter:
+        enabled: false
+    gateway:
+      routes:
+        - id: 用户
+          uri: lb://user-consumer
+          predicates:
+            - Path=/user/**
+          filters:
+            - StripPrefix=1
+    nacos:
+      server-addr: 127.0.0.1:8848
+knife4j:
+  gateway:
+    enabled: true
+    strategy: discover
+    discover:
+      enabled: true
+      version: openapi3
+      excluded-services:
+        - gateway
