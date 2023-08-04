@@ -77,10 +77,10 @@
                         </execution>
                     </executions>
                     <configuration>
-                        <pushRegistry>business-cloud-docker.pkg.coding.net</pushRegistry>
+                        <pushRegistry>your-registry</pushRegistry>
                         <images>
                             <image>
-                                <name>business-cloud-docker.pkg.coding.net/xqh-artifacts/docker/${project.name}-test</name>
+                                <name>your-registry/${project.name}</name>
                             </image>
                         </images>
                     </configuration>
