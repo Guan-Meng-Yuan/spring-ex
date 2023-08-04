@@ -62,16 +62,25 @@
                     <version>0.43.2</version>
                     <executions>
                         <execution>
+                            <id>build</id>
                             <phase>package</phase>
                             <goals>
                                 <goal>build</goal>
                             </goals>
                         </execution>
+                        <execution>
+                            <id>push</id>
+                            <phase>install</phase>
+                            <goals>
+                                <goal>push</goal>
+                            </goals>
+                        </execution>
                     </executions>
                     <configuration>
+                        <pushRegistry>business-cloud-docker.pkg.coding.net</pushRegistry>
                         <images>
                             <image>
-                                <name>${project.name}</name>
+                                <name>business-cloud-docker.pkg.coding.net/xqh-artifacts/docker/${project.name}-test</name>
                             </image>
                         </images>
                     </configuration>
