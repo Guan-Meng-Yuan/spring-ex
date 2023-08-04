@@ -12,6 +12,8 @@ spring:
         enabled: false
       transport:
         dashboard: ${SENTINEL_HOST:localhost}:${SENTINEL_POST:8081}
+        client-ip: ${SENTINEL_HOST:localhost}
+        port: 8721
 dubbo:
   registry:
     address: ${NACOS_HOST:localhost}:${NACOS_PORT:8848}

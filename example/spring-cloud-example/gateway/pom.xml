@@ -57,6 +57,10 @@
                     <mainClass>com.guanmengyuan.spring.cloud.example.gateway.GatewayApplication</mainClass>
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>io.fabric8</groupId>
+                <artifactId>docker-maven-plugin</artifactId>
+            </plugin>
         </plugins>
     </build>
 

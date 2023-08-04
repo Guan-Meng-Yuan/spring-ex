@@ -9,6 +9,8 @@ spring:
         enabled: false
       transport:
         dashboard: ${SENTINEL_HOST:localhost}:${SENTINEL_POST:8081}
+        client-ip: ${SENTINEL_HOST:localhost}
+        port: 8719
     gateway:
       routes:
         - id: 用户

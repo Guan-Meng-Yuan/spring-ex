@@ -1,22 +1,21 @@
 version: "3.8"
 services:
   gateway:
-    build:
-      context: ./gateway
-      dockerfile: ../Dockerfile
+    image: gateway
     restart: always
     ports:
-      - "9911:80"
+      - "80:80"
+      - "8719:8719"
     environment:
       SW_AGENT_COLLECTOR_BACKEND_SERVICES: 192.168.3.229:11800
       SW_AGENT_NAME: gateway
       SENTINEL_HOST: 192.168.3.229
       NACOS_HOST: 192.168.3.229
   user-provider:
-    build:
-      context: ./provider/provider-user
-      dockerfile: ../../Dockerfile
+    image: provider-user
     restart: always
+    ports:
+      - "8721:8721"
     environment:
       SW_AGENT_COLLECTOR_BACKEND_SERVICES: 192.168.3.229:11800
       SW_AGENT_NAME: user-provider
@@ -24,10 +23,10 @@ services:
       NACOS_HOST: 192.168.3.229
       DB_HOST: 192.168.3.229
   user-consumer:
-    build:
-      context: ./consumer/consumer-user
-      dockerfile: ../../Dockerfile
+    image: consumer-user
     restart: always
+    ports:
+      - "8720:8720"
     environment:
       SW_AGENT_COLLECTOR_BACKEND_SERVICES: 192.168.3.229:11800
       SW_AGENT_NAME: user-consumer
