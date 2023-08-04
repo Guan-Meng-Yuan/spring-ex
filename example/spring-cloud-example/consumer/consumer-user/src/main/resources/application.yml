@@ -9,8 +9,13 @@ spring:
     time-zone: GMT+8
     default-property-inclusion: non-null
   cloud:
+    sentinel:
+      filter:
+        enabled: false
+      transport:
+        dashboard: ${SENTINEL_HOST:localhost}:${SENTINEL_POST:8081}
     nacos:
-      server-addr: 127.0.0.1:8848
+      server-addr: ${NACOS_HOST:localhost}:${NACOS_PORT:8848}
 dubbo:
   registry:
     address: ${spring.cloud.nacos.server-addr}
@@ -27,7 +32,7 @@ dubbo:
     check: false
 
 server:
-  port: 81
+  port: ${SERVER_PORT:80}
 springdoc:
   title: 测试接口文档
   group-configs:
@@ -35,3 +40,8 @@ springdoc:
       packages-to-scan:
         - com.guanmengyuan.spring.cloud.example.consumer.controller
       display-name: 测试
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"

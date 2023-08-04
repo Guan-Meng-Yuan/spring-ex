@@ -55,6 +55,7 @@
         <wx-java.version>4.5.4.B</wx-java.version>
         <snakeyaml.version>2.0</snakeyaml.version>
         <dubbo.version>3.2.4</dubbo.version>
+        <sentinel.version>1.8.6</sentinel.version>
         <!--        build start-->
         <maven-compiler-plugin.version>3.11.0</maven-compiler-plugin.version>
         <maven-gpg-plugin.version>3.1.0</maven-gpg-plugin.version>
@@ -67,6 +68,13 @@
     </properties>
     <dependencyManagement>
         <dependencies>
+            <!-- https://mvnrepository.com/artifact/com.alibaba.csp/sentinel-apache-dubbo3-adapter -->
+            <dependency>
+                <groupId>com.alibaba.csp</groupId>
+                <artifactId>sentinel-apache-dubbo3-adapter</artifactId>
+                <version>${sentinel.version}</version>
+            </dependency>
+
             <!--            alipay-->
             <dependency>
                 <groupId>com.alipay.sdk</groupId>

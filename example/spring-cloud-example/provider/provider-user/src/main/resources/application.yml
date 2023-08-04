@@ -1,14 +1,20 @@
 spring:
   datasource:
-    url: jdbc:mysql://localhost:3306/test
+    url: jdbc:mysql://${DB_HOST:localhost}:${DB_PORT:3306}/test
     username: root
     password: Aa123456#
     driver-class-name: com.mysql.cj.jdbc.Driver
   application:
     name: user-provider
+  cloud:
+    sentinel:
+      filter:
+        enabled: false
+      transport:
+        dashboard: ${SENTINEL_HOST:localhost}:${SENTINEL_POST:8081}
 dubbo:
   registry:
-    address: localhost:8848
+    address: ${NACOS_HOST:localhost}:${NACOS_PORT:8848}
     protocol: nacos
     register-mode: instance
   protocol:
@@ -19,3 +25,8 @@ mybatis-flex:
   audit-enable: true
   global-config:
     print-banner: false
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
