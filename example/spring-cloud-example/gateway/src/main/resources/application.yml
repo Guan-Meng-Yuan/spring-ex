@@ -13,7 +13,7 @@ spring:
         port: 8719
     gateway:
       routes:
-        - id: 用户
+        - id: user-consumer
           uri: lb://user-consumer
           predicates:
             - Path=/user/**

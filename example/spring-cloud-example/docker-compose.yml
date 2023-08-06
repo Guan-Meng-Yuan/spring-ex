@@ -7,28 +7,29 @@ services:
       - "80:80"
       - "8719:8719"
     environment:
-      SW_AGENT_COLLECTOR_BACKEND_SERVICES: 192.168.3.229:11800
+      SW_AGENT_COLLECTOR_BACKEND_SERVICES: 192.168.50.237:11800
       SW_AGENT_NAME: gateway
-      SENTINEL_HOST: 192.168.3.229
-      NACOS_HOST: 192.168.3.229
+      SENTINEL_HOST: 192.168.50.237
+      NACOS_HOST: 192.168.50.237
   user-provider:
     image: provider-user
     restart: always
     ports:
       - "8721:8721"
     environment:
-      SW_AGENT_COLLECTOR_BACKEND_SERVICES: 192.168.3.229:11800
+      SW_AGENT_COLLECTOR_BACKEND_SERVICES: 192.168.50.237:11800
       SW_AGENT_NAME: user-provider
-      SENTINEL_HOST: 192.168.3.229
-      NACOS_HOST: 192.168.3.229
-      DB_HOST: 192.168.3.229
+      SENTINEL_HOST: 192.168.50.237
+      NACOS_HOST: 192.168.50.237
+      DB_HOST: 192.168.50.237
   user-consumer:
     image: consumer-user
     restart: always
     ports:
       - "8720:8720"
+      - "81:81"
     environment:
-      SW_AGENT_COLLECTOR_BACKEND_SERVICES: 192.168.3.229:11800
+      SW_AGENT_COLLECTOR_BACKEND_SERVICES: 192.168.50.237:11800
       SW_AGENT_NAME: user-consumer
-      SENTINEL_HOST: 192.168.3.229
-      NACOS_HOST: 192.168.3.229
+      SENTINEL_HOST: 192.168.50.237
+      NACOS_HOST: 192.168.50.237

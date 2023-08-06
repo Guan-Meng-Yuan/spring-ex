@@ -80,7 +80,7 @@
                         <pushRegistry>your-registry</pushRegistry>
                         <images>
                             <image>
-                                <name>your-registry/${project.name}</name>
+                                <name>${project.name}</name>
                             </image>
                         </images>
                     </configuration>

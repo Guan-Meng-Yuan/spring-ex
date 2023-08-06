@@ -34,7 +34,7 @@ dubbo:
     check: false
 
 server:
-  port: ${SERVER_PORT:81}
+  port: 81
 springdoc:
   title: 测试接口文档
   group-configs:
