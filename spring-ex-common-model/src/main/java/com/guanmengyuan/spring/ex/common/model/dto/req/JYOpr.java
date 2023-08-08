@@ -1,6 +1,7 @@
 package com.guanmengyuan.spring.ex.common.model.dto.req;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+
 import lombok.Data;
 
 /**
@@ -8,7 +9,6 @@ import lombok.Data;
  *
  * @author guanmengyuan
  */
-@SuppressWarnings("unused")
 @Data
 public class JYOpr {
     /**

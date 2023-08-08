@@ -1,18 +1,17 @@
 package com.guanmengyuan.spring.ex.alipay.service.impl;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import com.alipay.easysdk.factory.MultipleFactory;
 import com.alipay.easysdk.kernel.Config;
 import com.guanmengyuan.spring.ex.alipay.config.AliPayProperties;
 import com.guanmengyuan.spring.ex.alipay.service.AliPayService;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 public class DefaultAliPayServiceImpl implements AliPayService {
     private static final Map<String, MultipleFactory> factories = new HashMap<>();
 
-    @SuppressWarnings("unused")
     @Override
     public MultipleFactory switchOverTo(String appId) {
         return factories.get(appId);
