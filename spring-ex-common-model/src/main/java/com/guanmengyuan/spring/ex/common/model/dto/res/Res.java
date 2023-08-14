@@ -4,13 +4,17 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.guanmengyuan.spring.ex.common.model.enums.ResEnum;
 import com.guanmengyuan.spring.ex.common.model.exception.ServiceException;
 import lombok.Data;
+import org.dromara.hutool.core.collection.CollUtil;
 import org.dromara.hutool.core.text.StrUtil;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
+import org.springframework.validation.ObjectError;
+import org.springframework.web.bind.support.WebExchangeBindException;
 import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.server.ServerWebExchange;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * 统一响应dto
@@ -27,6 +31,7 @@ public class Res<T> implements Serializable {
     /**
      * 响应消息
      */
+    @JsonIgnore
     private String message;
     /**
      * 响应数据,所有的数据响应都会在外层包装此类型
@@ -55,7 +60,6 @@ public class Res<T> implements Serializable {
     }
 
 
-
     public static Res<?> error(Throwable error, ServerWebExchange exchange) {
         Res<?> res = new Res<>();
         res.setSuccess(Boolean.FALSE);
@@ -68,6 +72,11 @@ public class Res<T> implements Serializable {
             res.setHttpStatusCode(statusCode);
             if (error instanceof ServiceException serviceException) {
                 res.setTips(serviceException.getTips());
+            } else if (error instanceof WebExchangeBindException webExchangeBindException) {
+                List<ObjectError> allErrors = webExchangeBindException.getAllErrors();
+                if (CollUtil.isNotEmpty(allErrors)) {
+                    res.setTips(StrUtil.defaultIfBlank(allErrors.get(0).getDefaultMessage(), ResEnum.NOT_AN_ENUMERATION.getTips()));
+                }
             }
         } else {
             res.setHttpStatusCode(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -90,8 +99,6 @@ public class Res<T> implements Serializable {
         setResEnum(res, ResEnum.SUCCESS);
         return res;
     }
-
-
 
 
 }

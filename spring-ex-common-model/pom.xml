@@ -5,7 +5,7 @@
     <parent>
         <groupId>com.guanmengyuan</groupId>
         <artifactId>spring-ex</artifactId>
-        <version>1.0.11-jdk17on</version>
+        <version>1.0.12-jdk17on</version>
     </parent>
     <groupId>com.guanmengyuan.spring-ex</groupId>
     <artifactId>spring-ex-common-model</artifactId>
@@ -47,6 +47,10 @@
         <dependency>
             <groupId>com.github.therapi</groupId>
             <artifactId>therapi-runtime-javadoc-scribe</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
         </dependency>
     </dependencies>
 

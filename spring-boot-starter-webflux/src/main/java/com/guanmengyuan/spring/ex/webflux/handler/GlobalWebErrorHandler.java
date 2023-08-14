@@ -21,6 +21,7 @@ import java.util.Map;
 @Order(-2)
 public class GlobalWebErrorHandler extends AbstractErrorWebExceptionHandler {
     private static final String HTTP_STATUS_FIELD = "httpStatusCode";
+    private static final String MESSAGE_FIELD = "message";
 
     public GlobalWebErrorHandler(GlobalErrorAttributes globalErrorAttributes,
                                  ApplicationContext applicationContext, ServerCodecConfigurer serverCodecConfigurer) {
@@ -39,6 +40,7 @@ public class GlobalWebErrorHandler extends AbstractErrorWebExceptionHandler {
         final Map<String, Object> errorPropertiesMap = getErrorAttributes(request, ErrorAttributeOptions.defaults());
         Object statusCode = errorPropertiesMap.get(HTTP_STATUS_FIELD);
         errorPropertiesMap.remove(HTTP_STATUS_FIELD);
+        errorPropertiesMap.remove(MESSAGE_FIELD);
         return ServerResponse.status((HttpStatusCode) statusCode)
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(BodyInserters.fromValue(errorPropertiesMap));
