@@ -5,6 +5,7 @@ import com.guanmengyuan.spring.ex.webflux.handler.GlobalResponseHandler;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.autoconfigure.http.HttpMessageConverters;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
@@ -35,6 +36,7 @@ public class WebFluxConfiguration implements WebFluxConfigurer {
     }
 
     @Bean
+    @ConditionalOnProperty(name = "spring.webflux.enable-global-response",havingValue = "true",matchIfMissing = true)
     public GlobalResponseHandler responseWrapper(ServerCodecConfigurer serverCodecConfigurer,
                                                  RequestedContentTypeResolver requestedContentTypeResolver,
                                                  ReactiveAdapterRegistry reactiveAdapterRegistry) {

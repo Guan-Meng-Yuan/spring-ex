@@ -5,7 +5,7 @@
 
     <groupId>com.guanmengyuan</groupId>
     <artifactId>spring-ex</artifactId>
-    <version>1.0.13-jdk17on</version>
+    <version>1.0.14-jdk17on</version>
     <packaging>pom</packaging>
 
     <name>spring-ex</name>
@@ -42,11 +42,12 @@
         <module>spring-boot-starter-wx-mini-app</module>
         <module>spring-boot-starter-wx-pay</module>
         <module>spring-boot-starter-alipay</module>
+        <module>spring-cloud-starter-auth</module>
     </modules>
 
 
     <properties>
-        <revision>1.0.13-jdk17on</revision>
+        <revision>1.0.14-jdk17on</revision>
         <java.version>17</java.version>
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>

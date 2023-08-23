@@ -75,12 +75,10 @@ public class OpenApiConfiguration implements GlobalOpenApiCustomizer {
         components.addSchemas("Res<T>", resSchema);
 
 
-
-
         Map<String, String> finalTagMap = tagMap;
         paths.forEach((s, pathItem) -> {
             List<Operation> operations = pathItem.readOperations();
-            Predicate<Parameter> nameStartWith = parameter -> StrUtil.startWithAny(parameter.getName(), "queryWrapper","totalRow","records","totalPage");
+            Predicate<Parameter> nameStartWith = parameter -> StrUtil.startWithAny(parameter.getName(), "queryWrapper", "totalRow", "records", "totalPage");
             operations.forEach(operation -> {
                 CollUtil.remove(operation.getParameters(), nameStartWith);
                 List<String> operationTags = operation.getTags();

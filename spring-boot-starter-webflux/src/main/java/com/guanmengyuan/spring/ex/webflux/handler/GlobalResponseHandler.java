@@ -27,7 +27,7 @@ import java.util.Set;
 public class GlobalResponseHandler extends ResponseBodyResultHandler {
     public static final Set<String> DEFAULT_PATH = SetUtil.of("/v3/api-docs/**", "/webjars/**", "/doc.html",
             "/actuator/**",
-            "/swagger-ui.html");
+            "/swagger-ui.html", "/favicon.ico");
 
     private static PathMatcher pathMatcher;
     private static final MethodParameter METHOD_PARAMETER;

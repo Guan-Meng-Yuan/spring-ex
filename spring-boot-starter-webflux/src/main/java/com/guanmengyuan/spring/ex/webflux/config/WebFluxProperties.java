@@ -14,5 +14,9 @@ public class WebFluxProperties {
      * 忽略全局响应路径
      */
     private Set<String> ignores;
+    /**
+     * 是否开始全局响应
+     */
+    private Boolean enableGlobalResponse=true;
 
 }
