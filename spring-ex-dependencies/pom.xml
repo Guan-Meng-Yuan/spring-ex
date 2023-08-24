@@ -72,6 +72,8 @@
                 <groupId>cn.dev33</groupId>
                 <artifactId>sa-token-bom</artifactId>
                 <version>${sa-token.version}</version>
+                <scope>import</scope>
+                <type>pom</type>
             </dependency>
             <dependency>
                 <groupId>cn.dev33</groupId>
