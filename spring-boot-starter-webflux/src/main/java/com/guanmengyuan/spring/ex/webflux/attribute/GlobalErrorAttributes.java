@@ -2,7 +2,7 @@ package com.guanmengyuan.spring.ex.webflux.attribute;
 
 import com.guanmengyuan.spring.ex.common.model.dto.res.Res;
 import lombok.extern.slf4j.Slf4j;
-import org.dromara.hutool.core.bean.BeanUtil;
+import cn.hutool.core.bean.BeanUtil;
 import org.springframework.boot.web.error.ErrorAttributeOptions;
 import org.springframework.boot.web.reactive.error.DefaultErrorAttributes;
 import org.springframework.stereotype.Component;

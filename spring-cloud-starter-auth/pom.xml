@@ -6,7 +6,7 @@
     <parent>
         <groupId>com.guanmengyuan</groupId>
         <artifactId>spring-ex</artifactId>
-        <version>1.0.15-jdk17on</version>
+        <version>1.0.16-jdk17on</version>
     </parent>
 
     <groupId>com.guanmengyuan.spring-ex</groupId>
@@ -35,7 +35,7 @@
             <artifactId>lombok</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.dromara.hutool</groupId>
+            <groupId>cn.hutool</groupId>
             <artifactId>hutool-core</artifactId>
         </dependency>
         <dependency>

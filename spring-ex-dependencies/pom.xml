@@ -5,7 +5,7 @@
 
     <groupId>com.guanmengyuan</groupId>
     <artifactId>spring-ex-dependencies</artifactId>
-    <version>1.0.15-jdk17on</version>
+    <version>1.0.16-jdk17on</version>
     <packaging>pom</packaging>
     <name>spring-ex-dependencies</name>
     <description>spring ex base pom</description>
@@ -32,7 +32,7 @@
     </scm>
 
     <properties>
-        <revision>1.0.15-jdk17on</revision>
+        <revision>1.0.16-jdk17on</revision>
         <java.version>17</java.version>
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
@@ -46,7 +46,7 @@
 
         <mybatis-flex.version>1.5.8</mybatis-flex.version>
         <mybatis.version>3.0.2</mybatis.version>
-        <hutool.version>6.0.0-M5</hutool.version>
+        <hutool.version>5.8.21</hutool.version>
         <knife4j.version>4.3.0</knife4j.version>
         <therapi.version>0.15.0</therapi.version>
         <retrofit.version>3.0.2</retrofit.version>
@@ -183,7 +183,7 @@
                 <scope>import</scope>
             </dependency>
             <dependency>
-                <groupId>org.dromara.hutool</groupId>
+                <groupId>cn.hutool</groupId>
                 <artifactId>hutool-bom</artifactId>
                 <version>${hutool.version}</version>
                 <type>pom</type>

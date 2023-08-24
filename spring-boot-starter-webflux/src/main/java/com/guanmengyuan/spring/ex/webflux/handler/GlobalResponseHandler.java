@@ -4,8 +4,7 @@ import com.guanmengyuan.spring.ex.common.model.dto.res.Res;
 import com.guanmengyuan.spring.ex.webflux.config.WebFluxProperties;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
-import org.dromara.hutool.core.collection.CollUtil;
-import org.dromara.hutool.core.collection.set.SetUtil;
+import cn.hutool.core.collection.CollUtil;
 import org.springframework.beans.factory.BeanInitializationException;
 import org.springframework.core.MethodParameter;
 import org.springframework.core.ReactiveAdapterRegistry;
@@ -25,7 +24,7 @@ import java.util.Set;
 
 @Slf4j
 public class GlobalResponseHandler extends ResponseBodyResultHandler {
-    public static final Set<String> DEFAULT_PATH = SetUtil.of("/v3/api-docs/**", "/webjars/**", "/doc.html",
+    public static final Set<String> DEFAULT_PATH = CollUtil.newHashSet("/v3/api-docs/**", "/webjars/**", "/doc.html",
             "/actuator/**",
             "/swagger-ui.html", "/favicon.ico");
 

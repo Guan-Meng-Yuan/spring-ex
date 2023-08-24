@@ -16,9 +16,9 @@ import okhttp3.Response;
 import okhttp3.ResponseBody;
 import okio.Buffer;
 import okio.BufferedSource;
-import org.dromara.hutool.core.thread.ThreadUtil;
-import org.dromara.hutool.extra.spring.SpringUtil;
-import org.dromara.hutool.json.JSONUtil;
+import cn.hutool.core.thread.ThreadUtil;
+import cn.hutool.extra.spring.SpringUtil;
+import cn.hutool.json.JSONUtil;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Component;
 

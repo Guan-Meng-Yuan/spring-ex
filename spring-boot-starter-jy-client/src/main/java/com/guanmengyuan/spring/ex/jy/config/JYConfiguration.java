@@ -15,7 +15,7 @@ import org.springframework.context.annotation.Import;
  
 @EnableConfigurationProperties(JYProperties.class)
 @Configuration
-@Import(org.dromara.hutool.extra.spring.SpringUtil.class)
+@Import(cn.hutool.extra.spring.SpringUtil.class)
 @RetrofitScan("com.guanmengyuan.config.client")
 public class JYConfiguration {
 }

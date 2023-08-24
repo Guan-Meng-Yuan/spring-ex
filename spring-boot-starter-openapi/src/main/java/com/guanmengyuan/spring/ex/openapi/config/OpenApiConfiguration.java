@@ -1,6 +1,10 @@
 package com.guanmengyuan.spring.ex.openapi.config;
 
 
+import cn.hutool.core.collection.CollUtil;
+import cn.hutool.core.collection.ListUtil;
+import cn.hutool.core.map.MapUtil;
+import cn.hutool.core.util.StrUtil;
 import com.guanmengyuan.spring.ex.common.model.dto.res.Res;
 import io.swagger.v3.core.converter.AnnotatedType;
 import io.swagger.v3.core.converter.ModelConverters;
@@ -14,10 +18,6 @@ import io.swagger.v3.oas.models.media.Schema;
 import io.swagger.v3.oas.models.parameters.Parameter;
 import io.swagger.v3.oas.models.tags.Tag;
 import lombok.RequiredArgsConstructor;
-import org.dromara.hutool.core.collection.CollUtil;
-import org.dromara.hutool.core.collection.ListUtil;
-import org.dromara.hutool.core.map.MapUtil;
-import org.dromara.hutool.core.text.StrUtil;
 import org.springdoc.core.customizers.GlobalOpenApiCustomizer;
 import org.springdoc.core.providers.JavadocProvider;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -80,7 +80,7 @@ public class OpenApiConfiguration implements GlobalOpenApiCustomizer {
             List<Operation> operations = pathItem.readOperations();
             Predicate<Parameter> nameStartWith = parameter -> StrUtil.startWithAny(parameter.getName(), "queryWrapper", "totalRow", "records", "totalPage");
             operations.forEach(operation -> {
-                CollUtil.remove(operation.getParameters(), nameStartWith);
+                CollUtil.removeWithAddIf(operation.getParameters(),nameStartWith);
                 List<String> operationTags = operation.getTags();
                 if (CollUtil.size(operationTags) == 1) {
                     String tag = operationTags.get(0);

@@ -1,11 +1,11 @@
 package com.guanmengyuan.spring.ex.common.model.dto.res;
 
+import cn.hutool.core.collection.CollUtil;
+import cn.hutool.core.util.StrUtil;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.guanmengyuan.spring.ex.common.model.enums.ResEnum;
 import com.guanmengyuan.spring.ex.common.model.exception.ServiceException;
 import lombok.Data;
-import org.dromara.hutool.core.collection.CollUtil;
-import org.dromara.hutool.core.text.StrUtil;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.validation.ObjectError;
@@ -75,7 +75,7 @@ public class Res<T> implements Serializable {
             } else if (error instanceof WebExchangeBindException webExchangeBindException) {
                 List<ObjectError> allErrors = webExchangeBindException.getAllErrors();
                 if (CollUtil.isNotEmpty(allErrors)) {
-                    res.setTips(StrUtil.defaultIfBlank(allErrors.get(0).getDefaultMessage(), ResEnum.NOT_AN_ENUMERATION.getTips()));
+                    res.setTips(StrUtil.emptyToDefault(allErrors.get(0).getDefaultMessage(), ResEnum.NOT_AN_ENUMERATION.getTips()));
                 }
             }
         } else {
