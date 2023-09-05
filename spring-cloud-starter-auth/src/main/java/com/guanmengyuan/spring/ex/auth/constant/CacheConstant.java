@@ -1,4 +1,4 @@
-package cn.com.xaxqh.xcrl.model.constant;
+package com.guanmengyuan.spring.ex.auth.constant;
 
 public interface CacheConstant {
     String CAPTCHA_KEY="captcha:";

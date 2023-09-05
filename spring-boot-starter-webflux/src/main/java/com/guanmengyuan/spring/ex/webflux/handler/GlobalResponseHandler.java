@@ -1,10 +1,8 @@
 package com.guanmengyuan.spring.ex.webflux.handler;
 
-import com.guanmengyuan.spring.ex.common.model.dto.res.Res;
-import com.guanmengyuan.spring.ex.webflux.config.WebFluxProperties;
-import lombok.NonNull;
-import lombok.extern.slf4j.Slf4j;
-import cn.hutool.core.collection.CollUtil;
+import java.util.List;
+import java.util.Set;
+
 import org.springframework.beans.factory.BeanInitializationException;
 import org.springframework.core.MethodParameter;
 import org.springframework.core.ReactiveAdapterRegistry;
@@ -16,11 +14,15 @@ import org.springframework.web.reactive.HandlerResult;
 import org.springframework.web.reactive.accept.RequestedContentTypeResolver;
 import org.springframework.web.reactive.result.method.annotation.ResponseBodyResultHandler;
 import org.springframework.web.server.ServerWebExchange;
+
+import com.guanmengyuan.spring.ex.common.model.dto.res.Res;
+import com.guanmengyuan.spring.ex.webflux.config.WebFluxProperties;
+
+import cn.hutool.core.collection.CollUtil;
+import lombok.NonNull;
+import lombok.extern.slf4j.Slf4j;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
-
-import java.util.List;
-import java.util.Set;
 
 @Slf4j
 public class GlobalResponseHandler extends ResponseBodyResultHandler {
@@ -44,13 +46,13 @@ public class GlobalResponseHandler extends ResponseBodyResultHandler {
     }
 
     public GlobalResponseHandler(List<HttpMessageWriter<?>> writers, RequestedContentTypeResolver resolver,
-                                 ReactiveAdapterRegistry registry, WebFluxProperties webFluxProperties) {
+            ReactiveAdapterRegistry registry, WebFluxProperties webFluxProperties) {
         super(writers, resolver, registry);
         this.webFluxProperties = webFluxProperties;
         setOrder(-1);
     }
 
-    @SuppressWarnings({"unused", "SameReturnValue"})
+    @SuppressWarnings({ "unused", "SameReturnValue" })
     private static Res<?> methodForParams() {
         return null;
     }
@@ -87,7 +89,8 @@ public class GlobalResponseHandler extends ResponseBodyResultHandler {
         String traceId = exchange.getRequest().getId();
         RequestPath path = exchange.getRequest().getPath();
         Set<String> ignores = getPattern(webFluxProperties.getIgnores());
-        if (CollUtil.isNotEmpty(ignores) && ignores.stream().anyMatch(pattern -> getPathMatcher().match(pattern, path.value()))) {
+        if (CollUtil.isNotEmpty(ignores)
+                && ignores.stream().anyMatch(pattern -> getPathMatcher().match(pattern, path.value()))) {
             return super.handleResult(exchange, result);
         }
         if (returnValue instanceof Mono<?> mono) {

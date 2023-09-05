@@ -80,7 +80,10 @@ public class OpenApiConfiguration implements GlobalOpenApiCustomizer {
             List<Operation> operations = pathItem.readOperations();
             Predicate<Parameter> nameStartWith = parameter -> StrUtil.startWithAny(parameter.getName(), "queryWrapper", "totalRow", "records", "totalPage");
             operations.forEach(operation -> {
-                CollUtil.removeWithAddIf(operation.getParameters(),nameStartWith);
+                List<Parameter> operationParameters = operation.getParameters();
+                if (CollUtil.isNotEmpty(operationParameters)) {
+                    CollUtil.removeWithAddIf(operationParameters, nameStartWith);
+                }
                 List<String> operationTags = operation.getTags();
                 if (CollUtil.size(operationTags) == 1) {
                     String tag = operationTags.get(0);

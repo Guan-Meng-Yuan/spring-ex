@@ -1,1 +1,2 @@
 com.guanmengyuan.spring.ex.auth.config.SaTokenConfiguration
+com.guanmengyuan.spring.ex.auth.util.CaptchaUtils

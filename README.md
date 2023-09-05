@@ -88,6 +88,14 @@
     <artifactId>spring-boot-starter-alipay</artifactId>
 </dependency>
 ```
+**[spring-cloud-starter-auth](./spring-cloud-starter-auth)**: SpringCloud认证自动配置组件
+
+```xml
+<dependency>
+    <groupId>com.guanmengyuan.spring-ex</groupId>
+    <artifactId>spring-cloud-starter-auth</artifactId>
+</dependency>
+```
 
 
 **[spring-ex-common-model](./spring-ex-common-model)**: 通用模型包,内置全局响应和接口
