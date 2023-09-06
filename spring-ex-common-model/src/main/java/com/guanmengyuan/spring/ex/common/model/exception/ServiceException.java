@@ -3,6 +3,7 @@ package com.guanmengyuan.spring.ex.common.model.exception;
 import com.guanmengyuan.spring.ex.common.model.enums.BaseResEnum;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -21,6 +22,14 @@ public class ServiceException extends ResponseStatusException {
     public ServiceException(HttpStatusCode status, String reason, String tips) {
         super(status, reason);
         this.tips = tips;
+    }
+
+    public ServiceException(HttpStatusCode status, String tips) {
+        this(status, tips, tips);
+    }
+
+    public ServiceException(String tips) {
+        this(HttpStatus.INTERNAL_SERVER_ERROR, tips);
     }
 
 

@@ -1,0 +1,2 @@
+com.guanmengyuan.spring.ex.oss.config.AwsS3AutoConfiguration
+com.guanmengyuan.spring.ex.oss.util.OssUtil

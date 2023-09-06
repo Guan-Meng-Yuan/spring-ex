@@ -5,7 +5,7 @@
 
     <groupId>com.guanmengyuan</groupId>
     <artifactId>spring-ex-dependencies</artifactId>
-    <version>1.0.18-jdk17on</version>
+    <version>1.1.0</version>
     <packaging>pom</packaging>
     <name>spring-ex-dependencies</name>
     <description>spring ex base pom</description>
@@ -32,7 +32,7 @@
     </scm>
 
     <properties>
-        <revision>1.0.18-jdk17on</revision>
+        <revision>1.1.0</revision>
         <java.version>17</java.version>
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
@@ -55,7 +55,9 @@
         <dubbo.version>3.2.5</dubbo.version>
         <sentinel.version>1.8.6</sentinel.version>
         <sa-token.version>1.35.0.RC</sa-token.version>
-        <forset.version>1.5.32</forset.version>
+        <forest.version>1.5.33</forest.version>
+        <flowable.version>7.0.0.M2</flowable.version>
+        <aws.version>2.20.141</aws.version>
         <!--        build start-->
         <maven-compiler-plugin.version>3.11.0</maven-compiler-plugin.version>
         <maven-gpg-plugin.version>3.1.0</maven-gpg-plugin.version>
@@ -124,34 +126,33 @@
                 <artifactId>weixin-java-pay</artifactId>
                 <version>${wx-java.version}</version>
             </dependency>
-            <!--    mybatis-flex-->
-            <dependency>
-                <groupId>com.mybatis-flex</groupId>
-                <artifactId>mybatis-flex-annotation</artifactId>
-                <version>${mybatis-flex.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.mybatis-flex</groupId>
-                <artifactId>mybatis-flex-core</artifactId>
-                <version>${mybatis-flex.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.mybatis-flex</groupId>
-                <artifactId>mybatis-flex-spring-boot-starter</artifactId>
-                <exclusions>
-                    <exclusion>
-                        <groupId>org.mybatis</groupId>
-                        <artifactId>mybatis-spring</artifactId>
-                    </exclusion>
-                </exclusions>
-                <version>${mybatis-flex.version}</version>
-            </dependency>
             <dependency>
                 <groupId>org.mybatis</groupId>
                 <artifactId>mybatis-spring</artifactId>
                 <version>${mybatis.version}</version>
             </dependency>
             <!--dependencies-->
+            <dependency>
+                <groupId>org.flowable</groupId>
+                <artifactId>flowable-bom</artifactId>
+                <version>${flowable.version}</version>
+                <scope>import</scope>
+                <type>pom</type>
+            </dependency>
+            <dependency>
+                <groupId>software.amazon.awssdk</groupId>
+                <artifactId>bom</artifactId>
+                <version>${aws.version}</version>
+                <scope>import</scope>
+                <type>pom</type>
+            </dependency>
+            <dependency>
+                <groupId>com.mybatis-flex</groupId>
+                <version>${mybatis-flex.version}</version>
+                <artifactId>mybatis-flex-dependencies</artifactId>
+                <scope>import</scope>
+                <type>pom</type>
+            </dependency>
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-dependencies</artifactId>
@@ -221,7 +222,7 @@
             <dependency>
                 <groupId>com.dtflys.forest</groupId>
                 <artifactId>forest-spring-boot3-starter</artifactId>
-                <version>${forset.version}</version>
+                <version>${forest.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.yaml</groupId>
@@ -267,6 +268,11 @@
             <dependency>
                 <groupId>com.guanmengyuan.spring-ex</groupId>
                 <artifactId>spring-cloud-starter-auth</artifactId>
+                <version>${revision}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.guanmengyuan.spring-ex</groupId>
+                <artifactId>spring-boot-starter-oss</artifactId>
                 <version>${revision}</version>
             </dependency>
         </dependencies>
