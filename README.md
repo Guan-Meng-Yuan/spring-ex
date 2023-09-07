@@ -120,3 +120,11 @@
 > * **[ParamEnum](./spring-ex-common-model/src/main/java/com/guanmengyuan/spring/ex/common/model/enums/ParamEnum.java)
     **: 通用参数枚举接口,实现该接口可将任意类型的enum作为参数传递
 
+
+**[spring-boot-starter-oss]**: AWS S3协议存储通用组件
+```xml
+<dependency>
+    <groupId>com.guanmengyuan.spring-ex</groupId>
+    <artifactId>spring-boot-starter-oss</artifactId>
+</dependency>
+```
