@@ -1,7 +1,8 @@
 package com.guanmengyuan.spring.ex.oss.config;
 
-import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+
+import lombok.Data;
 
 @ConfigurationProperties(prefix = "oss")
 @Data
@@ -14,7 +15,7 @@ public class AwsS3Properties {
     /**
      * 区域
      */
-    private String regine;
+    private String region;
     /**
      * 密钥keyId
      */
@@ -26,6 +27,6 @@ public class AwsS3Properties {
     /**
      * 是否开启https
      */
-    private Boolean enableHttps=false;
+    private Boolean enableHttps = false;
 
 }

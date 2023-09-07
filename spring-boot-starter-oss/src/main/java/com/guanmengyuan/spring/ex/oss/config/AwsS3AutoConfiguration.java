@@ -1,9 +1,13 @@
 package com.guanmengyuan.spring.ex.oss.config;
 
-import lombok.RequiredArgsConstructor;
+import java.net.URI;
+
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
+import lombok.RequiredArgsConstructor;
 import software.amazon.awssdk.auth.credentials.AwsBasicCredentials;
 import software.amazon.awssdk.auth.credentials.StaticCredentialsProvider;
 import software.amazon.awssdk.regions.Region;
@@ -11,8 +15,7 @@ import software.amazon.awssdk.services.s3.S3AsyncClient;
 import software.amazon.awssdk.services.s3.S3Client;
 import software.amazon.awssdk.services.s3.presigner.S3Presigner;
 
-import java.net.URI;
-
+@Configuration
 @EnableConfigurationProperties(AwsS3Properties.class)
 @RequiredArgsConstructor
 public class AwsS3AutoConfiguration {
@@ -23,22 +26,29 @@ public class AwsS3AutoConfiguration {
     @Bean
     public S3Client s3Client() {
         if (null == s3Client) {
-            s3Client = S3Client.builder().region(getRegion()).endpointOverride(URI.create(getDomain())).credentialsProvider(StaticCredentialsProvider.create(AwsBasicCredentials.create(awsS3Properties.getAccessKey(), awsS3Properties.getAccessKeySecret()))).build();
+            s3Client = S3Client.builder().region(getRegion()).endpointOverride(URI.create(getDomain()))
+                    .credentialsProvider(StaticCredentialsProvider.create(AwsBasicCredentials
+                            .create(awsS3Properties.getAccessKey(), awsS3Properties.getAccessKeySecret())))
+                    .build();
         }
         return s3Client;
     }
 
     private Region getRegion() {
-        return Region.of(awsS3Properties.getRegine());
+        return Region.of(awsS3Properties.getRegion());
     }
 
     private String getDomain() {
-        return awsS3Properties.getEnableHttps() ? "https://" + awsS3Properties.getEndpoint() : "http://" + awsS3Properties.getEndpoint();
+        return awsS3Properties.getEnableHttps() ? "https://" + awsS3Properties.getEndpoint()
+                : "http://" + awsS3Properties.getEndpoint();
     }
 
     @ConditionalOnMissingBean(S3Presigner.class)
     @Bean
     public S3Presigner s3Presigner() {
-        return S3Presigner.builder().region(getRegion()).endpointOverride(URI.create(getDomain())).credentialsProvider(StaticCredentialsProvider.create(AwsBasicCredentials.create(awsS3Properties.getAccessKey(), awsS3Properties.getAccessKeySecret()))).build();
+        return S3Presigner.builder().region(getRegion()).endpointOverride(URI.create(getDomain()))
+                .credentialsProvider(StaticCredentialsProvider.create(AwsBasicCredentials
+                        .create(awsS3Properties.getAccessKey(), awsS3Properties.getAccessKeySecret())))
+                .build();
     }
 }
