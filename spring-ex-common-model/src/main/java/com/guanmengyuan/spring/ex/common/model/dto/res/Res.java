@@ -9,6 +9,7 @@ import lombok.Data;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.validation.ObjectError;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.support.WebExchangeBindException;
 import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.server.ServerWebExchange;
@@ -66,23 +67,46 @@ public class Res<T> implements Serializable {
         res.setTraceId(exchange.getRequest().getId());
         res.setMessage(StrUtil.format("request path error,path:{},errorMessage:{}", exchange.getRequest().getPath(),
                 error.getMessage()));
-        res.setTips(ResEnum.NOT_AN_ENUMERATION.getTips());
+        res.setTips(ResEnum.INTERNAL_SERVER_ERROR.getTips());
         if (error instanceof ResponseStatusException responseStatusException) {
-            HttpStatusCode statusCode = responseStatusException.getStatusCode();
-            res.setHttpStatusCode(statusCode);
-            if (error instanceof ServiceException serviceException) {
-                res.setTips(serviceException.getTips());
-            } else if (error instanceof WebExchangeBindException webExchangeBindException) {
-                List<ObjectError> allErrors = webExchangeBindException.getAllErrors();
-                if (CollUtil.isNotEmpty(allErrors)) {
-                    res.setTips(StrUtil.emptyToDefault(allErrors.get(0).getDefaultMessage(), ResEnum.NOT_AN_ENUMERATION.getTips()));
-                }
+            setRes(error, responseStatusException, res);
+        } else {
+            res.setHttpStatusCode(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+        return res;
+    }
+
+    private static void setRes(Throwable error, ResponseStatusException responseStatusException, Res<?> res) {
+        HttpStatusCode statusCode = responseStatusException.getStatusCode();
+        res.setHttpStatusCode(statusCode);
+        if (error instanceof ServiceException serviceException) {
+            res.setTips(serviceException.getTips());
+        } else if (error instanceof WebExchangeBindException webExchangeBindException) {
+            List<ObjectError> allErrors = webExchangeBindException.getAllErrors();
+            if (CollUtil.isNotEmpty(allErrors)) {
+                res.setTips(StrUtil.emptyToDefault(allErrors.get(0).getDefaultMessage(), ResEnum.INTERNAL_SERVER_ERROR.getTips()));
+            }
+        }
+    }
+
+    public static Res<?> error(Throwable error, String requestId) {
+        Res<?> res = new Res<>();
+        res.setSuccess(Boolean.FALSE);
+        res.setTraceId(requestId);
+        res.setTips(ResEnum.INTERNAL_SERVER_ERROR.getTips());
+        if (error instanceof ResponseStatusException responseStatusException) {
+            setRes(error, responseStatusException, res);
+        } else if (error instanceof MethodArgumentNotValidException methodArgumentNotValidException) {
+            List<ObjectError> allErrors = methodArgumentNotValidException.getAllErrors();
+            if (CollUtil.isNotEmpty(allErrors)) {
+                res.setTips(StrUtil.emptyToDefault(allErrors.get(0).getDefaultMessage(), ResEnum.INTERNAL_SERVER_ERROR.getTips()));
             }
         } else {
             res.setHttpStatusCode(HttpStatus.INTERNAL_SERVER_ERROR);
         }
         return res;
     }
+
 
     @SuppressWarnings("SameParameterValue")
     private static void setResEnum(Res<?> res, ResEnum resEnum) {

@@ -13,6 +13,7 @@ public enum ResEnum implements BaseResEnum {
     NOT_AN_ENUMERATION(HttpStatus.NOT_ACCEPTABLE, "header enum not support", "网络异常"),
     ID_CAN_NOT_BE_EMPTY(HttpStatus.BAD_REQUEST, "ID不能为空", "参数错误"),
     BODY_CAN_NOT_BE_EMPTY(HttpStatus.BAD_REQUEST, "参数不能为空", "参数错误"),
+    INTERNAL_SERVER_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, "网络异常", "网络异常"),
     ;
     private final HttpStatusCode httpStatusCode;
     private final String message;
