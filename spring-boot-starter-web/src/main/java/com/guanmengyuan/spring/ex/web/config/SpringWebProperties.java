@@ -5,11 +5,10 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 
 import java.util.Set;
 
-@ConfigurationProperties(prefix = "spring.mvc")
 @Data
+@ConfigurationProperties(prefix = "spring.mvc")
 public class SpringWebProperties {
-    /**
-     * 忽略全局响应
-     */
     private Set<String> ignores;
+
+    private Boolean enableGlobalRes = false;
 }

@@ -5,7 +5,7 @@
 
     <groupId>com.guanmengyuan</groupId>
     <artifactId>spring-ex-dependencies</artifactId>
-    <version>1.2.2</version>
+    <version>1.2.3</version>
     <packaging>pom</packaging>
     <name>spring-ex-dependencies</name>
     <description>spring ex base pom</description>
@@ -32,7 +32,7 @@
     </scm>
 
     <properties>
-        <revision>1.2.2</revision>
+        <revision>1.2.3</revision>
         <java.version>17</java.version>
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
@@ -58,6 +58,7 @@
         <forest.version>1.5.33</forest.version>
         <flowable.version>7.0.0.M2</flowable.version>
         <aws.version>2.20.141</aws.version>
+        <springdoc.version>2.2.0</springdoc.version>
         <!--        build start-->
         <maven-compiler-plugin.version>3.11.0</maven-compiler-plugin.version>
         <maven-gpg-plugin.version>3.1.0</maven-gpg-plugin.version>
@@ -71,6 +72,36 @@
     <dependencyManagement>
         <dependencies>
             <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>${spring-boot.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring-cloud.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>com.tencent.cloud</groupId>
+                <artifactId>spring-cloud-tencent-dependencies</artifactId>
+                <version>${spring-cloud-tencent.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>com.alibaba.cloud</groupId>
+                <artifactId>spring-cloud-alibaba-dependencies</artifactId>
+                <version>${spring-cloud-alibaba.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
                 <groupId>cn.dev33</groupId>
                 <artifactId>sa-token-bom</artifactId>
                 <version>${sa-token.version}</version>
@@ -81,6 +112,16 @@
                 <groupId>cn.dev33</groupId>
                 <artifactId>sa-token-reactor-spring-boot3-starter</artifactId>
                 <version>${sa-token.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springdoc</groupId>
+                <artifactId>springdoc-openapi-starter-webflux-ui</artifactId>
+                <version>${springdoc.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springdoc</groupId>
+                <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+                <version>${springdoc.version}</version>
             </dependency>
             <dependency>
                 <groupId>cn.dev33</groupId>
@@ -153,36 +194,7 @@
                 <scope>import</scope>
                 <type>pom</type>
             </dependency>
-            <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-dependencies</artifactId>
-                <version>${spring-boot.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
 
-            <dependency>
-                <groupId>org.springframework.cloud</groupId>
-                <artifactId>spring-cloud-dependencies</artifactId>
-                <version>${spring-cloud.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-
-            <dependency>
-                <groupId>com.tencent.cloud</groupId>
-                <artifactId>spring-cloud-tencent-dependencies</artifactId>
-                <version>${spring-cloud-tencent.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-            <dependency>
-                <groupId>com.alibaba.cloud</groupId>
-                <artifactId>spring-cloud-alibaba-dependencies</artifactId>
-                <version>${spring-cloud-alibaba.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
             <dependency>
                 <groupId>cn.hutool</groupId>
                 <artifactId>hutool-bom</artifactId>
@@ -209,7 +221,11 @@
                 <artifactId>knife4j-openapi3-jakarta-spring-boot-starter</artifactId>
                 <version>${knife4j.version}</version>
             </dependency>
-
+            <dependency>
+                <groupId>com.github.xiaoymin</groupId>
+                <artifactId>knife4j-openapi3-ui</artifactId>
+                <version>${knife4j.version}</version>
+            </dependency>
             <dependency>
                 <groupId>com.github.xiaoymin</groupId>
                 <artifactId>knife4j-gateway-spring-boot-starter</artifactId>

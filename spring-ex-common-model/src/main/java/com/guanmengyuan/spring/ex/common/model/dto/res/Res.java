@@ -3,6 +3,7 @@ package com.guanmengyuan.spring.ex.common.model.dto.res;
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.util.StrUtil;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.guanmengyuan.spring.ex.common.model.enums.ResEnum;
 import com.guanmengyuan.spring.ex.common.model.exception.ServiceException;
 import lombok.Data;
@@ -47,15 +48,22 @@ public class Res<T> implements Serializable {
     /**
      * 请求ID
      */
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private String traceId;
 
     @JsonIgnore
     private HttpStatusCode httpStatusCode;
 
     public static Res<?> successNoData(String traceId) {
+        Res<?> res = successNoData();
+        res.setTraceId(traceId);
+        return res;
+    }
+
+
+    public static Res<?> successNoData() {
         Res<?> res = new Res<>();
         res.setSuccess(Boolean.TRUE);
-        res.setTraceId(traceId);
         setResEnum(res, ResEnum.SUCCESS);
         return res;
     }
@@ -89,6 +97,31 @@ public class Res<T> implements Serializable {
         }
     }
 
+    public static Res<?> error(ServiceException serviceException) {
+        Res<?> res = new Res<>();
+        res.setMessage(serviceException.getMessage());
+        res.setTips(serviceException.getTips());
+        res.setHttpStatusCode(serviceException.getStatusCode());
+        res.setSuccess(Boolean.FALSE);
+        return res;
+    }
+
+    public static Res<?> error(Throwable throwable) {
+        Res<?> res = new Res<>();
+        if (throwable instanceof ServiceException serviceException) {
+            res.setMessage(serviceException.getMessage());
+            res.setTips(serviceException.getTips());
+            res.setHttpStatusCode(serviceException.getStatusCode());
+        } else {
+            res.setTips(ResEnum.INTERNAL_SERVER_ERROR.getTips());
+            res.setHttpStatusCode(ResEnum.INTERNAL_SERVER_ERROR.getHttpStatusCode());
+            res.setMessage(throwable.getMessage());
+        }
+
+        res.setSuccess(Boolean.FALSE);
+        return res;
+    }
+
     public static Res<?> error(Throwable error, String requestId) {
         Res<?> res = new Res<>();
         res.setSuccess(Boolean.FALSE);
@@ -116,9 +149,14 @@ public class Res<T> implements Serializable {
     }
 
     public static <T> Res<T> success(T data, String traceId) {
+        Res<T> res = success(data);
+        res.setTraceId(traceId);
+        return res;
+    }
+
+    public static <T> Res<T> success(T data) {
         Res<T> res = new Res<>();
         res.setData(data);
-        res.setTraceId(traceId);
         res.setSuccess(Boolean.TRUE);
         setResEnum(res, ResEnum.SUCCESS);
         return res;

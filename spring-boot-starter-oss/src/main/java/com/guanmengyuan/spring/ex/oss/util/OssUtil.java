@@ -1,29 +1,22 @@
 package com.guanmengyuan.spring.ex.oss.util;
 
-import java.io.File;
-import java.nio.ByteBuffer;
-import java.time.Duration;
-import java.util.Arrays;
-import java.util.List;
-import java.util.concurrent.atomic.AtomicReference;
-
-import org.springframework.core.io.buffer.DataBuffer;
-import org.springframework.core.io.buffer.DataBufferUtils;
-import org.springframework.http.codec.multipart.FilePart;
-import org.springframework.stereotype.Component;
-import org.springframework.web.multipart.MultipartFile;
-
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.http.HttpUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
-import reactor.core.publisher.Flux;
+import org.springframework.stereotype.Component;
+import org.springframework.web.multipart.MultipartFile;
 import software.amazon.awssdk.core.sync.RequestBody;
 import software.amazon.awssdk.services.s3.S3Client;
 import software.amazon.awssdk.services.s3.model.GetObjectRequest;
 import software.amazon.awssdk.services.s3.model.ObjectIdentifier;
 import software.amazon.awssdk.services.s3.presigner.S3Presigner;
 import software.amazon.awssdk.services.s3.presigner.model.GetObjectPresignRequest;
+
+import java.io.File;
+import java.time.Duration;
+import java.util.Arrays;
+import java.util.List;
 
 @Component
 @RequiredArgsConstructor
@@ -32,6 +25,11 @@ public class OssUtil {
 
     private final S3Presigner s3Presigner;
 
+    /**
+     * 检测bucket,如果不存在会新建bucket
+     *
+     * @param bucket 存储桶名称
+     */
     private void checkBucket(String bucket) {
         try {
             s3Client.headBucket(builder -> builder.bucket(bucket));
@@ -40,6 +38,14 @@ public class OssUtil {
         }
     }
 
+    /**
+     * 上传文件
+     *
+     * @param bucket 存储桶名称
+     * @param key    文件key
+     * @param file   文件
+     * @return 上传结果
+     */
     public boolean upload(String bucket, String key, File file) {
         checkBucket(bucket);
         return s3Client
@@ -48,13 +54,14 @@ public class OssUtil {
                 .sdkHttpResponse().isSuccessful();
     }
 
-    public boolean upload(String bucket, String key, ByteBuffer byteBuffer, String contentType) {
-        checkBucket(bucket);
-        return s3Client.putObject(builder -> builder.bucket(bucket).key(key).contentType(contentType),
-                RequestBody.fromByteBuffer(byteBuffer)).sdkHttpResponse().isSuccessful();
 
-    }
-
+    /**
+     * 删除文件
+     *
+     * @param bucket 存储桶名称
+     * @param keys   文件key集合
+     * @return 删除结果
+     */
     public boolean deleteFile(String bucket, String... keys) {
         List<String> keyList = Arrays.asList(keys);
         if (CollUtil.isEmpty(keyList)) {
@@ -68,40 +75,44 @@ public class OssUtil {
                 .hasDeleted();
     }
 
-    public boolean upload(String bucket, FilePart filePart) {
-        return upload(bucket, filePart.filename(), filePart);
-    }
-
+    /**
+     * 上传文件
+     *
+     * @param bucket        存储桶名称
+     * @param multipartFile 文件
+     * @return 上传结果
+     */
     @SneakyThrows
     public boolean upload(String bucket, MultipartFile multipartFile) {
         return upload(bucket, multipartFile.getOriginalFilename(), multipartFile);
     }
 
+    /**
+     * 上传文件
+     *
+     * @param bucket        存储桶名称
+     * @param key           文件名称
+     * @param multipartFile 文件
+     * @return 上传结果
+     */
     @SneakyThrows
     public boolean upload(String bucket, String key, MultipartFile multipartFile) {
         checkBucket(bucket);
         return s3Client.putObject(
-                builder -> builder.bucket(bucket).key(key)
-                        .contentType(multipartFile.getContentType()),
-                RequestBody.fromInputStream(multipartFile.getInputStream(), multipartFile.getSize())).sdkHttpResponse()
+                        builder -> builder.bucket(bucket).key(key)
+                                .contentType(multipartFile.getContentType()),
+                        RequestBody.fromInputStream(multipartFile.getInputStream(), multipartFile.getSize())).sdkHttpResponse()
                 .isSuccessful();
     }
 
-    public boolean upload(String bucket, String key, FilePart filePart) {
-        Flux<DataBuffer> dataBufferFlux = filePart.content();
-        AtomicReference<ByteBuffer> byteBuffer = new AtomicReference<>();
-        dataBufferFlux.reduce(DataBuffer::write).map(dataBuffer -> {
-            byte[] bytes = new byte[dataBuffer.readableByteCount()];
-            dataBuffer.read(bytes);
-            DataBufferUtils.release(dataBuffer);
-            byteBuffer.set(ByteBuffer.wrap(bytes));
-            return byteBuffer;
-        }).subscribe();
-        String mimeType = HttpUtil.getMimeType(filePart.filename());
 
-        return upload(bucket, key, byteBuffer.get(), mimeType);
-    }
-
+    /**
+     * 获取文件临时url
+     *
+     * @param bucket  存储桶名称
+     * @param fileKey 文件名
+     * @return 文件url
+     */
     public String getUrl(String bucket, String fileKey) {
         return s3Presigner
                 .presignGetObject(GetObjectPresignRequest.builder().signatureDuration(Duration.ofMinutes(60))
