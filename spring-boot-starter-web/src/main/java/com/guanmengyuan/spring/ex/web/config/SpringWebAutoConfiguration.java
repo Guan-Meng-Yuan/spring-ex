@@ -1,5 +1,6 @@
 package com.guanmengyuan.spring.ex.web.config;
 
+import com.guanmengyuan.spring.ex.common.model.converter.AnyToEnumConverterFactory;
 import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
 import org.springframework.boot.autoconfigure.web.ServerProperties;
@@ -11,14 +12,21 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 import org.springframework.core.annotation.Order;
+import org.springframework.format.FormatterRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
 @EnableConfigurationProperties(SpringWebProperties.class)
 @ConditionalOnWebApplication(type = ConditionalOnWebApplication.Type.SERVLET)
 @Order(-100)
 @Primary
-public class SpringWebAutoConfiguration   {
+public class SpringWebAutoConfiguration implements WebMvcConfigurer {
     private final ServerProperties serverProperties;
+
+    @Override
+    public void addFormatters(FormatterRegistry registry) {
+        registry.addConverterFactory(new AnyToEnumConverterFactory());
+    }
 
     public SpringWebAutoConfiguration(ServerProperties serverProperties) {
         this.serverProperties = serverProperties;

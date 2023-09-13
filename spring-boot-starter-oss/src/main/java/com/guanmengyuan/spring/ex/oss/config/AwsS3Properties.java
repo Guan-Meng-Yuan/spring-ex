@@ -29,4 +29,6 @@ public class AwsS3Properties {
      */
     private Boolean enableHttps = false;
 
+    private Boolean enableTemModel = false;
+
 }

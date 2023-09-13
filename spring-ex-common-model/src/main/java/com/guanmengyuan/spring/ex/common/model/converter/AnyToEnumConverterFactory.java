@@ -1,4 +1,4 @@
-package com.guanmengyuan.spring.ex.webflux.converter;
+package com.guanmengyuan.spring.ex.common.model.converter;
 
 import com.guanmengyuan.spring.ex.common.model.enums.ParamEnum;
 import com.guanmengyuan.spring.ex.common.model.enums.ResEnum;
