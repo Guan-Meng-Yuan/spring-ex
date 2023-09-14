@@ -27,7 +27,7 @@ public class AwsS3Properties {
     /**
      * 是否开启https
      */
-    private Boolean enableHttps = false;
+    private boolean enableHttps = false;
     /**
      * 是否使用临时凭证
      */
