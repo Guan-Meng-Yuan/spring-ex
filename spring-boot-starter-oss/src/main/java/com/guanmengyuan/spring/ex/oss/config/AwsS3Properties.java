@@ -1,8 +1,8 @@
 package com.guanmengyuan.spring.ex.oss.config;
 
-import org.springframework.boot.context.properties.ConfigurationProperties;
-
+import com.guanmengyuan.spring.ex.oss.model.OssTemporaryCredentials;
 import lombok.Data;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 
 @ConfigurationProperties(prefix = "oss")
 @Data
@@ -28,7 +28,21 @@ public class AwsS3Properties {
      * 是否开启https
      */
     private Boolean enableHttps = false;
+    /**
+     * 是否使用临时凭证
+     */
+    private Boolean enableTemporaryCredentialsModel = false;
+    /**
+     * 获取临时凭证的api地址
+     */
+    private String temporaryCredentialsUrl;
 
-    private Boolean enableTemModel = false;
-
+    /**
+     * 临时凭证响应类
+     */
+    private Class<? extends OssTemporaryCredentials> temporaryCredentialsResponse;
+    /**
+     * 重新请求凭证的cron表达式
+     */
+    private String cron;
 }

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 import software.amazon.awssdk.core.sync.RequestBody;
 import software.amazon.awssdk.services.s3.S3Client;
+import software.amazon.awssdk.services.s3.S3ClientBuilder;
 import software.amazon.awssdk.services.s3.model.GetObjectRequest;
 import software.amazon.awssdk.services.s3.model.ObjectIdentifier;
 import software.amazon.awssdk.services.s3.presigner.S3Presigner;
@@ -21,9 +22,17 @@ import java.util.List;
 @Component
 @RequiredArgsConstructor
 public class OssUtil {
-    private final S3Client s3Client;
+    private final S3ClientBuilder s3ClientBuilder;
 
-    private final S3Presigner s3Presigner;
+    private final S3Presigner.Builder s3PresignerBuilder;
+
+    public S3Presigner s3Presigner() {
+        return s3PresignerBuilder.build();
+    }
+
+    public S3Client s3Client() {
+        return s3ClientBuilder.build();
+    }
 
     /**
      * 检测bucket,如果不存在会新建bucket
@@ -31,11 +40,13 @@ public class OssUtil {
      * @param bucket 存储桶名称
      */
     private void checkBucket(String bucket) {
+        S3Client s3Client = s3Client();
         try {
             s3Client.headBucket(builder -> builder.bucket(bucket));
         } catch (Exception e) {
             s3Client.createBucket(builder -> builder.bucket(bucket));
         }
+        s3Client.close();
     }
 
     /**
@@ -48,10 +59,13 @@ public class OssUtil {
      */
     public boolean upload(String bucket, String key, File file) {
         checkBucket(bucket);
-        return s3Client
+        S3Client s3Client = s3Client();
+        boolean successful = s3Client
                 .putObject(builder -> builder.bucket(bucket).key(key).contentType(HttpUtil.getMimeType(file.getPath())),
                         RequestBody.fromFile(file))
                 .sdkHttpResponse().isSuccessful();
+        s3Client.close();
+        return successful;
     }
 
 
@@ -63,16 +77,19 @@ public class OssUtil {
      * @return 删除结果
      */
     public boolean deleteFile(String bucket, String... keys) {
+        S3Client s3Client = s3Client();
         List<String> keyList = Arrays.asList(keys);
         if (CollUtil.isEmpty(keyList)) {
             return false;
         }
         List<ObjectIdentifier> willDelete = CollUtil.newArrayList();
         keyList.forEach(key -> willDelete.add(ObjectIdentifier.builder().key(key).build()));
-        return s3Client
+        boolean hadDeleted = s3Client
                 .deleteObjects(
                         builder -> builder.bucket(bucket).delete(deleteBuilder -> deleteBuilder.objects(willDelete)))
                 .hasDeleted();
+        s3Client.close();
+        return hadDeleted;
     }
 
     /**
@@ -98,11 +115,14 @@ public class OssUtil {
     @SneakyThrows
     public boolean upload(String bucket, String key, MultipartFile multipartFile) {
         checkBucket(bucket);
-        return s3Client.putObject(
+        S3Client s3Client = s3Client();
+        boolean successful = s3Client.putObject(
                         builder -> builder.bucket(bucket).key(key)
                                 .contentType(multipartFile.getContentType()),
                         RequestBody.fromInputStream(multipartFile.getInputStream(), multipartFile.getSize())).sdkHttpResponse()
                 .isSuccessful();
+        s3Client.close();
+        return successful;
     }
 
 
@@ -114,9 +134,12 @@ public class OssUtil {
      * @return 文件url
      */
     public String getUrl(String bucket, String fileKey) {
-        return s3Presigner
+        S3Presigner s3Presigner = s3Presigner();
+        String url = s3Presigner
                 .presignGetObject(GetObjectPresignRequest.builder().signatureDuration(Duration.ofMinutes(60))
                         .getObjectRequest(GetObjectRequest.builder().bucket(bucket).key(fileKey).build()).build())
                 .url().toString();
+        s3Presigner.close();
+        return url;
     }
 }

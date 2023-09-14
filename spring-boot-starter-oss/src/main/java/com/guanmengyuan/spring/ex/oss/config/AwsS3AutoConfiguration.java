@@ -1,8 +1,13 @@
 package com.guanmengyuan.spring.ex.oss.config;
 
-import com.guanmengyuan.spring.ex.oss.client.WxCloudCosClient;
-import com.guanmengyuan.spring.ex.oss.dto.CosSecretInfo;
-import lombok.RequiredArgsConstructor;
+import cn.hutool.core.util.StrUtil;
+import cn.hutool.cron.CronUtil;
+import cn.hutool.cron.task.Task;
+import com.dtflys.forest.Forest;
+import com.guanmengyuan.spring.ex.oss.model.OssTemporaryCredentials;
+import jakarta.annotation.PostConstruct;
+import lombok.SneakyThrows;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -18,20 +23,54 @@ import java.net.URI;
 
 @Configuration
 @EnableConfigurationProperties(AwsS3Properties.class)
-@RequiredArgsConstructor
+@Slf4j
 public class AwsS3AutoConfiguration {
     private final AwsS3Properties awsS3Properties;
-    private final WxCloudCosClient wxCloudCosClient;
+    private OssTemporaryCredentials ossTemporaryCredentials;
 
-    @Bean
-    public S3Client s3Client() {
-        S3ClientBuilder s3ClientBuilder = S3Client.builder().region(getRegion()).endpointOverride(URI.create(getDomain()));
-        if (awsS3Properties.getEnableTemModel()) {
-            CosSecretInfo cosSecretInfo = wxCloudCosClient.getCosSecretInfo();
-            return s3ClientBuilder.credentialsProvider(StaticCredentialsProvider.create(AwsSessionCredentials.create(cosSecretInfo.getTmpSecretId(), cosSecretInfo.getTmpSecretKey(), cosSecretInfo.getToken()))).build();
+    private S3ClientBuilder s3ClientBuilder;
+
+    private S3Presigner.Builder s3PresignerBuilder;
+
+    @PostConstruct
+    public void init() {
+        if (awsS3Properties.getEnableTemporaryCredentialsModel()) {
+            ossTemporaryCredentials();
+            CronUtil.schedule(awsS3Properties.getCron(), (Task) this::ossTemporaryCredentials);
+            CronUtil.setMatchSecond(true);
+            CronUtil.start();
         }
 
-        return s3ClientBuilder.credentialsProvider(StaticCredentialsProvider.create(AwsBasicCredentials.create(awsS3Properties.getAccessKey(), awsS3Properties.getAccessKeySecret()))).build();
+    }
+
+    @SneakyThrows
+    public void ossTemporaryCredentials() {
+        if (awsS3Properties.getEnableTemporaryCredentialsModel()) {
+            ossTemporaryCredentials = Forest.get(awsS3Properties.getTemporaryCredentialsUrl()).execute(awsS3Properties.getTemporaryCredentialsResponse());
+            Forest.get(awsS3Properties.getTemporaryCredentialsUrl()).execute(awsS3Properties.getTemporaryCredentialsResponse());
+            log.info("response,{}", ossTemporaryCredentials);
+            s3ClientBuilder.credentialsProvider(StaticCredentialsProvider.create(AwsSessionCredentials.create(ossTemporaryCredentials.temSecretId(), ossTemporaryCredentials.tmpSecretKey(), ossTemporaryCredentials.token())));
+            s3PresignerBuilder.credentialsProvider(StaticCredentialsProvider.create(AwsSessionCredentials.create(ossTemporaryCredentials.temSecretId(), ossTemporaryCredentials.tmpSecretKey(), ossTemporaryCredentials.token())));
+        }
+    }
+
+
+    public AwsS3AutoConfiguration(AwsS3Properties awsS3Properties) {
+        if (awsS3Properties.getEnableTemporaryCredentialsModel()) {
+            if (StrUtil.isEmpty(awsS3Properties.getTemporaryCredentialsUrl()) || StrUtil.isEmpty(awsS3Properties.getCron()) || null == awsS3Properties.getTemporaryCredentialsResponse()) {
+                throw new RuntimeException("temporary credentials model is enabled,please set the temporaryCredentialsUrl or temporaryCredentialsResponse or cron");
+            }
+        }
+        this.awsS3Properties = awsS3Properties;
+    }
+
+    @Bean
+    public S3ClientBuilder s3ClientBuilder() {
+        s3ClientBuilder = S3Client.builder().region(getRegion()).endpointOverride(URI.create(getDomain()));
+        if (awsS3Properties.getEnableTemporaryCredentialsModel()) {
+            return s3ClientBuilder.credentialsProvider(StaticCredentialsProvider.create(AwsSessionCredentials.create(ossTemporaryCredentials.temSecretId(), ossTemporaryCredentials.tmpSecretKey(), ossTemporaryCredentials.token())));
+        }
+        return s3ClientBuilder.credentialsProvider(StaticCredentialsProvider.create(AwsBasicCredentials.create(awsS3Properties.getAccessKey(), awsS3Properties.getAccessKeySecret())));
     }
 
     private Region getRegion() {
@@ -43,12 +82,13 @@ public class AwsS3AutoConfiguration {
     }
 
     @Bean
-    public S3Presigner s3Presigner() {
-        S3Presigner.Builder builder = S3Presigner.builder().region(getRegion()).endpointOverride(URI.create(getDomain()));
-        if (awsS3Properties.getEnableTemModel()) {
-            CosSecretInfo cosSecretInfo = wxCloudCosClient.getCosSecretInfo();
-           return builder.credentialsProvider(StaticCredentialsProvider.create(AwsSessionCredentials.create(cosSecretInfo.getTmpSecretId(), cosSecretInfo.getTmpSecretKey(), cosSecretInfo.getToken()))).build();
+    public S3Presigner.Builder s3PresignerBuilder() {
+        s3PresignerBuilder = S3Presigner.builder().region(getRegion()).endpointOverride(URI.create(getDomain()));
+        if (awsS3Properties.getEnableTemporaryCredentialsModel()) {
+            return s3PresignerBuilder.credentialsProvider(StaticCredentialsProvider.create(AwsSessionCredentials.create(ossTemporaryCredentials.temSecretId(), ossTemporaryCredentials.tmpSecretKey(), ossTemporaryCredentials.token())));
         }
-        return builder.credentialsProvider(StaticCredentialsProvider.create(AwsBasicCredentials.create(awsS3Properties.getAccessKey(), awsS3Properties.getAccessKeySecret()))).build();
+        return s3PresignerBuilder.credentialsProvider(StaticCredentialsProvider.create(AwsBasicCredentials.create(awsS3Properties.getAccessKey(), awsS3Properties.getAccessKeySecret())));
     }
+
+
 }
