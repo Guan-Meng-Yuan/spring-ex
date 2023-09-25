@@ -33,7 +33,7 @@ public class ServiceException extends ResponseStatusException {
     }
 
     public ServiceException(String tips, String reason) {
-        this(HttpStatus.INTERNAL_SERVER_ERROR, tips, reason);
+        this(HttpStatus.INTERNAL_SERVER_ERROR, reason, tips);
     }
 
 

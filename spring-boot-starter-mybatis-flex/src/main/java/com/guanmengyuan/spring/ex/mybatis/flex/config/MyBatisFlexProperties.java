@@ -1,8 +1,8 @@
 package com.guanmengyuan.spring.ex.mybatis.flex.config;
 
-import org.springframework.boot.context.properties.ConfigurationProperties;
 
 import lombok.Data;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 
 /**
  * mybatis flex 配置项
