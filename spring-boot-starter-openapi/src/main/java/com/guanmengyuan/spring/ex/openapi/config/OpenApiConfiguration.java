@@ -19,7 +19,6 @@ import io.swagger.v3.oas.models.parameters.Parameter;
 import io.swagger.v3.oas.models.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springdoc.core.customizers.GlobalOpenApiCustomizer;
-import org.springdoc.core.providers.JavadocProvider;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -33,7 +32,6 @@ import java.util.function.Predicate;
 @RequiredArgsConstructor
 public class OpenApiConfiguration implements GlobalOpenApiCustomizer {
     private final OpenApiConfigProperties openApiConfigProperties;
-    private final JavadocProvider javadocProvider;
 
     @Bean
     public OpenAPI openAPI() {
@@ -65,8 +63,7 @@ public class OpenApiConfiguration implements GlobalOpenApiCustomizer {
 
         //设置全局响应类
         Schema<Res> resSchema = modelConverters.readAllAsResolvedSchema(new AnnotatedType(Res.class)).schema;
-        String resClassDoc = javadocProvider.getClassJavadoc(Res.class);
-        resSchema.setDescription(resClassDoc);
+        resSchema.setDescription("全局响应");
         resSchema.setType("object");
         resSchema.set$id("res");
         Map<String, Schema> resProperties = resSchema.getProperties();

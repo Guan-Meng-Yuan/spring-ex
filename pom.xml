@@ -11,7 +11,7 @@
 
     <name>spring-ex</name>
     <description>spring enhance pack</description>
-    <url>https://github.com/GMY-i/spring-ex</url>
+    <url>https://gitee.com/guan-meng-yuan/spring-ex</url>
     <licenses>
         <license>
             <name>The Apache Software License, Version 2.0</name>
@@ -22,15 +22,15 @@
     <developers>
         <developer>
             <name>GMY</name>
-            <url>https://github.com/gmy-i</url>
+            <url>https://gitee.com/guan-meng-yuan</url>
             <organization>GMY</organization>
-            <organizationUrl>https://github.com/gmy-i</organizationUrl>
+            <organizationUrl>https://gitee.com/guan-meng-yuan</organizationUrl>
         </developer>
     </developers>
     <scm>
-        <url>https://github.com/GMY-i/spring-ex</url>
-        <connection>scm:git:git@github.com:GMY-i/spring-ex.git</connection>
-        <developerConnection>scm:git:git@github.com:GMY-i/spring-ex.git</developerConnection>
+        <url>https://gitee.com/guan-meng-yuan/spring-ex</url>
+        <connection>scm:git:git@gitee.com:guan-meng-yuan/spring-ex.git</connection>
+        <developerConnection>scm:git:git@gitee.com:guan-meng-yuan/spring-ex.git</developerConnection>
     </scm>
 
 

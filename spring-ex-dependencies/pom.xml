@@ -10,7 +10,7 @@
     <packaging>pom</packaging>
     <name>spring-ex-dependencies</name>
     <description>spring ex base pom</description>
-    <url>https://github.com/GMY-i/spring-ex</url>
+    <url>https://gitee.com/guan-meng-yuan/spring-ex</url>
     <licenses>
         <license>
             <name>The Apache Software License, Version 2.0</name>
@@ -21,9 +21,9 @@
     <developers>
         <developer>
             <name>GMY</name>
-            <url>https://github.com/gmy-i</url>
+            <url>https://gitee.com/guan-meng-yuan</url>
             <organization>GMY</organization>
-            <organizationUrl>https://github.com/gmy-i</organizationUrl>
+            <organizationUrl>https://gitee.com/guan-meng-yuan</organizationUrl>
         </developer>
     </developers>
     <scm>
@@ -45,18 +45,18 @@
         <spring-cloud-alibaba.version>2022.0.0.0</spring-cloud-alibaba.version>
         <!--        spring end-->
 
-        <mybatis-flex.version>1.6.7</mybatis-flex.version>
+        <mybatis-flex.version>1.6.8</mybatis-flex.version>
         <mybatis.version>3.0.2</mybatis.version>
         <hutool.version>5.8.22</hutool.version>
         <knife4j.version>4.3.0</knife4j.version>
         <therapi.version>0.15.0</therapi.version>
         <alipay.version>2.2.3</alipay.version>
         <wx-java.version>4.5.5.B</wx-java.version>
-        <dubbo.version>3.2.6</dubbo.version>
+        <dubbo.version>3.2.7</dubbo.version>
         <sentinel.version>1.8.6</sentinel.version>
         <sa-token.version>1.36.0</sa-token.version>
         <forest.version>1.5.33</forest.version>
-        <aws.version>2.20.153</aws.version>
+        <aws.version>2.20.162</aws.version>
         <springdoc.version>2.2.0</springdoc.version>
         <!--        build start-->
         <maven-compiler-plugin.version>3.11.0</maven-compiler-plugin.version>
@@ -139,11 +139,6 @@
 
 
             <dependency>
-                <groupId>cn.dev33</groupId>
-                <artifactId>sa-token-reactor-spring-boot3-starter</artifactId>
-                <version>${sa-token.version}</version>
-            </dependency>
-            <dependency>
                 <groupId>org.springdoc</groupId>
                 <artifactId>springdoc-openapi-starter-webflux-ui</artifactId>
                 <version>${springdoc.version}</version>
@@ -156,11 +151,6 @@
             <dependency>
                 <groupId>cn.dev33</groupId>
                 <artifactId>sa-token-dubbo3</artifactId>
-                <version>${sa-token.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>cn.dev33</groupId>
-                <artifactId>sa-token-redis</artifactId>
                 <version>${sa-token.version}</version>
             </dependency>
             <!-- https://mvnrepository.com/artifact/com.alibaba.csp/sentinel-apache-dubbo3-adapter -->

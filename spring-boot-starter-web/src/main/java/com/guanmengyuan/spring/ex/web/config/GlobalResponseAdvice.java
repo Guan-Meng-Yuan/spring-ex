@@ -1,7 +1,10 @@
 package com.guanmengyuan.spring.ex.web.config;
 
-import java.util.Set;
-
+import cn.hutool.core.collection.CollUtil;
+import cn.hutool.core.util.StrUtil;
+import cn.hutool.json.JSONUtil;
+import com.guanmengyuan.spring.ex.common.model.dto.res.Res;
+import lombok.NonNull;
 import org.springframework.core.MethodParameter;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.HttpMessageConverter;
@@ -12,12 +15,9 @@ import org.springframework.util.AntPathMatcher;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
 
-import com.guanmengyuan.spring.ex.common.model.dto.res.Res;
+import java.util.Set;
 
-import cn.hutool.core.collection.CollUtil;
-import cn.hutool.core.util.StrUtil;
-import cn.hutool.json.JSONUtil;
-import lombok.NonNull;
+import static com.guanmengyuan.spring.ex.common.model.constant.GlobalResponseConstant.DEFAULT_PATH;
 
 @RestControllerAdvice
 public class GlobalResponseAdvice implements ResponseBodyAdvice<Object> {
@@ -36,9 +36,7 @@ public class GlobalResponseAdvice implements ResponseBodyAdvice<Object> {
         this.antPathMatcher = new AntPathMatcher();
     }
 
-    public static final Set<String> DEFAULT_PATH = CollUtil.newHashSet("/v3/api-docs/**", "/webjars/**", "/doc.html",
-            "/actuator/**",
-            "/swagger-ui.html", "/favicon.ico");
+
 
     @Override
     public boolean supports(@NonNull MethodParameter returnType,
