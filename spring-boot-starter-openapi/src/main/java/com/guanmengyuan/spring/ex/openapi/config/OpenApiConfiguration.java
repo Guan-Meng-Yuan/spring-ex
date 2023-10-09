@@ -27,6 +27,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.Predicate;
 
+/**
+ * 接口文档自动配置类
+ */
 @Configuration
 @EnableConfigurationProperties(OpenApiConfigProperties.class)
 @RequiredArgsConstructor

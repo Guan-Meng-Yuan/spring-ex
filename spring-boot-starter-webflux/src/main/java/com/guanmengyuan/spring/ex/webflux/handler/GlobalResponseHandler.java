@@ -24,6 +24,9 @@ import java.util.Set;
 
 import static com.guanmengyuan.spring.ex.common.model.constant.GlobalResponseConstant.DEFAULT_PATH;
 
+/**
+ * 全局响应处理器
+ */
 @Slf4j
 public class GlobalResponseHandler extends ResponseBodyResultHandler {
 
@@ -42,14 +45,17 @@ public class GlobalResponseHandler extends ResponseBodyResultHandler {
         }
     }
 
+    /**
+     * 全局响应构造
+     */
     public GlobalResponseHandler(List<HttpMessageWriter<?>> writers, RequestedContentTypeResolver resolver,
-            ReactiveAdapterRegistry registry, WebFluxProperties webFluxProperties) {
+                                 ReactiveAdapterRegistry registry, WebFluxProperties webFluxProperties) {
         super(writers, resolver, registry);
         this.webFluxProperties = webFluxProperties;
         setOrder(-1);
     }
 
-    @SuppressWarnings({ "unused", "SameReturnValue" })
+    @SuppressWarnings({"unused", "SameReturnValue"})
     private static Res<?> methodForParams() {
         return null;
     }

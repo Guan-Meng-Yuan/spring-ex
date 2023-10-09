@@ -3,6 +3,9 @@ package com.guanmengyuan.spring.ex.openapi.config;
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
+/**
+ * 文档配置类
+ */
 @Data
 @ConfigurationProperties(prefix = "springdoc")
 public class OpenApiConfigProperties {

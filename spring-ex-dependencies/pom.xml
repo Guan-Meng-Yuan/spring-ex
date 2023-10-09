@@ -45,7 +45,7 @@
         <spring-cloud-alibaba.version>2022.0.0.0</spring-cloud-alibaba.version>
         <!--        spring end-->
 
-        <mybatis-flex.version>1.6.8</mybatis-flex.version>
+        <mybatis-flex.version>1.6.9</mybatis-flex.version>
         <mybatis.version>3.0.2</mybatis.version>
         <hutool.version>5.8.22</hutool.version>
         <knife4j.version>4.3.0</knife4j.version>

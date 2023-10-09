@@ -50,17 +50,29 @@ public class Res<T> implements Serializable {
      */
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private String traceId;
-
+    /**
+     * http code
+     */
     @JsonIgnore
     private HttpStatusCode httpStatusCode;
 
+    /**
+     * 正常响应无数据
+     *
+     * @param traceId 请求ID
+     * @return 无数据的正常响应
+     */
     public static Res<?> successNoData(String traceId) {
         Res<?> res = successNoData();
         res.setTraceId(traceId);
         return res;
     }
 
-
+    /**
+     * 正常响应无数据
+     *
+     * @return 无数据的响应
+     */
     public static Res<?> successNoData() {
         Res<?> res = new Res<>();
         res.setSuccess(Boolean.TRUE);
@@ -68,7 +80,13 @@ public class Res<T> implements Serializable {
         return res;
     }
 
-
+    /**
+     * 错误响应
+     *
+     * @param error    错误接口
+     * @param exchange exchange实例
+     * @return 错误响应
+     */
     public static Res<?> error(Throwable error, ServerWebExchange exchange) {
         Res<?> res = new Res<>();
         res.setSuccess(Boolean.FALSE);
@@ -97,6 +115,12 @@ public class Res<T> implements Serializable {
         }
     }
 
+    /**
+     * 错误响应
+     *
+     * @param serviceException 业务异常
+     * @return 错误响应
+     */
     public static Res<?> error(ServiceException serviceException) {
         Res<?> res = new Res<>();
         res.setMessage(serviceException.getMessage());
@@ -106,6 +130,12 @@ public class Res<T> implements Serializable {
         return res;
     }
 
+    /**
+     * 错误响应
+     *
+     * @param throwable 异常接口
+     * @return 错误响应
+     */
     public static Res<?> error(Throwable throwable) {
         Res<?> res = new Res<>();
         if (throwable instanceof ServiceException serviceException) {
@@ -122,6 +152,13 @@ public class Res<T> implements Serializable {
         return res;
     }
 
+    /**
+     * 错误响应
+     *
+     * @param error     错误
+     * @param requestId 请求ID
+     * @return 错误
+     */
     public static Res<?> error(Throwable error, String requestId) {
         Res<?> res = new Res<>();
         res.setSuccess(Boolean.FALSE);
@@ -140,7 +177,12 @@ public class Res<T> implements Serializable {
         return res;
     }
 
-
+    /**
+     * setRes
+     *
+     * @param res     res
+     * @param resEnum 响应枚举
+     */
     @SuppressWarnings("SameParameterValue")
     private static void setResEnum(Res<?> res, ResEnum resEnum) {
         res.setMessage(resEnum.getMessage());
@@ -148,12 +190,27 @@ public class Res<T> implements Serializable {
         res.setHttpStatusCode(res.httpStatusCode);
     }
 
+    /**
+     * 成功响应
+     *
+     * @param data    数据
+     * @param traceId 请求ID
+     * @param <T>     泛型类型
+     * @return 响应结果
+     */
     public static <T> Res<T> success(T data, String traceId) {
         Res<T> res = success(data);
         res.setTraceId(traceId);
         return res;
     }
 
+    /**
+     * 成功响应
+     *
+     * @param data 数据
+     * @param <T>  数据类型
+     * @return 成功的响应
+     */
     public static <T> Res<T> success(T data) {
         Res<T> res = new Res<>();
         res.setData(data);

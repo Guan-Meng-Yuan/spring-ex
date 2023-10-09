@@ -35,6 +35,10 @@
             <artifactId>spring-boot-starter-actuator</artifactId>
         </dependency>
         <dependency>
+            <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-starter-webflux-ui</artifactId>
+        </dependency>
+        <dependency>
             <groupId>com.guanmengyuan.spring-ex</groupId>
             <artifactId>spring-ex-common-model</artifactId>
         </dependency>

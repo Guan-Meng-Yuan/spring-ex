@@ -8,6 +8,9 @@ import lombok.SneakyThrows;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.core.convert.converter.ConverterFactory;
 
+/**
+ * 任何类型转枚举工厂类
+ */
 public class AnyToEnumConverterFactory implements ConverterFactory<String, ParamEnum> {
 
 
