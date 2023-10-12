@@ -1,8 +1,17 @@
 package com.guanmengyuan.spring.ex.webflux.controller;
 
+import java.util.List;
 
-import cn.hutool.core.bean.BeanUtil;
-import cn.hutool.core.util.StrUtil;
+import org.dromara.hutool.core.bean.BeanUtil;
+import org.dromara.hutool.core.text.StrUtil;
+import org.springdoc.core.annotations.ParameterObject;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+
 import com.guanmengyuan.spring.ex.common.model.domain.BaseDomain;
 import com.guanmengyuan.spring.ex.common.model.enums.ResEnum;
 import com.guanmengyuan.spring.ex.common.model.exception.ServiceException;
@@ -11,11 +20,8 @@ import com.mybatisflex.core.query.QueryColumn;
 import com.mybatisflex.core.service.IService;
 import com.mybatisflex.core.table.TableDefs;
 import com.mybatisflex.core.table.TableInfoFactory;
-import jakarta.annotation.Resource;
-import org.springdoc.core.annotations.ParameterObject;
-import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+import jakarta.annotation.Resource;
 
 public class BaseController<T extends BaseDomain<T>> {
     @Resource
@@ -29,7 +35,8 @@ public class BaseController<T extends BaseDomain<T>> {
      */
     @GetMapping
     public List<T> list(@ParameterObject T param) {
-        QueryColumn createTime = TableDefs.getQueryColumn(param.getClass(), TableInfoFactory.ofEntityClass(param.getClass()).getTableNameWithSchema(), "create_time");
+        QueryColumn createTime = TableDefs.getQueryColumn(param.getClass(),
+                TableInfoFactory.ofEntityClass(param.getClass()).getTableNameWithSchema(), "create_time");
         return param.orderBy(createTime.desc()).list();
     }
 
@@ -53,7 +60,8 @@ public class BaseController<T extends BaseDomain<T>> {
      */
     @GetMapping("page")
     public Page<T> page(@ParameterObject Page<T> page, @ParameterObject() T param) {
-        QueryColumn createTime = TableDefs.getQueryColumn(param.getClass(), TableInfoFactory.ofEntityClass(param.getClass()).getTableNameWithSchema(), "create_time");
+        QueryColumn createTime = TableDefs.getQueryColumn(param.getClass(),
+                TableInfoFactory.ofEntityClass(param.getClass()).getTableNameWithSchema(), "create_time");
         return param.orderBy(createTime.desc()).page(page);
     }
 

@@ -1,33 +1,36 @@
 package com.guanmengyuan.spring.ex.auth.util;
 
-import cn.hutool.cache.CacheUtil;
-import cn.hutool.cache.impl.TimedCache;
-import cn.hutool.captcha.AbstractCaptcha;
-import cn.hutool.captcha.CaptchaUtil;
-import cn.hutool.captcha.generator.CodeGenerator;
-import cn.hutool.core.map.MapUtil;
-import cn.hutool.core.util.IdUtil;
-import cn.hutool.core.util.StrUtil;
-import com.guanmengyuan.spring.ex.auth.constant.CacheConstant;
-import com.guanmengyuan.spring.ex.auth.enums.CaptchaType;
-import com.guanmengyuan.spring.ex.auth.model.CaptchaResult;
-import com.guanmengyuan.spring.ex.common.model.exception.ServiceException;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
+import java.time.Duration;
+import java.util.Map;
+import java.util.concurrent.TimeUnit;
+
+import org.dromara.hutool.core.cache.CacheUtil;
+import org.dromara.hutool.core.cache.impl.TimedCache;
+import org.dromara.hutool.core.data.id.IdUtil;
+import org.dromara.hutool.core.map.MapUtil;
+import org.dromara.hutool.core.text.StrUtil;
+import org.dromara.hutool.swing.captcha.AbstractCaptcha;
+import org.dromara.hutool.swing.captcha.CaptchaUtil;
+import org.dromara.hutool.swing.captcha.generator.CodeGenerator;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 
-import java.time.Duration;
-import java.util.Map;
-import java.util.concurrent.TimeUnit;
+import com.guanmengyuan.spring.ex.auth.constant.CacheConstant;
+import com.guanmengyuan.spring.ex.auth.enums.CaptchaType;
+import com.guanmengyuan.spring.ex.auth.model.CaptchaResult;
+import com.guanmengyuan.spring.ex.common.model.exception.ServiceException;
+
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 @Component
 @RequiredArgsConstructor
 @Slf4j
 public class CaptchaUtils {
     private final RedisTemplate<String, String> redisTemplate;
-    private static final TimedCache<String, String> IN_MEMORY_CACHE = CacheUtil.newTimedCache(Duration.ofMinutes(1).toMillis());
+    private static final TimedCache<String, String> IN_MEMORY_CACHE = CacheUtil
+            .newTimedCache(Duration.ofMinutes(1).toMillis());
     private static final int DEFAULT_WIDTH = 200;
     private static final int DEFAULT_HEIGHT = 100;
 
@@ -41,9 +44,10 @@ public class CaptchaUtils {
      * @return 验证码结果
      * @see CaptchaType#CUSTOM
      */
-    public CaptchaResult captchaResult(CaptchaType captchaType, CodeGenerator codeGenerator, Integer width, Integer height) {
+    public CaptchaResult captchaResult(CaptchaType captchaType, CodeGenerator codeGenerator, Integer width,
+            Integer height) {
 
-        Map<String, Object> captchaResult = MapUtil.newHashMap();
+        Map<String, Object> captchaResult = MapUtil.empty();
         String redisKeyID = IdUtil.getSnowflakeNextIdStr();
         String verifyKey = CacheConstant.CAPTCHA_KEY + redisKeyID;
         AbstractCaptcha captcha;
@@ -57,9 +61,8 @@ public class CaptchaUtils {
                 captcha.setGenerator(codeGenerator);
             }
             default ->
-                    throw new ServiceException(HttpStatus.NOT_ACCEPTABLE, "captcha type not support", "验证码不支持");
+                throw new ServiceException(HttpStatus.NOT_ACCEPTABLE, "captcha type not support", "验证码不支持");
         }
-
 
         captcha.createCode();
         String code = captcha.getCode();
@@ -93,7 +96,8 @@ public class CaptchaUtils {
 
     public CaptchaResult captchaResult(CaptchaType captchaType) {
         if (captchaType.equals(CaptchaType.CUSTOM)) {
-            throw new ServiceException(HttpStatus.NOT_ACCEPTABLE, "captcha type custom is need codeGenerator", "验证码类型不支持");
+            throw new ServiceException(HttpStatus.NOT_ACCEPTABLE, "captcha type custom is need codeGenerator",
+                    "验证码类型不支持");
         }
         return captchaResult(captchaType, null);
     }

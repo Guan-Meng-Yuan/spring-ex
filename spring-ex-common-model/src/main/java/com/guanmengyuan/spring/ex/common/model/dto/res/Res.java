@@ -1,12 +1,10 @@
 package com.guanmengyuan.spring.ex.common.model.dto.res;
 
-import cn.hutool.core.collection.CollUtil;
-import cn.hutool.core.util.StrUtil;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.guanmengyuan.spring.ex.common.model.enums.ResEnum;
-import com.guanmengyuan.spring.ex.common.model.exception.ServiceException;
-import lombok.Data;
+import java.io.Serializable;
+import java.util.List;
+
+import org.dromara.hutool.core.collection.CollUtil;
+import org.dromara.hutool.core.text.StrUtil;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.validation.ObjectError;
@@ -15,8 +13,12 @@ import org.springframework.web.bind.support.WebExchangeBindException;
 import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.server.ServerWebExchange;
 
-import java.io.Serializable;
-import java.util.List;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.guanmengyuan.spring.ex.common.model.enums.ResEnum;
+import com.guanmengyuan.spring.ex.common.model.exception.ServiceException;
+
+import lombok.Data;
 
 /**
  * 统一响应dto
@@ -26,7 +28,9 @@ import java.util.List;
 @Data
 public class Res<T> implements Serializable {
     /**
-     * 是否成功<br/>true 操作成功<br/>false 操作失败
+     * 是否成功<br/>
+     * true 操作成功<br/>
+     * false 操作失败
      */
     private Boolean success;
 
@@ -110,7 +114,8 @@ public class Res<T> implements Serializable {
         } else if (error instanceof WebExchangeBindException webExchangeBindException) {
             List<ObjectError> allErrors = webExchangeBindException.getAllErrors();
             if (CollUtil.isNotEmpty(allErrors)) {
-                res.setTips(StrUtil.emptyToDefault(allErrors.get(0).getDefaultMessage(), ResEnum.INTERNAL_SERVER_ERROR.getTips()));
+                res.setTips(StrUtil.defaultIfBlank(allErrors.get(0).getDefaultMessage(),
+                        ResEnum.INTERNAL_SERVER_ERROR.getTips()));
             }
         }
     }
@@ -169,7 +174,8 @@ public class Res<T> implements Serializable {
         } else if (error instanceof MethodArgumentNotValidException methodArgumentNotValidException) {
             List<ObjectError> allErrors = methodArgumentNotValidException.getAllErrors();
             if (CollUtil.isNotEmpty(allErrors)) {
-                res.setTips(StrUtil.emptyToDefault(allErrors.get(0).getDefaultMessage(), ResEnum.INTERNAL_SERVER_ERROR.getTips()));
+                res.setTips(StrUtil.defaultIfBlank(allErrors.get(0).getDefaultMessage(),
+                        ResEnum.INTERNAL_SERVER_ERROR.getTips()));
             }
         } else {
             res.setHttpStatusCode(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -218,6 +224,5 @@ public class Res<T> implements Serializable {
         setResEnum(res, ResEnum.SUCCESS);
         return res;
     }
-
 
 }

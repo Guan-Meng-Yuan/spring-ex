@@ -3,15 +3,16 @@ package com.guanmengyuan.spring.ex.oss.util;
 import java.io.File;
 import java.util.List;
 
+import org.dromara.hutool.core.collection.CollUtil;
+import org.dromara.hutool.core.collection.ListUtil;
+import org.dromara.hutool.core.data.id.IdUtil;
+import org.dromara.hutool.core.io.file.FileUtil;
+import org.dromara.hutool.core.text.StrUtil;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.guanmengyuan.spring.ex.oss.config.OssConfigProperties;
 
-import cn.hutool.core.collection.CollUtil;
-import cn.hutool.core.util.IdUtil;
-import cn.hutool.core.util.StrUtil;
-import cn.hutool.http.HttpUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import software.amazon.awssdk.core.sync.RequestBody;
@@ -38,7 +39,8 @@ public class OssUtil {
         if (CollUtil.isEmpty(keys)) {
             throw new RuntimeException("文件列表为空");
         }
-        List<ObjectIdentifier> willDelete = CollUtil.newArrayList();
+
+        List<ObjectIdentifier> willDelete = ListUtil.empty();
         for (String key : keys) {
             willDelete.add(ObjectIdentifier.builder().key(key).build());
         }
@@ -53,7 +55,7 @@ public class OssUtil {
      * @return
      */
     public Boolean deleteObjects(String... keys) {
-        return deleteObjects(ossConfigProperties.getDefaultBucket(), CollUtil.toList(keys));
+        return deleteObjects(ossConfigProperties.getDefaultBucket(), ListUtil.of(keys));
     }
 
     /**
@@ -95,9 +97,10 @@ public class OssUtil {
     @SneakyThrows
     public String upload(File file, String bucket, String key) {
         String fileKey = IdUtil.getSnowflakeNextIdStr() + StrUtil.DASHED + key;
+
         s3Client.putObject(
                 builder -> builder.bucket(bucket).key(fileKey)
-                        .contentType(HttpUtil.getMimeType(file.getName())),
+                        .contentType(FileUtil.getMimeType(file.getName())),
                 RequestBody.fromFile(file)).sdkHttpResponse().isSuccessful();
         return fileKey;
     }

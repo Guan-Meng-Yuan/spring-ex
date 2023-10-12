@@ -1,12 +1,9 @@
 package com.guanmengyuan.spring.ex.web.config;
 
+import java.util.Collections;
+import java.util.Map;
 
-import cn.hutool.core.bean.BeanUtil;
-import com.guanmengyuan.spring.ex.common.model.dto.res.Res;
-import com.guanmengyuan.spring.ex.common.model.exception.ServiceException;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
-import lombok.extern.slf4j.Slf4j;
+import org.dromara.hutool.core.bean.BeanUtil;
 import org.springframework.boot.autoconfigure.web.ServerProperties;
 import org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController;
 import org.springframework.boot.web.servlet.error.DefaultErrorAttributes;
@@ -16,8 +13,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 
-import java.util.Collections;
-import java.util.Map;
+import com.guanmengyuan.spring.ex.common.model.dto.res.Res;
+import com.guanmengyuan.spring.ex.common.model.exception.ServiceException;
+
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 public class GlobalErrorController extends BasicErrorController {
@@ -35,7 +36,9 @@ public class GlobalErrorController extends BasicErrorController {
         Map<String, Object> body = getErrorAttributes(request, getErrorAttributeOptions(request, MediaType.ALL));
         ServiceException serviceException = new ServiceException(status, body.get("error").toString(), "网络异常");
         log.error("request error:{}", body.get("path") + ":" + body.get("error"), serviceException);
-        return (modelAndView != null) ? modelAndView : new ModelAndView(new MappingJackson2JsonView()).addAllObjects(BeanUtil.beanToMap(Res.error(serviceException)));
+        return (modelAndView != null) ? modelAndView
+                : new ModelAndView(new MappingJackson2JsonView())
+                        .addAllObjects(BeanUtil.beanToMap(Res.error(serviceException)));
     }
 
     @Override

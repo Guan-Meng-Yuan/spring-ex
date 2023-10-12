@@ -23,11 +23,11 @@
         </dependency>
         <dependency>
             <groupId>org.dromara.hutool</groupId>
-            <artifactId>hutool-captcha</artifactId>
+            <artifactId>hutool-swing</artifactId>
         </dependency>
         <dependency>
             <groupId>org.dromara.hutool</groupId>
-            <artifactId>hutool-cache</artifactId>
+            <artifactId>hutool-core</artifactId>
         </dependency>
         <dependency>
             <groupId>cn.dev33</groupId>

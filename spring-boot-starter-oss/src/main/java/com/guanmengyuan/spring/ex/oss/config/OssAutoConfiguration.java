@@ -2,6 +2,7 @@ package com.guanmengyuan.spring.ex.oss.config;
 
 import java.net.URI;
 
+import org.dromara.hutool.core.text.StrUtil;
 import org.springframework.beans.factory.BeanInitializationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -12,7 +13,6 @@ import org.springframework.context.annotation.Configuration;
 import com.guanmengyuan.spring.ex.oss.provider.DynamicCredentialsProvider;
 import com.guanmengyuan.spring.ex.oss.service.OssSecretRequestService;
 
-import cn.hutool.core.util.StrUtil;
 import software.amazon.awssdk.auth.credentials.AwsBasicCredentials;
 import software.amazon.awssdk.auth.credentials.StaticCredentialsProvider;
 import software.amazon.awssdk.regions.Region;
