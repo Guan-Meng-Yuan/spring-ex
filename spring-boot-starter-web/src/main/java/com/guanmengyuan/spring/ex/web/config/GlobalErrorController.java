@@ -1,9 +1,11 @@
 package com.guanmengyuan.spring.ex.web.config;
 
-import java.util.Collections;
-import java.util.Map;
-
-import org.dromara.hutool.core.bean.BeanUtil;
+import cn.hutool.core.bean.BeanUtil;
+import com.guanmengyuan.spring.ex.common.model.dto.res.Res;
+import com.guanmengyuan.spring.ex.common.model.exception.ServiceException;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.web.ServerProperties;
 import org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController;
 import org.springframework.boot.web.servlet.error.DefaultErrorAttributes;
@@ -13,12 +15,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 
-import com.guanmengyuan.spring.ex.common.model.dto.res.Res;
-import com.guanmengyuan.spring.ex.common.model.exception.ServiceException;
-
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
-import lombok.extern.slf4j.Slf4j;
+import java.util.Collections;
+import java.util.Map;
 
 @Slf4j
 public class GlobalErrorController extends BasicErrorController {

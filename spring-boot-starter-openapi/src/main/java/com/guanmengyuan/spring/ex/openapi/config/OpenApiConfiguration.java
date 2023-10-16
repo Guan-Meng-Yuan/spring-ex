@@ -1,20 +1,10 @@
 package com.guanmengyuan.spring.ex.openapi.config;
 
-import java.util.List;
-import java.util.Map;
-import java.util.function.Predicate;
-
-import org.dromara.hutool.core.collection.CollUtil;
-import org.dromara.hutool.core.collection.ListUtil;
-import org.dromara.hutool.core.map.MapUtil;
-import org.dromara.hutool.core.text.StrUtil;
-import org.springdoc.core.customizers.GlobalOpenApiCustomizer;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-
+import cn.hutool.core.collection.CollUtil;
+import cn.hutool.core.collection.ListUtil;
+import cn.hutool.core.map.MapUtil;
+import cn.hutool.core.util.StrUtil;
 import com.guanmengyuan.spring.ex.common.model.dto.res.Res;
-
 import io.swagger.v3.core.converter.AnnotatedType;
 import io.swagger.v3.core.converter.ModelConverters;
 import io.swagger.v3.oas.models.Components;
@@ -27,6 +17,14 @@ import io.swagger.v3.oas.models.media.Schema;
 import io.swagger.v3.oas.models.parameters.Parameter;
 import io.swagger.v3.oas.models.tags.Tag;
 import lombok.RequiredArgsConstructor;
+import org.springdoc.core.customizers.GlobalOpenApiCustomizer;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
+import java.util.List;
+import java.util.Map;
+import java.util.function.Predicate;
 
 /**
  * 接口文档自动配置类
@@ -58,7 +56,7 @@ public class OpenApiConfiguration implements GlobalOpenApiCustomizer {
         Components components = openApi.getComponents();
         Paths paths = openApi.getPaths();
         List<Tag> tags = openApi.getTags();
-        Map<String, String> tagMap = MapUtil.empty();
+        Map<String, String> tagMap = MapUtil.newHashMap();
         if (CollUtil.isNotEmpty(tags)) {
             tagMap = CollUtil.fieldValueAsMap(tags, "name", "description");
             tags.forEach(tag -> tag.setName(tag.getDescription()));

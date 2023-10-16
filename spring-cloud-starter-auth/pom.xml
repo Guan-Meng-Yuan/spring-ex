@@ -5,7 +5,7 @@
     <parent>
         <groupId>com.guanmengyuan</groupId>
         <artifactId>spring-ex</artifactId>
-        <version>1.2.11</version>
+        <version>1.2.12</version>
     </parent>
 
     <groupId>com.guanmengyuan.spring-ex</groupId>
@@ -22,20 +22,20 @@
             <artifactId>spring-ex-common-model</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.dromara.hutool</groupId>
-            <artifactId>hutool-swing</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.dromara.hutool</groupId>
-            <artifactId>hutool-core</artifactId>
-        </dependency>
-        <dependency>
             <groupId>cn.dev33</groupId>
             <artifactId>sa-token-reactor-spring-boot3-starter</artifactId>
         </dependency>
         <dependency>
             <groupId>cn.dev33</groupId>
             <artifactId>sa-token-spring-boot3-starter</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-cache</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-captcha</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>

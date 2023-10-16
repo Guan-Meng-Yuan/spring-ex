@@ -1,13 +1,10 @@
 package com.guanmengyuan.spring.ex.web.config;
 
-import static com.guanmengyuan.spring.ex.common.model.constant.GlobalResponseConstant.DEFAULT_PATH;
-
-import java.util.Set;
-
-import org.dromara.hutool.core.collection.CollUtil;
-import org.dromara.hutool.core.collection.set.SetUtil;
-import org.dromara.hutool.core.text.StrUtil;
-import org.dromara.hutool.json.JSONUtil;
+import cn.hutool.core.collection.CollUtil;
+import cn.hutool.core.util.StrUtil;
+import cn.hutool.json.JSONUtil;
+import com.guanmengyuan.spring.ex.common.model.dto.res.Res;
+import lombok.NonNull;
 import org.springframework.core.MethodParameter;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.HttpMessageConverter;
@@ -18,9 +15,9 @@ import org.springframework.util.AntPathMatcher;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
 
-import com.guanmengyuan.spring.ex.common.model.dto.res.Res;
+import java.util.Set;
 
-import lombok.NonNull;
+import static com.guanmengyuan.spring.ex.common.model.constant.GlobalResponseConstant.DEFAULT_PATH;
 
 @RestControllerAdvice
 public class GlobalResponseAdvice implements ResponseBodyAdvice<Object> {
@@ -32,7 +29,7 @@ public class GlobalResponseAdvice implements ResponseBodyAdvice<Object> {
     public GlobalResponseAdvice(SpringWebProperties springWebProperties) {
         this.springWebProperties = springWebProperties;
 
-        ignores = SetUtil.empty();
+        ignores = CollUtil.newHashSet();
         if (CollUtil.isNotEmpty(springWebProperties.getIgnores())) {
             ignores.addAll(springWebProperties.getIgnores());
         }

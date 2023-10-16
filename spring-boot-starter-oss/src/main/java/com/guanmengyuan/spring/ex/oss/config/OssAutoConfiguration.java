@@ -1,22 +1,22 @@
 package com.guanmengyuan.spring.ex.oss.config;
 
-import java.net.URI;
-
-import org.dromara.hutool.core.text.StrUtil;
+import cn.hutool.core.util.StrUtil;
+import com.guanmengyuan.spring.ex.oss.enums.SecretMode;
+import com.guanmengyuan.spring.ex.oss.provider.DynamicCredentialsProvider;
+import com.guanmengyuan.spring.ex.oss.service.OssSecretRequestService;
 import org.springframework.beans.factory.BeanInitializationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-
-import com.guanmengyuan.spring.ex.oss.provider.DynamicCredentialsProvider;
-import com.guanmengyuan.spring.ex.oss.service.OssSecretRequestService;
-
 import software.amazon.awssdk.auth.credentials.AwsBasicCredentials;
 import software.amazon.awssdk.auth.credentials.StaticCredentialsProvider;
 import software.amazon.awssdk.regions.Region;
 import software.amazon.awssdk.services.s3.S3Client;
+
+import java.net.URI;
+import java.util.Objects;
 
 /**
  * @author guanmengyuan
@@ -30,17 +30,13 @@ public class OssAutoConfiguration {
     private OssSecretRequestService ossSecretRequestService;
 
     public OssAutoConfiguration(OssConfigProperties ossConfigProperties) {
-        switch (ossConfigProperties.getSecretMode()) {
-            case USUALLY:
-                if (!StrUtil.isAllNotEmpty(ossConfigProperties.getAccessKey(), ossConfigProperties.getAccessSecret(),
-                        ossConfigProperties.getRegion(), ossConfigProperties.getEndpoint(),
-                        ossConfigProperties.getDefaultBucket())) {
-                    throw new BeanInitializationException(
-                            "oss config properties bind error,please check the oss properties");
-                }
-                break;
-            default:
-                break;
+        if (Objects.requireNonNull(ossConfigProperties.getSecretMode()) == SecretMode.USUALLY) {
+            if (!StrUtil.isAllNotEmpty(ossConfigProperties.getAccessKey(), ossConfigProperties.getAccessSecret(),
+                    ossConfigProperties.getRegion(), ossConfigProperties.getEndpoint(),
+                    ossConfigProperties.getDefaultBucket())) {
+                throw new BeanInitializationException(
+                        "oss config properties bind error,please check the oss properties");
+            }
         }
         this.ossConfigProperties = ossConfigProperties;
     }
