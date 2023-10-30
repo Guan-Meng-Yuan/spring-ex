@@ -5,7 +5,7 @@
 
     <groupId>com.guanmengyuan</groupId>
     <artifactId>spring-ex-dependencies</artifactId>
-    <version>1.2.13</version>
+    <version>1.2.14</version>
     <packaging>pom</packaging>
     <name>spring-ex-dependencies</name>
     <description>spring ex base pom</description>
@@ -32,19 +32,19 @@
     </scm>
 
     <properties>
-        <revision>1.2.13</revision>
+        <revision>1.2.14</revision>
         <java.version>17</java.version>
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <!--        spring start-->
-        <spring-boot.version>3.1.4</spring-boot.version>
+        <spring-boot.version>3.1.5</spring-boot.version>
         <spring-cloud.version>2022.0.4</spring-cloud.version>
-        <spring-cloud-tencent.version>1.12.1-2022.0.4</spring-cloud-tencent.version>
+        <spring-cloud-tencent.version>1.12.3-2022.0.4</spring-cloud-tencent.version>
         <spring-cloud-alibaba.version>2022.0.0.0</spring-cloud-alibaba.version>
         <!--        spring end-->
 
-        <mybatis-flex.version>1.7.2</mybatis-flex.version>
+        <mybatis-flex.version>1.7.3</mybatis-flex.version>
         <mybatis.version>3.0.2</mybatis.version>
         <hutool.version>5.8.22</hutool.version>
         <knife4j.version>4.3.0</knife4j.version>
@@ -53,9 +53,9 @@
         <wx-java.version>4.5.5.B</wx-java.version>
         <dubbo.version>3.2.7</dubbo.version>
         <sentinel.version>1.8.6</sentinel.version>
-        <sa-token.version>1.36.0</sa-token.version>
+        <sa-token.version>1.37.0</sa-token.version>
         <forest.version>1.5.33</forest.version>
-        <aws.version>2.20.162</aws.version>
+        <aws.version>2.21.9</aws.version>
         <springdoc.version>2.2.0</springdoc.version>
         <!--        build start-->
         <maven-compiler-plugin.version>3.11.0</maven-compiler-plugin.version>

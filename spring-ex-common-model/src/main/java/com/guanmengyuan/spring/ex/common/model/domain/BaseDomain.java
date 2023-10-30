@@ -8,6 +8,7 @@ import com.mybatisflex.core.activerecord.Model;
 import com.mybatisflex.core.keygen.KeyGenerators;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.experimental.Accessors;
 
 import java.util.Date;
 
@@ -17,6 +18,7 @@ import java.util.Date;
 
 @Data
 @EqualsAndHashCode(callSuper = true)
+@Accessors(chain = true)
 public class BaseDomain<T extends Model<T>> extends Model<T> {
     /**
      * 主键ID
