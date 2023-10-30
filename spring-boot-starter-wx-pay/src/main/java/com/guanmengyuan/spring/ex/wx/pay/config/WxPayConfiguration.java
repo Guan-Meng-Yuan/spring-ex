@@ -46,7 +46,7 @@ public class WxPayConfiguration {
                             payConfig.setCertSerialNo(StringUtils.trimToNull(a.getCertSerialNo()));
                             payConfig.setApiV3Key(StringUtils.trimToNull(a.getApiV3Key()));
                             return payConfig;
-                        }).collect(Collectors.toMap(WxPayConfig::getAppId, a -> a, (o, n) -> o)), configs.get(0).getMchId());
+                        }).collect(Collectors.toMap(WxPayConfig::getAppId, a -> a, (o, n) -> o)), configs.get(0).getAppId());
         return wxPayService;
     }
 }

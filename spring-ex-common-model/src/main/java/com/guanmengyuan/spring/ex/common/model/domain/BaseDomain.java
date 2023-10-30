@@ -8,7 +8,6 @@ import com.mybatisflex.core.activerecord.Model;
 import com.mybatisflex.core.keygen.KeyGenerators;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.experimental.Accessors;
 
 import java.util.Date;
 
@@ -16,15 +15,35 @@ import java.util.Date;
  * 顶级父类
  */
 
+@SuppressWarnings("unchecked")
 @Data
 @EqualsAndHashCode(callSuper = true)
-@Accessors(chain = true)
 public class BaseDomain<T extends Model<T>> extends Model<T> {
     /**
      * 主键ID
      */
     @Id(keyType = KeyType.Generator, value = KeyGenerators.snowFlakeId)
     private String id;
+
+    public T setId(String id) {
+        this.id = id;
+        return (T) this;
+    }
+
+    public T setCreateTime(Date createTime) {
+        this.createTime = createTime;
+        return (T) this;
+    }
+
+    public T setUpdateTime(Date updateTime) {
+        this.updateTime = updateTime;
+        return (T) this;
+    }
+
+    public T setDeleted(Boolean deleted) {
+        this.deleted = deleted;
+        return (T) this;
+    }
 
     /**
      * 创建时间
