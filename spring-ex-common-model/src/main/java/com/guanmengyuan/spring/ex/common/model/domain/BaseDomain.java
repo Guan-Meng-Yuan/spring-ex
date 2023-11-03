@@ -30,6 +30,7 @@ public class BaseDomain<T extends Model<T>> extends Model<T> {
         return (T) this;
     }
 
+    @SuppressWarnings("UnusedReturnValue")
     public T setCreateTime(Date createTime) {
         this.createTime = createTime;
         return (T) this;
@@ -48,7 +49,6 @@ public class BaseDomain<T extends Model<T>> extends Model<T> {
     /**
      * 创建时间
      */
-    @Column(onInsertValue = "now()")
     private Date createTime;
     /**
      * 更新时间

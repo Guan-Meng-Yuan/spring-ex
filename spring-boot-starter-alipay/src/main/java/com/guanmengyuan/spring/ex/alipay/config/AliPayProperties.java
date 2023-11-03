@@ -1,7 +1,7 @@
 package com.guanmengyuan.spring.ex.alipay.config;
 
 
-import com.alipay.easysdk.kernel.util.AntCertificationUtil;
+import com.alipay.v3.util.AntCertificationUtil;
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 

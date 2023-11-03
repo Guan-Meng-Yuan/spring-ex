@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.guanmengyuan</groupId>
     <artifactId>spring-ex-dependencies</artifactId>
-    <version>1.2.16</version>
+    <version>1.2.18</version>
     <packaging>pom</packaging>
     <name>spring-ex-dependencies</name>
     <description>spring ex base pom</description>
@@ -32,7 +33,7 @@
     </scm>
 
     <properties>
-        <revision>1.2.16</revision>
+        <revision>1.2.18</revision>
         <java.version>17</java.version>
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
@@ -49,7 +50,7 @@
         <hutool.version>5.8.22</hutool.version>
         <knife4j.version>4.3.0</knife4j.version>
         <therapi.version>0.15.0</therapi.version>
-        <alipay.version>2.2.3</alipay.version>
+        <alipay.version>2.7.10.ALL</alipay.version>
         <wx-java.version>4.5.5.B</wx-java.version>
         <dubbo.version>3.2.7</dubbo.version>
         <sentinel.version>1.8.6</sentinel.version>
@@ -170,7 +171,7 @@
             <!--            alipay-->
             <dependency>
                 <groupId>com.alipay.sdk</groupId>
-                <artifactId>alipay-easysdk</artifactId>
+                <artifactId>alipay-sdk-java-v3</artifactId>
                 <version>${alipay.version}</version>
             </dependency>
             <!--            wechat-->
