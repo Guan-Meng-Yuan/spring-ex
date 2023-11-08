@@ -23,13 +23,13 @@
 
 ## 组件说明
 
-**[spring-boot-starter-webflux](./spring-boot-starter-webflux)**: 官方spring-boot-starter-webflux的增强版本
+**[spring-boot-starter-webf](./spring-boot-starter-web)**: 官方spring-boot-starter-webmvc的增强版本
 
 ```xml
 
 <dependency>
     <groupId>com.guanmengyuan.spring-ex</groupId>
-    <artifactId>spring-boot-starter-webflux</artifactId>
+    <artifactId>spring-boot-starter-web</artifactId>
 </dependency>
 
 ```

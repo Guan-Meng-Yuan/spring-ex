@@ -5,7 +5,7 @@
 
     <groupId>com.guanmengyuan</groupId>
     <artifactId>spring-ex</artifactId>
-    <version>1.2.18</version>
+    <version>1.2.19</version>
     <packaging>pom</packaging>
 
     <name>spring-ex</name>
@@ -34,7 +34,6 @@
 
 
     <modules>
-        <module>spring-boot-starter-webflux</module>
         <module>spring-ex-common-model</module>
         <module>spring-boot-starter-openapi</module>
         <module>spring-boot-starter-mybatis-flex</module>
@@ -48,7 +47,7 @@
 
 
     <properties>
-        <revision>1.2.18</revision>
+        <revision>1.2.19</revision>
         <java.version>17</java.version>
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>

@@ -9,7 +9,6 @@ import com.guanmengyuan.spring.ex.alipay.config.AliPayProperties;
 import com.guanmengyuan.spring.ex.alipay.service.AliPayService;
 import lombok.SneakyThrows;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -17,7 +16,7 @@ import java.util.concurrent.ConcurrentHashMap;
 public class DefaultAliPayServiceImpl implements AliPayService {
     private static final Map<String, ApiClient> clients = new ConcurrentHashMap<>();
 
-    private static final Map<String, MultipleFactory> factories = new HashMap<>();
+    private static final Map<String, MultipleFactory> factories = new ConcurrentHashMap<>();
 
     private static final Map<String, AliPayProperties.AliPayConfig> alipayConfigMap = new ConcurrentHashMap<>();
 
@@ -81,7 +80,7 @@ public class DefaultAliPayServiceImpl implements AliPayService {
 
     @Override
     @SneakyThrows
-    public String getUserId(String authCode, String appId) {
+    public  String getUserId(String authCode, String appId) {
         return factories.get(appId).OAuth().getToken(authCode).getUserId();
     }
 

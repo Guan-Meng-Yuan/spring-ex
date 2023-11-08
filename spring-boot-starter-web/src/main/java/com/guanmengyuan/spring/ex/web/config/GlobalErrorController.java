@@ -36,15 +36,12 @@ public class GlobalErrorController extends BasicErrorController {
         log.error("request error:{}", body.get("path") + ":" + body.get("error"), serviceException);
         return (modelAndView != null) ? modelAndView
                 : new ModelAndView(new MappingJackson2JsonView())
-                        .addAllObjects(BeanUtil.beanToMap(Res.error(serviceException)));
+                .addAllObjects(BeanUtil.beanToMap(Res.error(serviceException)));
     }
 
     @Override
     public ResponseEntity<Map<String, Object>> error(HttpServletRequest request) {
         HttpStatus status = getStatus(request);
-        if (status == HttpStatus.NO_CONTENT) {
-            return new ResponseEntity<>(status);
-        }
         Map<String, Object> body = getErrorAttributes(request, getErrorAttributeOptions(request, MediaType.ALL));
         ServiceException serviceException = new ServiceException(status, body.get("error").toString(), "网络异常");
         log.error("request error:{}", body.get("path") + ":" + body.get("error"), serviceException);
