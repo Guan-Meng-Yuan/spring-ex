@@ -1,28 +1,29 @@
 package com.guanmengyuan.spring.ex.oss.util;
 
+import java.io.File;
+import java.util.List;
+
+import org.springframework.stereotype.Component;
+import org.springframework.web.multipart.MultipartFile;
+
+import com.guanmengyuan.spring.ex.oss.config.OssConfigProperties;
+
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.collection.ListUtil;
 import cn.hutool.core.io.FileUtil;
 import cn.hutool.core.util.IdUtil;
 import cn.hutool.core.util.StrUtil;
-import com.guanmengyuan.spring.ex.oss.config.OssConfigProperties;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
-import org.springframework.stereotype.Component;
-import org.springframework.web.multipart.MultipartFile;
 import software.amazon.awssdk.core.sync.RequestBody;
 import software.amazon.awssdk.services.s3.S3Client;
 import software.amazon.awssdk.services.s3.model.ObjectIdentifier;
-
-import java.io.File;
-import java.util.List;
 
 /**
  * @author guanmengyuan
  */
 @Component
 @RequiredArgsConstructor
-@SuppressWarnings("unused")
 public class OssUtil {
     private final S3Client s3Client;
     private final OssConfigProperties ossConfigProperties;

@@ -1,5 +1,18 @@
 package com.guanmengyuan.spring.ex.auth.util;
 
+import java.time.Duration;
+import java.util.Map;
+import java.util.concurrent.TimeUnit;
+
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.http.HttpStatus;
+import org.springframework.stereotype.Component;
+
+import com.guanmengyuan.spring.ex.auth.constant.CacheConstant;
+import com.guanmengyuan.spring.ex.auth.enums.CaptchaType;
+import com.guanmengyuan.spring.ex.auth.model.CaptchaResult;
+import com.guanmengyuan.spring.ex.common.model.exception.ServiceException;
+
 import cn.hutool.cache.CacheUtil;
 import cn.hutool.cache.impl.TimedCache;
 import cn.hutool.captcha.AbstractCaptcha;
@@ -8,24 +21,12 @@ import cn.hutool.captcha.generator.CodeGenerator;
 import cn.hutool.core.map.MapUtil;
 import cn.hutool.core.util.IdUtil;
 import cn.hutool.core.util.StrUtil;
-import com.guanmengyuan.spring.ex.auth.constant.CacheConstant;
-import com.guanmengyuan.spring.ex.auth.enums.CaptchaType;
-import com.guanmengyuan.spring.ex.auth.model.CaptchaResult;
-import com.guanmengyuan.spring.ex.common.model.exception.ServiceException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.http.HttpStatus;
-import org.springframework.stereotype.Component;
-
-import java.time.Duration;
-import java.util.Map;
-import java.util.concurrent.TimeUnit;
 
 @Component
 @RequiredArgsConstructor
 @Slf4j
-@SuppressWarnings("unused")
 public class CaptchaUtils {
     private final RedisTemplate<String, String> redisTemplate;
     private static final TimedCache<String, String> IN_MEMORY_CACHE = CacheUtil
@@ -44,7 +45,7 @@ public class CaptchaUtils {
      * @see CaptchaType#CUSTOM
      */
     public CaptchaResult captchaResult(CaptchaType captchaType, CodeGenerator codeGenerator, Integer width,
-                                       Integer height) {
+            Integer height) {
 
         Map<String, Object> captchaResult = MapUtil.newHashMap();
         String redisKeyID = IdUtil.getSnowflakeNextIdStr();

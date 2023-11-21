@@ -1,11 +1,10 @@
 package com.guanmengyuan.spring.ex.alipay.service;
 
+import java.util.List;
+
 import com.alipay.easysdk.factory.MultipleFactory;
 import com.alipay.v3.ApiClient;
 import com.guanmengyuan.spring.ex.alipay.config.AliPayProperties;
-import lombok.SneakyThrows;
-
-import java.util.List;
 
 public interface AliPayService {
     /**
@@ -38,8 +37,6 @@ public interface AliPayService {
      * @param appId    小程序id
      * @return 用户id
      */
-    @SneakyThrows
     String getUserId(String authCode, String appId);
-
 
 }
