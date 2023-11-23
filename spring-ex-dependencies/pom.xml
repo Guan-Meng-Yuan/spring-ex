@@ -45,19 +45,19 @@
         <spring-cloud-alibaba.version>2022.0.0.0</spring-cloud-alibaba.version>
         <!--        spring end-->
 
-        <mybatis-flex.version>1.7.3</mybatis-flex.version>
-        <mybatis.version>3.0.2</mybatis.version>
-        <hutool.version>5.8.22</hutool.version>
+        <mybatis-flex.version>1.7.4</mybatis-flex.version>
+        <mybatis.version>3.0.3</mybatis.version>
+        <hutool.version>5.8.23</hutool.version>
         <knife4j.version>4.3.0</knife4j.version>
         <therapi.version>0.15.0</therapi.version>
         <alipay.version>2.7.10.ALL</alipay.version>
         <alipay-easy.version>2.2.3</alipay-easy.version>
-        <wx-java.version>4.5.6.B</wx-java.version>
-        <dubbo.version>3.2.7</dubbo.version>
+        <wx-java.version>4.5.7.B</wx-java.version>
+        <dubbo.version>3.2.9</dubbo.version>
         <sentinel.version>1.8.6</sentinel.version>
         <sa-token.version>1.37.0</sa-token.version>
         <forest.version>1.5.33</forest.version>
-        <aws.version>2.21.17</aws.version>
+        <aws.version>2.21.27</aws.version>
         <springdoc.version>2.2.0</springdoc.version>
         <flowable.version>7.0.0</flowable.version>
         <!--        build start-->

@@ -6,12 +6,21 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 @RestControllerAdvice
 @Slf4j
 public class GlobalExceptionHandler {
+
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public Res<?> handleMethodArgumentNotValidException(MethodArgumentNotValidException e, HttpServletRequest servletRequest, HttpServletResponse response) {
+        String requestURI = servletRequest.getRequestURI();
+        log.error("request error:{}", requestURI, e);
+        response.setStatus(HttpStatus.BAD_REQUEST.value());
+        return Res.error(e);
+    }
 
     @ExceptionHandler(Throwable.class)
     public Res<?> handlerThrowable(Throwable throwable, HttpServletRequest servletRequest, HttpServletResponse response) {

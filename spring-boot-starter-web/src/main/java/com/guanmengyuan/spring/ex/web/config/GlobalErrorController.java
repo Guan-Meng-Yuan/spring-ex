@@ -27,16 +27,15 @@ public class GlobalErrorController extends BasicErrorController {
     @Override
     public ModelAndView errorHtml(HttpServletRequest request, HttpServletResponse response) {
         HttpStatus status = getStatus(request);
-        Map<String, Object> model = Collections
-                .unmodifiableMap(getErrorAttributes(request, getErrorAttributeOptions(request, MediaType.TEXT_HTML)));
+        Map<String, Object> model = Collections.unmodifiableMap(getErrorAttributes(request, getErrorAttributeOptions(request, MediaType.TEXT_HTML)));
         response.setStatus(status.value());
+
         ModelAndView modelAndView = resolveErrorView(request, response, status, model);
         Map<String, Object> body = getErrorAttributes(request, getErrorAttributeOptions(request, MediaType.ALL));
         ServiceException serviceException = new ServiceException(status, body.get("error").toString(), "网络异常");
         log.error("request error:{}", body.get("path") + ":" + body.get("error"), serviceException);
-        return (modelAndView != null) ? modelAndView
-                : new ModelAndView(new MappingJackson2JsonView())
-                .addAllObjects(BeanUtil.beanToMap(Res.error(serviceException)));
+        response.setContentType(MediaType.APPLICATION_JSON_VALUE);
+        return (modelAndView != null) ? modelAndView : new ModelAndView(new MappingJackson2JsonView()).addAllObjects(BeanUtil.beanToMap(Res.error(serviceException), false, true));
     }
 
     @Override

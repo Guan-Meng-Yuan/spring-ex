@@ -38,19 +38,14 @@ public class GlobalResponseAdvice implements ResponseBodyAdvice<Object> {
     }
 
     @Override
-    public boolean supports(@NonNull MethodParameter returnType,
-            @NonNull Class<? extends HttpMessageConverter<?>> converterType) {
+    public boolean supports(@NonNull MethodParameter returnType, @NonNull Class<? extends HttpMessageConverter<?>> converterType) {
         return true;
     }
 
     @Override
-    public Object beforeBodyWrite(@Nullable Object body, @NonNull MethodParameter returnType,
-            @NonNull MediaType selectedContentType,
-            @NonNull Class<? extends HttpMessageConverter<?>> selectedConverterType, @NonNull ServerHttpRequest request,
-            @NonNull ServerHttpResponse response) {
+    public Object beforeBodyWrite(@Nullable Object body, @NonNull MethodParameter returnType, @NonNull MediaType selectedContentType, @NonNull Class<? extends HttpMessageConverter<?>> selectedConverterType, @NonNull ServerHttpRequest request, @NonNull ServerHttpResponse response) {
         String path = request.getURI().getPath();
-        if (!springWebProperties.getEnableGlobalRes() || StrUtil.equals(path, "/error") || body instanceof Res<?>
-                || ignores.stream().anyMatch(ignore -> antPathMatcher.match(ignore, path))) {
+        if (!springWebProperties.getEnableGlobalRes() || StrUtil.equals(path, "/error") || body instanceof Res<?> || ignores.stream().anyMatch(ignore -> antPathMatcher.match(ignore, path))) {
             return body;
         }
         return wrapperBody(body, returnType, response);

@@ -17,6 +17,7 @@ import org.springframework.web.server.ServerWebExchange;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * 统一响应dto
@@ -141,45 +142,26 @@ public class Res<T> implements Serializable {
      */
     public static Res<?> error(Throwable throwable) {
         Res<?> res = new Res<>();
+        //如果是内置业务异常
         if (throwable instanceof ServiceException serviceException) {
             res.setMessage(serviceException.getMessage());
             res.setTips(serviceException.getTips());
             res.setHttpStatusCode(serviceException.getStatusCode());
+            //如果是参数校验异常
+        } else if (throwable instanceof MethodArgumentNotValidException methodArgumentNotValidException) {
+            res.setTips(Objects.requireNonNull(methodArgumentNotValidException.getBindingResult().getFieldError()).getDefaultMessage());
+            res.setHttpStatusCode(HttpStatus.BAD_REQUEST);
+            res.setMessage(throwable.getMessage());
+            // 其他异常
         } else {
             res.setTips(ResEnum.INTERNAL_SERVER_ERROR.getTips());
             res.setHttpStatusCode(ResEnum.INTERNAL_SERVER_ERROR.getHttpStatusCode());
             res.setMessage(throwable.getMessage());
         }
-
         res.setSuccess(Boolean.FALSE);
         return res;
     }
 
-    /**
-     * 错误响应
-     *
-     * @param error     错误
-     * @param requestId 请求ID
-     * @return 错误
-     */
-    public static Res<?> error(Throwable error, String requestId) {
-        Res<?> res = new Res<>();
-        res.setSuccess(Boolean.FALSE);
-        res.setTraceId(requestId);
-        res.setTips(ResEnum.INTERNAL_SERVER_ERROR.getTips());
-        if (error instanceof ResponseStatusException responseStatusException) {
-            setRes(error, responseStatusException, res);
-        } else if (error instanceof MethodArgumentNotValidException methodArgumentNotValidException) {
-            List<ObjectError> allErrors = methodArgumentNotValidException.getAllErrors();
-            if (CollUtil.isNotEmpty(allErrors)) {
-                res.setTips(StrUtil.blankToDefault(allErrors.get(0).getDefaultMessage(),
-                        ResEnum.INTERNAL_SERVER_ERROR.getTips()));
-            }
-        } else {
-            res.setHttpStatusCode(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-        return res;
-    }
 
     /**
      * setRes

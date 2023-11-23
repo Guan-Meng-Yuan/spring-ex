@@ -1,3 +1,4 @@
 com.guanmengyuan.spring.ex.web.config.SpringWebAutoConfiguration
 com.guanmengyuan.spring.ex.web.config.GlobalExceptionHandler
 com.guanmengyuan.spring.ex.web.config.GlobalResponseAdvice
+com.guanmengyuan.spring.ex.web.config.ValidationConfiguration

@@ -1,13 +1,16 @@
 package com.guanmengyuan.spring.ex.common.model.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.guanmengyuan.spring.ex.common.model.valid.group.UpdateGroup;
 import com.mybatisflex.annotation.Column;
 import com.mybatisflex.annotation.Id;
 import com.mybatisflex.annotation.KeyType;
 import com.mybatisflex.core.activerecord.Model;
 import com.mybatisflex.core.keygen.KeyGenerators;
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
 import java.util.Date;
 
@@ -18,11 +21,13 @@ import java.util.Date;
 @SuppressWarnings("unchecked")
 @Data
 @EqualsAndHashCode(callSuper = true)
+@NoArgsConstructor
 public class BaseDomain<T extends Model<T>> extends Model<T> {
     /**
      * 主键ID
      */
     @Id(keyType = KeyType.Generator, value = KeyGenerators.snowFlakeId)
+    @NotNull(groups = UpdateGroup.class, message = "ID不能为空")
     private String id;
 
     public T setId(String id) {
