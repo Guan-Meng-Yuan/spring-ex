@@ -23,7 +23,7 @@
 
 ## 组件说明
 
-**[spring-boot-starter-webf](./spring-boot-starter-web)**: 官方spring-boot-starter-webmvc的增强版本
+**[spring-boot-starter-web](./spring-boot-starter-web)**: 官方spring-boot-starter-webmvc的增强版本
 
 ```xml
 
