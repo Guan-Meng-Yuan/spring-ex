@@ -38,7 +38,7 @@
 > * 全局异常拦截
 > * 全局响应
 
-**[spring-boot-starter-openapi](./spring-boot-starter-openapi)**: 文档增强组件,spring-boot-starter-webflux中默认包含
+**[spring-boot-starter-openapi](./spring-boot-starter-openapi)**: 文档增强组件,spring-boot-starter-web中默认包含
 > * 接口访问地址: http://yourip:port/doc.html
 
 ```xml
