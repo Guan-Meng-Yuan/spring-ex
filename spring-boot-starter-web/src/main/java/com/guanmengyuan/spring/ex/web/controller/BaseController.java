@@ -3,6 +3,7 @@ package com.guanmengyuan.spring.ex.web.controller;
 import java.util.List;
 
 import org.springdoc.core.annotations.ParameterObject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,12 +17,11 @@ import com.guanmengyuan.spring.ex.common.model.dto.req.PageReq;
 import com.guanmengyuan.spring.ex.common.model.valid.group.SaveGroup;
 import com.guanmengyuan.spring.ex.common.model.valid.group.UpdateGroup;
 import com.mybatisflex.core.paginate.Page;
+import com.mybatisflex.core.query.QueryWrapper;
 import com.mybatisflex.core.service.IService;
 
-import jakarta.annotation.Resource;
-
 public class BaseController<S extends IService<T>, T extends BaseDomain<T>> {
-    @Resource
+    @Autowired
     private S service;
 
     /**
@@ -33,7 +33,7 @@ public class BaseController<S extends IService<T>, T extends BaseDomain<T>> {
      */
     @GetMapping("page")
     public Page<T> page(@ParameterObject PageReq page, @ParameterObject T param) {
-        return service.page(Page.of(page.getCurrent(), page.getPageSize()), param.toQueryWrapper());
+        return service.page(Page.of(page.getCurrent(), page.getPageSize()), QueryWrapper.create(param));
     }
 
     /**
@@ -55,7 +55,7 @@ public class BaseController<S extends IService<T>, T extends BaseDomain<T>> {
      */
     @GetMapping
     public List<T> list(@ParameterObject T param) {
-        return service.list(param.toQueryWrapper());
+        return service.list(QueryWrapper.create(param));
     }
 
     /**
