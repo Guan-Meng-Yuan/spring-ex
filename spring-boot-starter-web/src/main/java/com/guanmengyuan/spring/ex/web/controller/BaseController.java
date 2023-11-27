@@ -1,17 +1,24 @@
 package com.guanmengyuan.spring.ex.web.controller;
 
+import java.util.List;
+
+import org.springdoc.core.annotations.ParameterObject;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+
 import com.guanmengyuan.spring.ex.common.model.domain.BaseDomain;
 import com.guanmengyuan.spring.ex.common.model.dto.req.PageReq;
 import com.guanmengyuan.spring.ex.common.model.valid.group.SaveGroup;
 import com.guanmengyuan.spring.ex.common.model.valid.group.UpdateGroup;
 import com.mybatisflex.core.paginate.Page;
 import com.mybatisflex.core.service.IService;
-import jakarta.annotation.Resource;
-import org.springdoc.core.annotations.ParameterObject;
-import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+import jakarta.annotation.Resource;
 
 public class BaseController<S extends IService<T>, T extends BaseDomain<T>> {
     @Resource
@@ -36,7 +43,7 @@ public class BaseController<S extends IService<T>, T extends BaseDomain<T>> {
      * @return 数据
      */
     @GetMapping("{id}")
-    public T getOneById(@PathVariable String id) {
+    public T getOneById(@PathVariable(name = "id") String id) {
         return service.getById(id);
     }
 
@@ -58,7 +65,7 @@ public class BaseController<S extends IService<T>, T extends BaseDomain<T>> {
      * @return 删除结果
      */
     @DeleteMapping("{ids}")
-    public Boolean removeByIds(@PathVariable List<String> ids) {
+    public Boolean removeByIds(@PathVariable(name = "ids") List<String> ids) {
         return service.removeByIds(ids);
     }
 
