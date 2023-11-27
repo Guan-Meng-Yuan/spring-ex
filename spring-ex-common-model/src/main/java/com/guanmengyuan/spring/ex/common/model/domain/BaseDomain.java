@@ -21,6 +21,7 @@ import lombok.NoArgsConstructor;
 @Data
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
+@SuppressWarnings("unchecked")
 public class BaseDomain<T extends Model<T>> extends Model<T> {
     /**
      * 主键ID

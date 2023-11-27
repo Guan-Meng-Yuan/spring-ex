@@ -1,13 +1,12 @@
 package com.guanmengyuan.spring.ex.common.model.dto.req;
 
-import lombok.Data;
-
 import java.io.Serializable;
+
+import lombok.Data;
 
 /**
  * 分页参数
  */
-@SuppressWarnings("ALL")
 @Data
 public class PageReq implements Serializable {
     /**

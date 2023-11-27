@@ -1,12 +1,13 @@
 package com.guanmengyuan.spring.ex.common.mybatis.flex.listener;
 
-import cn.hutool.core.date.DateUtil;
 import com.guanmengyuan.spring.ex.common.model.domain.BaseDomain;
 import com.mybatisflex.annotation.InsertListener;
 
+import cn.hutool.core.date.DateUtil;
+
 public class BaseInsertListener implements InsertListener {
-    @SuppressWarnings("rawtypes")
     @Override
+    @SuppressWarnings("rawtypes")
     public void onInsert(Object entity) {
         BaseDomain baseDomain = (BaseDomain) entity;
         if (null == baseDomain.getCreateTime()) {

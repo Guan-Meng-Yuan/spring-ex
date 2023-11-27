@@ -142,14 +142,15 @@ public class Res<T> implements Serializable {
      */
     public static Res<?> error(Throwable throwable) {
         Res<?> res = new Res<>();
-        //如果是内置业务异常
+        // 如果是内置业务异常
         if (throwable instanceof ServiceException serviceException) {
             res.setMessage(serviceException.getMessage());
             res.setTips(serviceException.getTips());
             res.setHttpStatusCode(serviceException.getStatusCode());
-            //如果是参数校验异常
+            // 如果是参数校验异常
         } else if (throwable instanceof MethodArgumentNotValidException methodArgumentNotValidException) {
-            res.setTips(Objects.requireNonNull(methodArgumentNotValidException.getBindingResult().getFieldError()).getDefaultMessage());
+            res.setTips(Objects.requireNonNull(methodArgumentNotValidException.getBindingResult().getFieldError())
+                    .getDefaultMessage());
             res.setHttpStatusCode(HttpStatus.BAD_REQUEST);
             res.setMessage(throwable.getMessage());
             // 其他异常
@@ -162,14 +163,12 @@ public class Res<T> implements Serializable {
         return res;
     }
 
-
     /**
      * setRes
      *
      * @param res     res
      * @param resEnum 响应枚举
      */
-    @SuppressWarnings("SameParameterValue")
     private static void setResEnum(Res<?> res, ResEnum resEnum) {
         res.setMessage(resEnum.getMessage());
         res.setTips(resEnum.getTips());
