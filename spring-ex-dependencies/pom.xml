@@ -5,7 +5,7 @@
 
     <groupId>com.guanmengyuan</groupId>
     <artifactId>spring-ex-dependencies</artifactId>
-    <version>1.2.21</version>
+    <version>1.2.22</version>
     <packaging>pom</packaging>
     <name>spring-ex-dependencies</name>
     <description>spring ex base pom</description>
@@ -20,19 +20,19 @@
     <developers>
         <developer>
             <name>GMY</name>
-            <url>https://gitee.com/guan-meng-yuan</url>
+            <url>https://github.com/guan-meng-yuan</url>
             <organization>GMY</organization>
-            <organizationUrl>https://gitee.com/guan-meng-yuan</organizationUrl>
+            <organizationUrl>https://github.com/guan-meng-yuan</organizationUrl>
         </developer>
     </developers>
     <scm>
-        <url>https://github.com/GMY-i/spring-ex</url>
-        <connection>scm:git:git@github.com:GMY-i/spring-ex.git</connection>
-        <developerConnection>scm:git:git@github.com:GMY-i/spring-ex.git</developerConnection>
+        <url>https://github.com/Guan-Meng-Yuan/spring-ex.git</url>
+        <connection>scm:git:git@github.com:Guan-Meng-Yuan/spring-ex.git</connection>
+        <developerConnection>scm:git:git@github.com:Guan-Meng-Yuan/spring-ex.git</developerConnection>
     </scm>
 
     <properties>
-        <revision>1.2.21</revision>
+        <revision>1.2.22</revision>
         <java.version>17</java.version>
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
@@ -44,7 +44,7 @@
         <spring-cloud-alibaba.version>2022.0.0.0</spring-cloud-alibaba.version>
         <!--        spring end-->
 
-        <mybatis-flex.version>1.7.4</mybatis-flex.version>
+        <mybatis-flex.version>1.7.5</mybatis-flex.version>
         <mybatis.version>3.0.3</mybatis.version>
         <hutool.version>5.8.23</hutool.version>
         <knife4j.version>4.3.0</knife4j.version>
@@ -55,9 +55,9 @@
         <dubbo.version>3.2.9</dubbo.version>
         <sentinel.version>1.8.6</sentinel.version>
         <sa-token.version>1.37.0</sa-token.version>
-        <forest.version>1.5.33</forest.version>
-        <aws.version>2.21.29</aws.version>
-        <springdoc.version>2.2.0</springdoc.version>
+        <forest.version>1.5.35</forest.version>
+        <aws.version>2.21.37</aws.version>
+        <springdoc.version>2.3.0</springdoc.version>
         <flowable.version>7.0.0</flowable.version>
         <!--        build start-->
         <maven-compiler-plugin.version>3.11.0</maven-compiler-plugin.version>

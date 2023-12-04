@@ -5,12 +5,12 @@
 
     <groupId>com.guanmengyuan</groupId>
     <artifactId>spring-ex</artifactId>
-    <version>1.2.21</version>
+    <version>1.2.22</version>
     <packaging>pom</packaging>
 
     <name>spring-ex</name>
     <description>spring enhance pack</description>
-    <url>https://gitee.com/guan-meng-yuan/spring-ex</url>
+    <url>https://github.com/Guan-Meng-Yuan/spring-ex</url>
     <licenses>
         <license>
             <name>The Apache Software License, Version 2.0</name>
@@ -21,15 +21,15 @@
     <developers>
         <developer>
             <name>GMY</name>
-            <url>https://gitee.com/guan-meng-yuan</url>
+            <url>https://github.com/guan-meng-yuan</url>
             <organization>GMY</organization>
-            <organizationUrl>https://gitee.com/guan-meng-yuan</organizationUrl>
+            <organizationUrl>https://github.com/guan-meng-yuan</organizationUrl>
         </developer>
     </developers>
     <scm>
-        <url>https://gitee.com/guan-meng-yuan/spring-ex</url>
-        <connection>scm:git:git@gitee.com:guan-meng-yuan/spring-ex.git</connection>
-        <developerConnection>scm:git:git@gitee.com:guan-meng-yuan/spring-ex.git</developerConnection>
+        <url>https://github.com/guan-meng-yuan/spring-ex</url>
+        <connection>scm:git:git@github.com:guan-meng-yuan/spring-ex.git</connection>
+        <developerConnection>scm:git:git@github.com:guan-meng-yuan/spring-ex.git</developerConnection>
     </scm>
 
 
@@ -47,7 +47,7 @@
 
 
     <properties>
-        <revision>1.2.21</revision>
+        <revision>1.2.22</revision>
         <java.version>17</java.version>
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
