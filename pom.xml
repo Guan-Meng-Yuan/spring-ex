@@ -5,7 +5,7 @@
 
     <groupId>com.guanmengyuan</groupId>
     <artifactId>spring-ex</artifactId>
-    <version>1.2.22</version>
+    <version>1.2.23</version>
     <packaging>pom</packaging>
 
     <name>spring-ex</name>
@@ -47,7 +47,7 @@
 
 
     <properties>
-        <revision>1.2.22</revision>
+        <revision>1.2.23</revision>
         <java.version>17</java.version>
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>

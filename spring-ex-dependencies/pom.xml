@@ -5,7 +5,7 @@
 
     <groupId>com.guanmengyuan</groupId>
     <artifactId>spring-ex-dependencies</artifactId>
-    <version>1.2.22</version>
+    <version>1.2.23</version>
     <packaging>pom</packaging>
     <name>spring-ex-dependencies</name>
     <description>spring ex base pom</description>
@@ -32,7 +32,7 @@
     </scm>
 
     <properties>
-        <revision>1.2.22</revision>
+        <revision>1.2.23</revision>
         <java.version>17</java.version>
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
@@ -50,6 +50,7 @@
         <knife4j.version>4.3.0</knife4j.version>
         <therapi.version>0.15.0</therapi.version>
         <alipay.version>2.7.10.ALL</alipay.version>
+        <okio.version>3.6.0</okio.version>
         <alipay-easy.version>2.2.3</alipay-easy.version>
         <wx-java.version>4.5.7.B</wx-java.version>
         <dubbo.version>3.2.9</dubbo.version>
@@ -171,6 +172,11 @@
                 <groupId>com.alipay.sdk</groupId>
                 <artifactId>alipay-easysdk</artifactId>
                 <version>${alipay-easy.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.squareup.okio</groupId>
+                <artifactId>okio</artifactId>
+                <version>${okio.version}</version>
             </dependency>
             <!--            wechat-->
             <dependency>
