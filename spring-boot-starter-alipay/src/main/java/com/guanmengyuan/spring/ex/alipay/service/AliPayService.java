@@ -2,8 +2,7 @@ package com.guanmengyuan.spring.ex.alipay.service;
 
 import java.util.List;
 
-import com.alipay.easysdk.factory.MultipleFactory;
-import com.alipay.v3.ApiClient;
+import com.alipay.api.AlipayClient;
 import com.guanmengyuan.spring.ex.alipay.config.AliPayProperties;
 
 public interface AliPayService {
@@ -13,15 +12,7 @@ public interface AliPayService {
      * @param appId appid
      * @return 自定义sdk配置
      */
-    ApiClient switchOverApiClient(String appId);
-
-    /**
-     * 切换appid对应的客户端 easy sdk
-     *
-     * @param appId appid
-     * @return 自定义sdk配置
-     */
-    MultipleFactory switchOverFactory(String appId);
+    AlipayClient switchOverApiClient(String appId);
 
     /**
      * 初始化支付宝配置
@@ -31,12 +22,13 @@ public interface AliPayService {
     void initFactories(List<AliPayProperties.AliPayConfig> configs);
 
     /**
-     * 获取支付宝用户id
+     * 获取支付宝用户openId
      *
      * @param authCode 认证code
      * @param appId    小程序id
      * @return 用户id
      */
-    String getUserId(String authCode, String appId);
+    String getOpenId(String authCode, String appId);
 
+    String getPhoneNumber(String phoneCode, String appId);
 }

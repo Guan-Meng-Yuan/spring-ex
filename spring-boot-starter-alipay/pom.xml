@@ -5,7 +5,7 @@
     <parent>
         <groupId>com.guanmengyuan</groupId>
         <artifactId>spring-ex</artifactId>
-        <version>1.2.23</version>
+        <version>1.2.24</version>
     </parent>
 
     <groupId>com.guanmengyuan.spring-ex</groupId>
@@ -33,16 +33,11 @@
         </dependency>
         <dependency>
             <groupId>com.alipay.sdk</groupId>
-            <artifactId>alipay-sdk-java-v3</artifactId>
+            <artifactId>alipay-sdk-java</artifactId>
         </dependency>
         <dependency>
             <groupId>com.alipay.sdk</groupId>
             <artifactId>alipay-easysdk</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.squareup.okio</groupId>
-            <artifactId>okio</artifactId>
-            <scope>optional</scope>
         </dependency>
     </dependencies>
 </project>

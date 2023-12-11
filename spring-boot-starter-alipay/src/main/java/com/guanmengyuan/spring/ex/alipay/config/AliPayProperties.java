@@ -1,7 +1,6 @@
 package com.guanmengyuan.spring.ex.alipay.config;
 
 
-import com.alipay.v3.util.AntCertificationUtil;
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
@@ -43,14 +42,10 @@ public class AliPayProperties {
         private String signType = "RSA2";
 
         /**
-         * 商户私钥
-         */
-        private String merchantPrivateKey;
-
-        /**
          * 商户私钥位置
          */
         private String merchantPrivateKeyPath;
+
 
         /**
          * 商户证书位置
@@ -68,10 +63,6 @@ public class AliPayProperties {
         private String alipayRootCertPath;
 
 
-        public void setMerchantPrivateKeyPath(String merchantPrivateKeyPath) {
-            this.merchantPrivateKeyPath = merchantPrivateKeyPath;
-            this.merchantPrivateKey = AntCertificationUtil.readCertContent(merchantPrivateKeyPath);
-        }
 
         /**
          * AES秘钥 可用于加密解密

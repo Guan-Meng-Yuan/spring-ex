@@ -1,9 +1,9 @@
 package com.guanmengyuan.spring.ex.common.mybatis.flex.listener;
 
+import org.dromara.hutool.core.date.DateUtil;
+
 import com.guanmengyuan.spring.ex.common.model.domain.BaseDomain;
 import com.mybatisflex.annotation.InsertListener;
-
-import cn.hutool.core.date.DateUtil;
 
 public class BaseInsertListener implements InsertListener {
     @Override
@@ -11,7 +11,7 @@ public class BaseInsertListener implements InsertListener {
     public void onInsert(Object entity) {
         BaseDomain baseDomain = (BaseDomain) entity;
         if (null == baseDomain.getCreateTime()) {
-            baseDomain.setCreateTime(DateUtil.date());
+            baseDomain.setCreateTime(DateUtil.now());
         }
     }
 }

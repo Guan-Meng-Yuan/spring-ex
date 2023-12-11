@@ -5,11 +5,11 @@
 
     <groupId>com.guanmengyuan</groupId>
     <artifactId>spring-ex-dependencies</artifactId>
-    <version>1.2.23</version>
+    <version>1.2.24</version>
     <packaging>pom</packaging>
     <name>spring-ex-dependencies</name>
     <description>spring ex base pom</description>
-    <url>https://gitee.com/guan-meng-yuan/spring-ex</url>
+    <url>https://github.com/Guan-Meng-Yuan/spring-ex</url>
     <licenses>
         <license>
             <name>The Apache Software License, Version 2.0</name>
@@ -32,32 +32,32 @@
     </scm>
 
     <properties>
-        <revision>1.2.23</revision>
+        <revision>1.2.24</revision>
         <java.version>17</java.version>
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <!--        spring start-->
         <spring-boot.version>3.2.0</spring-boot.version>
-        <spring-cloud.version>2022.0.4</spring-cloud.version>
+        <spring-cloud.version>2023.0.0</spring-cloud.version>
         <spring-cloud-tencent.version>1.12.4-2022.0.4</spring-cloud-tencent.version>
         <spring-cloud-alibaba.version>2022.0.0.0</spring-cloud-alibaba.version>
         <!--        spring end-->
 
         <mybatis-flex.version>1.7.5</mybatis-flex.version>
         <mybatis.version>3.0.3</mybatis.version>
-        <hutool.version>5.8.23</hutool.version>
-        <knife4j.version>4.3.0</knife4j.version>
+        <hutool.version>6.0.0-M8</hutool.version>
+        <knife4j.version>4.4.0</knife4j.version>
         <therapi.version>0.15.0</therapi.version>
-        <alipay.version>2.7.10.ALL</alipay.version>
-        <okio.version>3.6.0</okio.version>
+        <alipay.version>4.38.157.ALL</alipay.version>
         <alipay-easy.version>2.2.3</alipay-easy.version>
-        <wx-java.version>4.5.7.B</wx-java.version>
+        <okio.version>3.6.0</okio.version>
+        <wx-java.version>4.5.8.B</wx-java.version>
         <dubbo.version>3.2.9</dubbo.version>
         <sentinel.version>1.8.6</sentinel.version>
         <sa-token.version>1.37.0</sa-token.version>
         <forest.version>1.5.35</forest.version>
-        <aws.version>2.21.37</aws.version>
+        <aws.version>2.21.42</aws.version>
         <springdoc.version>2.3.0</springdoc.version>
         <flowable.version>7.0.0</flowable.version>
         <!--        build start-->
@@ -65,7 +65,7 @@
         <maven-gpg-plugin.version>3.1.0</maven-gpg-plugin.version>
         <maven-source-plugin.version>3.3.0</maven-source-plugin.version>
         <maven-resources-plugin.version>3.3.1</maven-resources-plugin.version>
-        <maven-javadoc-plugin.version>3.6.2</maven-javadoc-plugin.version>
+        <maven-javadoc-plugin.version>3.6.3</maven-javadoc-plugin.version>
         <maven-release-plugin.version>3.0.1</maven-release-plugin.version>
         <nexus-staging-maven-plugin.version>1.6.13</nexus-staging-maven-plugin.version>
         <!--        build end-->
@@ -103,7 +103,7 @@
                 <scope>import</scope>
             </dependency>
             <dependency>
-                <groupId>cn.hutool</groupId>
+                <groupId>org.dromara.hutool</groupId>
                 <artifactId>hutool-bom</artifactId>
                 <version>${hutool.version}</version>
                 <type>pom</type>
@@ -165,18 +165,13 @@
             <!--            alipay-->
             <dependency>
                 <groupId>com.alipay.sdk</groupId>
-                <artifactId>alipay-sdk-java-v3</artifactId>
+                <artifactId>alipay-sdk-java</artifactId>
                 <version>${alipay.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.alipay.sdk</groupId>
                 <artifactId>alipay-easysdk</artifactId>
                 <version>${alipay-easy.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.squareup.okio</groupId>
-                <artifactId>okio</artifactId>
-                <version>${okio.version}</version>
             </dependency>
             <!--            wechat-->
             <dependency>

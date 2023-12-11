@@ -1,89 +1,114 @@
 package com.guanmengyuan.spring.ex.alipay.service.impl;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
+import com.alipay.api.AlipayApiException;
+import com.alipay.api.AlipayClient;
+import com.alipay.api.AlipayConfig;
+import com.alipay.api.DefaultAlipayClient;
+import com.alipay.api.internal.util.file.FileUtils;
+import com.alipay.api.request.AlipayUserInfoShareRequest;
+import com.alipay.api.response.AlipayUserInfoShareResponse;
 import com.alipay.easysdk.factory.MultipleFactory;
 import com.alipay.easysdk.kernel.Config;
-import com.alipay.v3.ApiClient;
-import com.alipay.v3.ApiException;
-import com.alipay.v3.util.model.AlipayConfig;
 import com.guanmengyuan.spring.ex.alipay.config.AliPayProperties;
 import com.guanmengyuan.spring.ex.alipay.service.AliPayService;
+import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
+import org.springframework.core.io.ResourceLoader;
 
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
+@RequiredArgsConstructor
 public class DefaultAliPayServiceImpl implements AliPayService {
-    private static final Map<String, ApiClient> clients = new ConcurrentHashMap<>();
+    private static final Map<String, AlipayClient> clients = new ConcurrentHashMap<>();
+    private static final Map<String, AlipayConfig> alipayConfigMap = new ConcurrentHashMap<>();
+    private static final Map<String, MultipleFactory> multipleFactoryMap = new ConcurrentHashMap<>();
 
-    private static final Map<String, MultipleFactory> factories = new ConcurrentHashMap<>();
-
-    private static final Map<String, AliPayProperties.AliPayConfig> alipayConfigMap = new ConcurrentHashMap<>();
+    private final ResourceLoader resourceLoader;
 
     @Override
-    public synchronized ApiClient switchOverApiClient(String appId) {
+    public AlipayClient switchOverApiClient(String appId) {
         return clients.get(appId);
     }
 
-    @Override
-    public synchronized MultipleFactory switchOverFactory(String appId) {
-        return factories.get(appId);
-    }
-
 
     @Override
+    @SneakyThrows
     public void initFactories(List<AliPayProperties.AliPayConfig> configs) {
-        configs.forEach(config -> {
-            String appId = config.getAppId();
-            String protocol = config.getProtocol();
-            String gatewayHost = config.getGatewayHost();
-            String signType = config.getSignType();
-            String merchantPrivateKey = config.getMerchantPrivateKey();
-            String merchantCertPath = config.getMerchantCertPath();
-            String alipayCertPath = config.getAlipayCertPath();
-            String alipayRootCertPath = config.getAlipayRootCertPath();
-            String encryptKey = config.getEncryptKey();
-
-            ApiClient apiClient = new ApiClient();
+        configs.forEach(appConfig -> {
+            String appId = appConfig.getAppId();
             AlipayConfig alipayConfig = new AlipayConfig();
-            alipayConfig.setAppId(appId);
-            alipayConfig.setPrivateKey(merchantPrivateKey);
-            alipayConfig.setAppCertPath(merchantCertPath);
-            alipayConfig.setRootCertPath(alipayRootCertPath);
-            alipayConfig.setAlipayPublicCertPath(alipayCertPath);
-            alipayConfig.setEncryptKey(encryptKey);
-//            alipayConfig.setEncryptType(signType);
-            alipayConfigMap.put(appId, config);
-
-            MultipleFactory multipleFactory = new MultipleFactory();
-            Config aliPayConfig = new Config();
-            aliPayConfig.appId = appId;
-            aliPayConfig.protocol = protocol;
-            aliPayConfig.gatewayHost = gatewayHost;
-            aliPayConfig.signType = signType;
-            aliPayConfig.merchantPrivateKey = merchantPrivateKey;
-            aliPayConfig.merchantCertPath = merchantCertPath;
-            aliPayConfig.alipayRootCertPath = alipayRootCertPath;
-            aliPayConfig.alipayCertPath = alipayCertPath;
-            aliPayConfig.encryptKey = encryptKey;
-            multipleFactory.setOptions(aliPayConfig);
-            factories.put(appId, multipleFactory);
-
+            alipayConfig.setEncryptKey(appConfig.getEncryptKey());
+            Config config = new Config();
+            config.appId = appId;
+            config.protocol = appConfig.getProtocol();
+            config.gatewayHost = appConfig.getGatewayHost();
+            config.signType = appConfig.getSignType();
+            config.encryptKey = appConfig.getEncryptKey();
             try {
-                apiClient.setAlipayConfig(alipayConfig);
-            } catch (ApiException e) {
+                String merchantPrivateKey = FileUtils.readFileToString(resourceLoader.getResource(appConfig.getMerchantPrivateKeyPath()).getFile(), StandardCharsets.UTF_8);
+                config.merchantPrivateKey = merchantPrivateKey;
+                //设置私钥
+                alipayConfig.setPrivateKey(merchantPrivateKey);
+                String merchantCertPath = resourceLoader.getResource(appConfig.getMerchantCertPath()).getFile().getAbsolutePath();
+                //设置应用公钥证书文件
+                alipayConfig.setAppCertPath(merchantCertPath);
+                config.merchantCertPath = merchantCertPath;
+                //设置支付宝公钥证书文件
+                String alipayCertPath = resourceLoader.getResource(appConfig.getAlipayCertPath()).getFile().getAbsolutePath();
+                config.alipayCertPath = alipayCertPath;
+                alipayConfig.setAlipayPublicCertPath(alipayCertPath);
+                //支付宝根证书文件路径
+                String alipayRootCertPath = resourceLoader.getResource(appConfig.getAlipayRootCertPath()).getFile().getAbsolutePath();
+                config.alipayRootCertPath = alipayRootCertPath;
+                alipayConfig.setRootCertPath(alipayRootCertPath);
+                //设置
+                alipayConfig.setEncryptKey(appConfig.getEncryptKey());
+            } catch (IOException e) {
                 throw new RuntimeException(e);
             }
-            clients.put(config.getAppId(), apiClient);
+
+            AlipayClient apiClient;
+            try {
+                apiClient = new DefaultAlipayClient(alipayConfig);
+            } catch (AlipayApiException e) {
+                throw new RuntimeException(e);
+            }
+            MultipleFactory multipleFactory = new MultipleFactory();
+            multipleFactory.setOptions(config);
+            multipleFactoryMap.put(appId, multipleFactory);
+            alipayConfigMap.put(appId, alipayConfig);
+            clients.put(appConfig.getAppId(), apiClient);
         });
     }
 
     @Override
     @SneakyThrows
-    public  String getUserId(String authCode, String appId) {
-        return factories.get(appId).OAuth().getToken(authCode).getUserId();
+    public String getOpenId(String authCode, String appId) {
+        AlipayUserInfoShareRequest alipayUserInfoShareRequest = new AlipayUserInfoShareRequest();
+        AlipayUserInfoShareResponse execute = clients.get(appId).execute(alipayUserInfoShareRequest);
+        if (!execute.isSuccess()) {
+            throw new RuntimeException("获取用户信息失败");
+        }
+        return execute.getOpenId();
     }
 
+    @SneakyThrows
+    @Override
+    public String getPhoneNumber(String phoneCode, String appId) {
+        String decrypted = multipleFactoryMap.get(appId).AES().decrypt(phoneCode);
+        JSONObject jsonObject = JSON.parseObject(decrypted);
+        if (!"10000".equals(jsonObject.get("code"))) {
+            throw new RuntimeException("数据解析失败");
+        }
+        Object mobile = jsonObject.get("mobile");
+        return mobile.toString();
+    }
 
 
 }

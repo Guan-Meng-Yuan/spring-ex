@@ -7,6 +7,7 @@ import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
+import org.springframework.core.io.ResourceLoader;
 import org.springframework.util.CollectionUtils;
 
 @EnableConfigurationProperties(AliPayProperties.class)
@@ -14,6 +15,7 @@ import org.springframework.util.CollectionUtils;
 @RequiredArgsConstructor
 public class AliPayAutoConfiguration {
     private final AliPayProperties aliPayProperties;
+    private  final ResourceLoader resourceLoader;
 
     @Bean
     @ConditionalOnMissingBean(AliPayService.class)
@@ -21,7 +23,7 @@ public class AliPayAutoConfiguration {
         if (CollectionUtils.isEmpty(aliPayProperties.getConfigs())) {
             throw new RuntimeException("alipay config can not be empty");
         }
-        AliPayService aliPayService = new DefaultAliPayServiceImpl();
+        AliPayService aliPayService = new DefaultAliPayServiceImpl(resourceLoader);
         aliPayService.initFactories(aliPayProperties.getConfigs());
         return aliPayService;
     }
