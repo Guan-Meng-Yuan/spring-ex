@@ -1,17 +1,5 @@
 package com.guanmengyuan.spring.ex.web.controller;
 
-import java.util.List;
-
-import org.springdoc.core.annotations.ParameterObject;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-
 import com.guanmengyuan.spring.ex.common.model.domain.BaseDomain;
 import com.guanmengyuan.spring.ex.common.model.dto.req.PageReq;
 import com.guanmengyuan.spring.ex.common.model.valid.group.SaveGroup;
@@ -19,10 +7,19 @@ import com.guanmengyuan.spring.ex.common.model.valid.group.UpdateGroup;
 import com.mybatisflex.core.paginate.Page;
 import com.mybatisflex.core.query.QueryWrapper;
 import com.mybatisflex.core.service.IService;
+import org.springdoc.core.annotations.ParameterObject;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 public class BaseController<S extends IService<T>, T extends BaseDomain<T>> {
-    @Autowired
-    private S service;
+    private final S service;
+
+    public BaseController(S service) {
+        this.service = service;
+    }
+
 
     /**
      * 分页数据
@@ -77,7 +74,7 @@ public class BaseController<S extends IService<T>, T extends BaseDomain<T>> {
      */
     @PostMapping
     public Boolean save(@Validated(SaveGroup.class) @RequestBody T param) {
-        return param.save();
+        return service.save(param);
     }
 
     /**
@@ -88,6 +85,6 @@ public class BaseController<S extends IService<T>, T extends BaseDomain<T>> {
      */
     @PutMapping
     public Boolean update(@Validated(UpdateGroup.class) @RequestBody T param) {
-        return param.updateById();
+        return service.updateById(param);
     }
 }

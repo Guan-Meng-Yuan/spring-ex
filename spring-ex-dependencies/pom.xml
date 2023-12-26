@@ -5,7 +5,7 @@
 
     <groupId>com.guanmengyuan</groupId>
     <artifactId>spring-ex-dependencies</artifactId>
-    <version>1.2.24</version>
+    <version>1.2.25</version>
     <packaging>pom</packaging>
     <name>spring-ex-dependencies</name>
     <description>spring ex base pom</description>
@@ -32,36 +32,32 @@
     </scm>
 
     <properties>
-        <revision>1.2.24</revision>
+        <revision>1.2.25</revision>
         <java.version>17</java.version>
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <!--        spring start-->
-        <spring-boot.version>3.2.0</spring-boot.version>
+        <spring-boot.version>3.2.1</spring-boot.version>
         <spring-cloud.version>2023.0.0</spring-cloud.version>
-        <spring-cloud-tencent.version>1.12.4-2022.0.4</spring-cloud-tencent.version>
-        <spring-cloud-alibaba.version>2022.0.0.0</spring-cloud-alibaba.version>
         <!--        spring end-->
 
         <mybatis-flex.version>1.7.5</mybatis-flex.version>
         <mybatis.version>3.0.3</mybatis.version>
-        <hutool.version>6.0.0-M8</hutool.version>
+        <hutool.version>6.0.0-M9</hutool.version>
         <knife4j.version>4.4.0</knife4j.version>
         <therapi.version>0.15.0</therapi.version>
-        <alipay.version>4.38.157.ALL</alipay.version>
+        <alipay.version>4.38.170.ALL</alipay.version>
         <alipay-easy.version>2.2.3</alipay-easy.version>
-        <okio.version>3.6.0</okio.version>
-        <wx-java.version>4.5.8.B</wx-java.version>
-        <dubbo.version>3.2.9</dubbo.version>
-        <sentinel.version>1.8.6</sentinel.version>
+        <wx-java.version>4.5.9.B</wx-java.version>
+        <dubbo.version>3.2.10</dubbo.version>
         <sa-token.version>1.37.0</sa-token.version>
         <forest.version>1.5.35</forest.version>
-        <aws.version>2.21.42</aws.version>
+        <aws.version>2.22.5</aws.version>
         <springdoc.version>2.3.0</springdoc.version>
         <flowable.version>7.0.0</flowable.version>
         <!--        build start-->
-        <maven-compiler-plugin.version>3.11.0</maven-compiler-plugin.version>
+        <maven-compiler-plugin.version>3.12.0</maven-compiler-plugin.version>
         <maven-gpg-plugin.version>3.1.0</maven-gpg-plugin.version>
         <maven-source-plugin.version>3.3.0</maven-source-plugin.version>
         <maven-resources-plugin.version>3.3.1</maven-resources-plugin.version>
@@ -84,21 +80,6 @@
                 <groupId>org.springframework.cloud</groupId>
                 <artifactId>spring-cloud-dependencies</artifactId>
                 <version>${spring-cloud.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-
-            <dependency>
-                <groupId>com.tencent.cloud</groupId>
-                <artifactId>spring-cloud-tencent-dependencies</artifactId>
-                <version>${spring-cloud-tencent.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-            <dependency>
-                <groupId>com.alibaba.cloud</groupId>
-                <artifactId>spring-cloud-alibaba-dependencies</artifactId>
-                <version>${spring-cloud-alibaba.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -139,6 +120,13 @@
                 <scope>import</scope>
             </dependency>
             <dependency>
+                <groupId>org.apache.dubbo</groupId>
+                <artifactId>dubbo-dependencies-zookeeper-curator5</artifactId>
+                <type>pom</type>
+                <version>${dubbo.version}</version>
+            </dependency>
+
+            <dependency>
                 <groupId>org.flowable</groupId>
                 <artifactId>flowable-bom</artifactId>
                 <version>${flowable.version}</version>
@@ -155,13 +143,6 @@
                 <artifactId>sa-token-dubbo3</artifactId>
                 <version>${sa-token.version}</version>
             </dependency>
-            <!-- https://mvnrepository.com/artifact/com.alibaba.csp/sentinel-apache-dubbo3-adapter -->
-            <dependency>
-                <groupId>com.alibaba.csp</groupId>
-                <artifactId>sentinel-apache-dubbo3-adapter</artifactId>
-                <version>${sentinel.version}</version>
-            </dependency>
-
             <!--            alipay-->
             <dependency>
                 <groupId>com.alipay.sdk</groupId>
@@ -203,8 +184,10 @@
             <!--            openapi-->
             <dependency>
                 <groupId>com.github.xiaoymin</groupId>
-                <artifactId>knife4j-openapi3-ui</artifactId>
+                <artifactId>knife4j-dependencies</artifactId>
                 <version>${knife4j.version}</version>
+                <scope>import</scope>
+                <type>pom</type>
             </dependency>
             <dependency>
                 <groupId>com.github.therapi</groupId>
