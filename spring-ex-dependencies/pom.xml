@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.guanmengyuan</groupId>
     <artifactId>spring-ex-dependencies</artifactId>
-    <version>1.2.25</version>
+    <version>1.2.26</version>
     <packaging>pom</packaging>
     <name>spring-ex-dependencies</name>
     <description>spring ex base pom</description>
@@ -32,7 +33,7 @@
     </scm>
 
     <properties>
-        <revision>1.2.25</revision>
+        <revision>1.2.26</revision>
         <java.version>17</java.version>
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
@@ -42,22 +43,20 @@
         <spring-cloud.version>2023.0.0</spring-cloud.version>
         <!--        spring end-->
 
-        <mybatis-flex.version>1.7.5</mybatis-flex.version>
-        <mybatis.version>3.0.3</mybatis.version>
+        <mybatis-flex.version>1.7.7</mybatis-flex.version>
         <hutool.version>6.0.0-M9</hutool.version>
         <knife4j.version>4.4.0</knife4j.version>
         <therapi.version>0.15.0</therapi.version>
-        <alipay.version>4.38.170.ALL</alipay.version>
+        <alipay.version>4.38.183.ALL</alipay.version>
         <alipay-easy.version>2.2.3</alipay-easy.version>
-        <wx-java.version>4.5.9.B</wx-java.version>
+        <wx-java.version>4.6.0</wx-java.version>
         <dubbo.version>3.2.10</dubbo.version>
         <sa-token.version>1.37.0</sa-token.version>
         <forest.version>1.5.35</forest.version>
-        <aws.version>2.22.5</aws.version>
-        <springdoc.version>2.3.0</springdoc.version>
+        <aws.version>2.22.12</aws.version>
         <flowable.version>7.0.0</flowable.version>
         <!--        build start-->
-        <maven-compiler-plugin.version>3.12.0</maven-compiler-plugin.version>
+        <maven-compiler-plugin.version>3.12.1</maven-compiler-plugin.version>
         <maven-gpg-plugin.version>3.1.0</maven-gpg-plugin.version>
         <maven-source-plugin.version>3.3.0</maven-source-plugin.version>
         <maven-resources-plugin.version>3.3.1</maven-resources-plugin.version>
@@ -75,7 +74,6 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
-
             <dependency>
                 <groupId>org.springframework.cloud</groupId>
                 <artifactId>spring-cloud-dependencies</artifactId>
@@ -113,6 +111,11 @@
                 <type>pom</type>
             </dependency>
             <dependency>
+                <groupId>com.mybatis-flex</groupId>
+                <artifactId>mybatis-flex-spring-boot3-starter</artifactId>
+                <version>${mybatis-flex.version}</version>
+            </dependency>
+            <dependency>
                 <groupId>org.apache.dubbo</groupId>
                 <artifactId>dubbo-bom</artifactId>
                 <version>${dubbo.version}</version>
@@ -132,11 +135,6 @@
                 <version>${flowable.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
-            </dependency>
-            <dependency>
-                <groupId>org.springdoc</groupId>
-                <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
-                <version>${springdoc.version}</version>
             </dependency>
             <dependency>
                 <groupId>cn.dev33</groupId>
@@ -174,11 +172,6 @@
                 <groupId>com.github.binarywang</groupId>
                 <artifactId>weixin-java-pay</artifactId>
                 <version>${wx-java.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.mybatis</groupId>
-                <artifactId>mybatis-spring</artifactId>
-                <version>${mybatis.version}</version>
             </dependency>
 
             <!--            openapi-->
