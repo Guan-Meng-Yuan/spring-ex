@@ -6,7 +6,7 @@
 
     <groupId>com.guanmengyuan</groupId>
     <artifactId>spring-ex-dependencies</artifactId>
-    <version>1.2.27</version>
+    <version>1.2.28</version>
     <packaging>pom</packaging>
     <name>spring-ex-dependencies</name>
     <description>spring ex base pom</description>
@@ -33,7 +33,7 @@
     </scm>
 
     <properties>
-        <revision>1.2.27</revision>
+        <revision>1.2.28</revision>
         <java.version>17</java.version>
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
@@ -45,7 +45,7 @@
 
         <mybatis-flex.version>1.7.7</mybatis-flex.version>
         <hutool.version>6.0.0-M9</hutool.version>
-        <knife4j.version>4.4.0</knife4j.version>
+        <knife4j.version>4.5.0</knife4j.version>
         <therapi.version>0.15.0</therapi.version>
         <alipay.version>4.38.183.ALL</alipay.version>
         <alipay-easy.version>2.2.3</alipay-easy.version>
@@ -53,7 +53,7 @@
         <dubbo.version>3.2.10</dubbo.version>
         <sa-token.version>1.37.0</sa-token.version>
         <forest.version>1.5.35</forest.version>
-        <aws.version>2.22.12</aws.version>
+        <aws.version>2.23.0</aws.version>
         <flowable.version>7.0.0</flowable.version>
         <!--        build start-->
         <maven-compiler-plugin.version>3.12.1</maven-compiler-plugin.version>
