@@ -18,7 +18,7 @@ public enum ResEnum implements BaseResEnum {
     /**
      * 未授权
      */
-    UNAUTHORIZED(HttpStatus.UNAUTHORIZED, "unauthorized", "未授权"),
+    UNAUTHORIZED(HttpStatus.UNAUTHORIZED, "unauthorized", "暂无权限"),
     /**
      * 枚举参数不支持
      */

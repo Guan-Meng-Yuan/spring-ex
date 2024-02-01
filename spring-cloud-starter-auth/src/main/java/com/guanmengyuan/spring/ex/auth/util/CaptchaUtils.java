@@ -2,6 +2,7 @@ package com.guanmengyuan.spring.ex.auth.util;
 
 import java.time.Duration;
 import java.util.Map;
+import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
 import org.dromara.hutool.core.cache.CacheUtil;
@@ -52,12 +53,12 @@ public class CaptchaUtils {
         String verifyKey = CacheConstant.CAPTCHA_KEY + redisKeyID;
         AbstractCaptcha captcha;
         switch (captchaType) {
-            case LINE -> captcha = CaptchaUtil.createLineCaptcha(width, height);
-            case GIF -> captcha = CaptchaUtil.createGifCaptcha(width, height);
-            case SHEAR -> captcha = CaptchaUtil.createShearCaptcha(width, height);
-            case CIRCLE -> captcha = CaptchaUtil.createCircleCaptcha(width, height);
+            case LINE -> captcha = CaptchaUtil.ofLineCaptcha(width, height);
+            case GIF -> captcha = CaptchaUtil.ofGifCaptcha(width, height);
+            case SHEAR -> captcha = CaptchaUtil.ofShearCaptcha(width, height);
+            case CIRCLE -> captcha = CaptchaUtil.ofCircleCaptcha(width, height);
             case CUSTOM -> {
-                captcha = CaptchaUtil.createShearCaptcha(width, height);
+                captcha = CaptchaUtil.ofShearCaptcha(width, height);
                 captcha.setGenerator(codeGenerator);
             }
             default ->
@@ -71,7 +72,7 @@ public class CaptchaUtils {
         } else {
             try {
 
-                redisTemplate.opsForValue().set(verifyKey, code, 1, TimeUnit.MINUTES);
+                redisTemplate.opsForValue().set(verifyKey, Objects.requireNonNull(code), 1, TimeUnit.MINUTES);
             } catch (Exception e) {
                 log.error("redis save captcha error", e);
                 IN_MEMORY_CACHE.put(redisKeyID, code);

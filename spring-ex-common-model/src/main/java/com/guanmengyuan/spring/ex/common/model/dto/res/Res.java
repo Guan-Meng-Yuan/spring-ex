@@ -1,9 +1,11 @@
 package com.guanmengyuan.spring.ex.common.model.dto.res;
 
-import java.io.Serializable;
-import java.util.List;
-import java.util.Objects;
-
+import cn.dev33.satoken.exception.SaTokenException;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.guanmengyuan.spring.ex.common.model.enums.ResEnum;
+import com.guanmengyuan.spring.ex.common.model.exception.ServiceException;
+import lombok.Data;
 import org.dromara.hutool.core.collection.CollUtil;
 import org.dromara.hutool.core.text.StrUtil;
 import org.springframework.http.HttpStatus;
@@ -14,12 +16,9 @@ import org.springframework.web.bind.support.WebExchangeBindException;
 import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.server.ServerWebExchange;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.guanmengyuan.spring.ex.common.model.enums.ResEnum;
-import com.guanmengyuan.spring.ex.common.model.exception.ServiceException;
-
-import lombok.Data;
+import java.io.Serializable;
+import java.util.List;
+import java.util.Objects;
 
 /**
  * 统一响应dto
@@ -156,6 +155,10 @@ public class Res<T> implements Serializable {
             res.setHttpStatusCode(HttpStatus.BAD_REQUEST);
             res.setMessage(throwable.getMessage());
             // 其他异常
+        } else if (throwable instanceof SaTokenException saTokenException) {
+            res.setTips(ResEnum.UNAUTHORIZED.getTips());
+            res.setHttpStatusCode(ResEnum.UNAUTHORIZED.getHttpStatusCode());
+            res.setMessage(saTokenException.getMessage());
         } else {
             res.setTips(ResEnum.INTERNAL_SERVER_ERROR.getTips());
             res.setHttpStatusCode(ResEnum.INTERNAL_SERVER_ERROR.getHttpStatusCode());

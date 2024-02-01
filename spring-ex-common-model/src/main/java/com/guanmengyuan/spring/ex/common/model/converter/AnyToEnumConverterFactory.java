@@ -1,18 +1,19 @@
 package com.guanmengyuan.spring.ex.common.model.converter;
 
+import org.springframework.core.convert.converter.Converter;
+import org.springframework.core.convert.converter.ConverterFactory;
+import org.springframework.lang.NonNull;
+
 import com.guanmengyuan.spring.ex.common.model.enums.ParamEnum;
 import com.guanmengyuan.spring.ex.common.model.enums.ResEnum;
 import com.guanmengyuan.spring.ex.common.model.exception.ServiceException;
-import lombok.NonNull;
+
 import lombok.SneakyThrows;
-import org.springframework.core.convert.converter.Converter;
-import org.springframework.core.convert.converter.ConverterFactory;
 
 /**
  * 任何类型转枚举工厂类
  */
 public class AnyToEnumConverterFactory implements ConverterFactory<String, ParamEnum> {
-
 
     @Override
     @NonNull
@@ -20,12 +21,11 @@ public class AnyToEnumConverterFactory implements ConverterFactory<String, Param
         return new AnyToEnum<>(targetType);
     }
 
-
     private record AnyToEnum<T extends ParamEnum>(Class<T> enumType) implements Converter<String, T> {
         @SuppressWarnings("unchecked")
         @Override
         @SneakyThrows
-        public T convert(String source) {
+        public T convert(@NonNull String source) {
             if (source.isEmpty()) {
                 return null;
             }

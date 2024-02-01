@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 public class BaseController<S extends IService<T>, T extends BaseDomain<T>> {
+
     private final S service;
 
     public BaseController(S service) {

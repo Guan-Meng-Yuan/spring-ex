@@ -2,6 +2,7 @@ package com.guanmengyuan.spring.ex.web.config;
 
 import static com.guanmengyuan.spring.ex.common.model.constant.GlobalResponseConstant.DEFAULT_PATH;
 
+import java.util.Objects;
 import java.util.Set;
 
 import org.dromara.hutool.core.collection.CollUtil;
@@ -13,14 +14,13 @@ import org.springframework.http.MediaType;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.server.ServerHttpRequest;
 import org.springframework.http.server.ServerHttpResponse;
+import org.springframework.lang.NonNull;
 import org.springframework.lang.Nullable;
 import org.springframework.util.AntPathMatcher;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
 
 import com.guanmengyuan.spring.ex.common.model.dto.res.Res;
-
-import lombok.NonNull;
 
 @RestControllerAdvice
 public class GlobalResponseAdvice implements ResponseBodyAdvice<Object> {
@@ -53,7 +53,8 @@ public class GlobalResponseAdvice implements ResponseBodyAdvice<Object> {
             @NonNull ServerHttpResponse response) {
         String path = request.getURI().getPath();
         if (!springWebProperties.getEnableGlobalRes() || StrUtil.equals(path, "/error") || body instanceof Res<?>
-                || ignores.stream().anyMatch(ignore -> antPathMatcher.match(ignore, path))) {
+                || ignores.stream().anyMatch(
+                        ignore -> antPathMatcher.match(Objects.requireNonNull(ignore), Objects.requireNonNull(path)))) {
             return body;
         }
         return wrapperBody(body, returnType, response);

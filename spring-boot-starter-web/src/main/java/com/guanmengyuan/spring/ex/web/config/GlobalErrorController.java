@@ -2,6 +2,7 @@ package com.guanmengyuan.spring.ex.web.config;
 
 import java.util.Collections;
 import java.util.Map;
+import java.util.Objects;
 
 import org.dromara.hutool.core.bean.BeanUtil;
 import org.springframework.boot.autoconfigure.web.ServerProperties;
@@ -49,6 +50,6 @@ public class GlobalErrorController extends BasicErrorController {
         Map<String, Object> body = getErrorAttributes(request, getErrorAttributeOptions(request, MediaType.ALL));
         ServiceException serviceException = new ServiceException(status, body.get("error").toString(), "网络异常");
         log.error("request error:{}", body.get("path") + ":" + body.get("error"), serviceException);
-        return new ResponseEntity<>(BeanUtil.beanToMap(Res.error(serviceException)), status);
+        return new ResponseEntity<>(BeanUtil.beanToMap(Res.error(serviceException)), Objects.requireNonNull(status));
     }
 }

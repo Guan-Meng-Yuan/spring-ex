@@ -31,4 +31,5 @@ public interface AliPayService {
     String getOpenId(String authCode, String appId);
 
     String getPhoneNumber(String phoneCode, String appId);
+
 }

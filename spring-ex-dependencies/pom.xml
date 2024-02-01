@@ -6,7 +6,7 @@
 
     <groupId>com.guanmengyuan</groupId>
     <artifactId>spring-ex-dependencies</artifactId>
-    <version>1.2.28</version>
+    <version>1.2.30</version>
     <packaging>pom</packaging>
     <name>spring-ex-dependencies</name>
     <description>spring ex base pom</description>
@@ -33,28 +33,29 @@
     </scm>
 
     <properties>
-        <revision>1.2.28</revision>
+        <revision>1.2.30</revision>
         <java.version>17</java.version>
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <!--        spring start-->
-        <spring-boot.version>3.2.1</spring-boot.version>
+        <spring-boot.version>3.2.2</spring-boot.version>
         <spring-cloud.version>2023.0.0</spring-cloud.version>
+        <spring-cloud-tencent.version>1.12.4-2022.0.4</spring-cloud-tencent.version>
         <!--        spring end-->
 
-        <mybatis-flex.version>1.7.7</mybatis-flex.version>
-        <hutool.version>6.0.0-M9</hutool.version>
+        <mybatis-flex.version>1.7.8</mybatis-flex.version>
+        <hutool.version>6.0.0-M10</hutool.version>
         <knife4j.version>4.5.0</knife4j.version>
         <therapi.version>0.15.0</therapi.version>
-        <alipay.version>4.38.183.ALL</alipay.version>
+        <alipay.version>4.38.200.ALL</alipay.version>
         <alipay-easy.version>2.2.3</alipay-easy.version>
         <wx-java.version>4.6.0</wx-java.version>
         <dubbo.version>3.2.10</dubbo.version>
         <sa-token.version>1.37.0</sa-token.version>
         <forest.version>1.5.35</forest.version>
-        <aws.version>2.23.0</aws.version>
-        <flowable.version>7.0.0</flowable.version>
+        <aws.version>2.23.15</aws.version>
+        <flowable.version>7.0.1</flowable.version>
         <!--        build start-->
         <maven-compiler-plugin.version>3.12.1</maven-compiler-plugin.version>
         <maven-gpg-plugin.version>3.1.0</maven-gpg-plugin.version>
@@ -82,6 +83,13 @@
                 <scope>import</scope>
             </dependency>
             <dependency>
+                <groupId>com.tencent.cloud</groupId>
+                <artifactId>spring-cloud-tencent-dependencies</artifactId>
+                <version>${spring-cloud-tencent.version}</version>
+                <scope>import</scope>
+                <type>pom</type>
+            </dependency>
+            <dependency>
                 <groupId>org.dromara.hutool</groupId>
                 <artifactId>hutool-bom</artifactId>
                 <version>${hutool.version}</version>
@@ -105,13 +113,10 @@
             </dependency>
             <dependency>
                 <groupId>com.mybatis-flex</groupId>
-                <artifactId>mybatis-flex-spring-boot3-starter</artifactId>
+                <artifactId>mybatis-flex-dependencies</artifactId>
                 <version>${mybatis-flex.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.mybatis-flex</groupId>
-                <artifactId>mybatis-flex-core</artifactId>
-                <version>${mybatis-flex.version}</version>
+                <scope>import</scope>
+                <type>pom</type>
             </dependency>
             <dependency>
                 <groupId>org.apache.dubbo</groupId>
@@ -246,6 +251,11 @@
     <build>
         <pluginManagement>
             <plugins>
+                <plugin>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-maven-plugin</artifactId>
+                    <version>${spring-boot.version}</version>
+                </plugin>
                 <plugin>
                     <groupId>org.sonatype.plugins</groupId>
                     <artifactId>nexus-staging-maven-plugin</artifactId>
