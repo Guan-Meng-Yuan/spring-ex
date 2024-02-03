@@ -6,7 +6,7 @@
 
     <groupId>com.guanmengyuan</groupId>
     <artifactId>spring-ex-dependencies</artifactId>
-    <version>1.2.30</version>
+    <version>1.2.32</version>
     <packaging>pom</packaging>
     <name>spring-ex-dependencies</name>
     <description>spring ex base pom</description>
@@ -33,7 +33,7 @@
     </scm>
 
     <properties>
-        <revision>1.2.30</revision>
+        <revision>1.2.32</revision>
         <java.version>17</java.version>
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
@@ -54,7 +54,7 @@
         <dubbo.version>3.2.10</dubbo.version>
         <sa-token.version>1.37.0</sa-token.version>
         <forest.version>1.5.35</forest.version>
-        <aws.version>2.23.15</aws.version>
+        <aws.version>2.23.17</aws.version>
         <flowable.version>7.0.1</flowable.version>
         <!--        build start-->
         <maven-compiler-plugin.version>3.12.1</maven-compiler-plugin.version>
@@ -113,10 +113,13 @@
             </dependency>
             <dependency>
                 <groupId>com.mybatis-flex</groupId>
-                <artifactId>mybatis-flex-dependencies</artifactId>
+                <artifactId>mybatis-flex-spring-boot3-starter</artifactId>
                 <version>${mybatis-flex.version}</version>
-                <scope>import</scope>
-                <type>pom</type>
+            </dependency>
+            <dependency>
+                <groupId>com.mybatis-flex</groupId>
+                <artifactId>mybatis-flex-core</artifactId>
+                <version>${mybatis-flex.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.apache.dubbo</groupId>
