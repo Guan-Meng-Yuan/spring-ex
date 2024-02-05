@@ -6,7 +6,7 @@
 
     <groupId>com.guanmengyuan</groupId>
     <artifactId>spring-ex-dependencies</artifactId>
-    <version>1.2.32</version>
+    <version>1.2.33</version>
     <packaging>pom</packaging>
     <name>spring-ex-dependencies</name>
     <description>spring ex base pom</description>
@@ -33,7 +33,7 @@
     </scm>
 
     <properties>
-        <revision>1.2.32</revision>
+        <revision>1.2.33</revision>
         <java.version>17</java.version>
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
@@ -44,7 +44,7 @@
         <spring-cloud-tencent.version>1.12.4-2022.0.4</spring-cloud-tencent.version>
         <!--        spring end-->
 
-        <mybatis-flex.version>1.7.8</mybatis-flex.version>
+        <mybatis-flex.version>1.7.9</mybatis-flex.version>
         <hutool.version>6.0.0-M10</hutool.version>
         <knife4j.version>4.5.0</knife4j.version>
         <therapi.version>0.15.0</therapi.version>
