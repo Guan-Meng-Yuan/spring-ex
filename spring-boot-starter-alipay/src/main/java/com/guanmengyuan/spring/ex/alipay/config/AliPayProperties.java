@@ -3,7 +3,6 @@ package com.guanmengyuan.spring.ex.alipay.config;
 import java.util.List;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.lang.NonNull;
 
 import lombok.Data;
 
@@ -45,25 +44,21 @@ public class AliPayProperties {
         /**
          * 商户私钥位置
          */
-        @NonNull
         private String merchantPrivateKeyPath;
 
         /**
          * 商户证书位置
          */
-        @NonNull
         private String merchantCertPath;
 
         /**
          * 支付宝证书位置
          */
-        @NonNull
         private String alipayCertPath;
 
         /**
          * 支付宝根证书位置
          */
-        @NonNull
         private String alipayRootCertPath;
 
         /**
