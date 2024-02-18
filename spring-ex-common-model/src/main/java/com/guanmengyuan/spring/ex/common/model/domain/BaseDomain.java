@@ -64,7 +64,7 @@ public class BaseDomain<T extends Model<T>> extends Model<T> {
      * 是否已删除 逻辑删除
      */
     @JsonIgnore
-    @Column(isLogicDelete = true, value = "is_deleted", onInsertValue = "0")
+    @Column(isLogicDelete = true, value = "is_deleted")
     private Boolean deleted;
 
 }
