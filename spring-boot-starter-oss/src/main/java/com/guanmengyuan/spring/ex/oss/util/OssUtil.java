@@ -87,6 +87,15 @@ public class OssUtil {
         return upload(file, ossConfigProperties.getDefaultBucket());
     }
 
+    public String upload(byte[] bytes, String key) {
+        String fileKey = IdUtil.getSnowflakeNextIdStr() + StrUtil.DASHED + key;
+        s3Client.putObject(
+                builder -> builder.bucket(ossConfigProperties.getDefaultBucket()).key(fileKey)
+                        .contentType(FileUtil.getMimeType(fileKey)),
+                RequestBody.fromBytes(bytes)).sdkHttpResponse().isSuccessful();
+        return fileKey;
+    }
+
     /**
      * 上传文件
      *

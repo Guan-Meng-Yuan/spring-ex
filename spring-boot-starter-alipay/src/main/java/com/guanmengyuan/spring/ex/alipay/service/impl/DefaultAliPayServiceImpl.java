@@ -1,13 +1,11 @@
 package com.guanmengyuan.spring.ex.alipay.service.impl;
 
-import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
 
-import org.springframework.core.io.ResourceLoader;
+import org.dromara.hutool.core.io.resource.ResourceUtil;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
@@ -15,7 +13,6 @@ import com.alipay.api.AlipayApiException;
 import com.alipay.api.AlipayClient;
 import com.alipay.api.AlipayConfig;
 import com.alipay.api.DefaultAlipayClient;
-import com.alipay.api.internal.util.file.FileUtils;
 import com.alipay.api.request.AlipaySystemOauthTokenRequest;
 import com.alipay.api.response.AlipaySystemOauthTokenResponse;
 import com.alipay.easysdk.factory.MultipleFactory;
@@ -31,8 +28,6 @@ public class DefaultAliPayServiceImpl implements AliPayService {
     private static final Map<String, AlipayClient> clients = new ConcurrentHashMap<>();
     private static final Map<String, AlipayConfig> alipayConfigMap = new ConcurrentHashMap<>();
     private static final Map<String, MultipleFactory> multipleFactoryMap = new ConcurrentHashMap<>();
-
-    private final ResourceLoader resourceLoader;
 
     @Override
     public AlipayClient switchOverApiClient(String appId) {
@@ -53,37 +48,29 @@ public class DefaultAliPayServiceImpl implements AliPayService {
             config.gatewayHost = appConfig.getGatewayHost();
             config.signType = appConfig.getSignType();
             config.encryptKey = appConfig.getEncryptKey();
-            try {
-                String merchantPrivateKey = FileUtils.readFileToString(
-                        resourceLoader.getResource(Objects.requireNonNull(appConfig.getMerchantPrivateKeyPath()))
-                                .getFile(),
-                        StandardCharsets.UTF_8);
-                config.merchantPrivateKey = merchantPrivateKey;
-                // 设置私钥
-                alipayConfig.setPrivateKey(merchantPrivateKey);
-                String merchantCertPath = resourceLoader
-                        .getResource(Objects.requireNonNull(appConfig.getMerchantCertPath())).getFile()
-                        .getAbsolutePath();
-                // 设置应用公钥证书文件
-                alipayConfig.setAppCertPath(merchantCertPath);
-                config.merchantCertPath = merchantCertPath;
-                // 设置支付宝公钥证书文件
-                String alipayCertPath = resourceLoader
-                        .getResource(Objects.requireNonNull(appConfig.getAlipayCertPath())).getFile()
-                        .getAbsolutePath();
-                config.alipayCertPath = alipayCertPath;
-                alipayConfig.setAlipayPublicCertPath(alipayCertPath);
-                // 支付宝根证书文件路径
-                String alipayRootCertPath = resourceLoader
-                        .getResource(Objects.requireNonNull(appConfig.getAlipayRootCertPath())).getFile()
-                        .getAbsolutePath();
-                config.alipayRootCertPath = alipayRootCertPath;
-                alipayConfig.setRootCertPath(alipayRootCertPath);
-                // 设置
-                alipayConfig.setEncryptKey(appConfig.getEncryptKey());
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
+
+            // 设置私钥
+            String merchantPrivateKey = ResourceUtil.readStr(appConfig.getMerchantPrivateKeyPath(),
+                    StandardCharsets.UTF_8);
+
+            config.merchantPrivateKey = merchantPrivateKey;
+            alipayConfig.setPrivateKey(merchantPrivateKey);
+
+            // 设置应用公钥证书文件
+            String merchantCertPath = appConfig.getMerchantCertPath();
+            alipayConfig.setAppCertContent(ResourceUtil.readUtf8Str(merchantCertPath));
+            config.merchantCertPath = merchantCertPath;
+
+            // 设置支付宝公钥证书文件
+            String alipayCertPath = appConfig.getAlipayCertPath();
+            config.alipayCertPath = alipayCertPath;
+            alipayConfig.setAlipayPublicCertContent(ResourceUtil.readUtf8Str(alipayCertPath));
+            // 支付宝根证书文件路径
+            String alipayRootCertPath = appConfig.getAlipayRootCertPath();
+            config.alipayRootCertPath = alipayRootCertPath;
+            alipayConfig.setRootCertContent(ResourceUtil.readUtf8Str(alipayRootCertPath));
+            // 设置
+            alipayConfig.setEncryptKey(appConfig.getEncryptKey());
 
             AlipayClient apiClient;
             try {
