@@ -34,21 +34,9 @@
 
 ```
 
-> * 接口文档增强,支持javadoc文档注释
 > * 全局异常拦截
 > * 全局响应
 
-**[spring-boot-starter-openapi](./spring-boot-starter-openapi)**: 文档增强组件,spring-boot-starter-web中默认包含
-> * 接口访问地址: http://yourip:port/doc.html
-
-```xml
-
-<dependency>
-    <groupId>com.guanmengyuan.spring-ex</groupId>
-    <artifactId>spring-boot-starter-openapi</artifactId>
-</dependency>
-
-```
 
 **[spring-boot-starter-mybatis-flex](./spring-boot-starter-mybatis-flex)**: mybatis-flex的增强自动配置组件
 

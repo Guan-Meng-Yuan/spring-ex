@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.guanmengyuan</groupId>
     <artifactId>spring-ex-dependencies</artifactId>
-    <version>1.2.38</version>
+    <version>1.2.39</version>
     <packaging>pom</packaging>
     <name>spring-ex-dependencies</name>
     <description>spring ex base pom</description>
@@ -33,7 +33,7 @@
     </scm>
 
     <properties>
-        <revision>1.2.38</revision>
+        <revision>1.2.39</revision>
         <java.version>17</java.version>
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
@@ -41,21 +41,24 @@
         <!--        spring start-->
         <spring-boot.version>3.2.3</spring-boot.version>
         <spring-cloud.version>2023.0.0</spring-cloud.version>
-        <spring-cloud-tencent.version>1.13.0-2022.0.4</spring-cloud-tencent.version>
+        <spring-cloud-tencent.version>1.13.1-2022.0.4</spring-cloud-tencent.version>
+        <spring-cloud-alibaba.version>2023.0.0.0-RC1</spring-cloud-alibaba.version>
         <!--        spring end-->
 
-        <mybatis-flex.version>1.8.0</mybatis-flex.version>
+        <mybatis-flex.version>1.8.2</mybatis-flex.version>
         <hutool.version>6.0.0-M11</hutool.version>
         <knife4j.version>4.5.0</knife4j.version>
         <therapi.version>0.15.0</therapi.version>
-        <alipay.version>4.38.212.ALL</alipay.version>
+        <alipay.version>4.38.221.ALL</alipay.version>
         <alipay-easy.version>2.2.3</alipay-easy.version>
         <wx-java.version>4.6.0</wx-java.version>
         <dubbo.version>3.2.11</dubbo.version>
+        <polaris.version>0.2.0-3.2.7</polaris.version>
         <sa-token.version>1.37.0</sa-token.version>
-        <forest.version>1.5.35</forest.version>
-        <aws.version>2.24.10</aws.version>
+        <forest.version>1.5.36</forest.version>
+        <aws.version>2.25.6</aws.version>
         <flowable.version>7.0.1</flowable.version>
+        <springdoc.version>2.3.0</springdoc.version>
         <!--        build start-->
         <maven-compiler-plugin.version>3.12.1</maven-compiler-plugin.version>
         <maven-gpg-plugin.version>3.1.0</maven-gpg-plugin.version>
@@ -83,6 +86,13 @@
                 <scope>import</scope>
             </dependency>
             <dependency>
+                <groupId>com.alibaba.cloud</groupId>
+                <artifactId>spring-cloud-alibaba-dependencies</artifactId>
+                <version>${spring-cloud-alibaba.version}</version>
+                <scope>import</scope>
+                <type>pom</type>
+            </dependency>
+            <dependency>
                 <groupId>com.tencent.cloud</groupId>
                 <artifactId>spring-cloud-tencent-dependencies</artifactId>
                 <version>${spring-cloud-tencent.version}</version>
@@ -103,7 +113,6 @@
                 <scope>import</scope>
                 <type>pom</type>
             </dependency>
-            <!--dependencies-->
             <dependency>
                 <groupId>software.amazon.awssdk</groupId>
                 <artifactId>bom</artifactId>
@@ -113,13 +122,10 @@
             </dependency>
             <dependency>
                 <groupId>com.mybatis-flex</groupId>
-                <artifactId>mybatis-flex-spring-boot3-starter</artifactId>
+                <artifactId>mybatis-flex-dependencies</artifactId>
                 <version>${mybatis-flex.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.mybatis-flex</groupId>
-                <artifactId>mybatis-flex-core</artifactId>
-                <version>${mybatis-flex.version}</version>
+                <scope>import</scope>
+                <type>pom</type>
             </dependency>
             <dependency>
                 <groupId>org.apache.dubbo</groupId>
@@ -127,12 +133,6 @@
                 <version>${dubbo.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
-            </dependency>
-            <dependency>
-                <groupId>org.apache.dubbo</groupId>
-                <artifactId>dubbo-dependencies-zookeeper-curator5</artifactId>
-                <type>pom</type>
-                <version>${dubbo.version}</version>
             </dependency>
 
             <dependency>
@@ -142,6 +142,26 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
+            <!--dependencies-->
+
+            <dependency>
+                <groupId>com.tencent.polaris</groupId>
+                <artifactId>dubbo-registry-polaris</artifactId>
+                <version>${polaris.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.tencent.polaris</groupId>
+                <artifactId>dubbo-metadatareport-polaris</artifactId>
+                <version>${polaris.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.dubbo</groupId>
+                <artifactId>dubbo-dependencies-zookeeper-curator5</artifactId>
+                <type>pom</type>
+                <version>${dubbo.version}</version>
+            </dependency>
+
             <dependency>
                 <groupId>cn.dev33</groupId>
                 <artifactId>sa-token-dubbo3</artifactId>
@@ -182,23 +202,6 @@
 
             <!--            openapi-->
             <dependency>
-                <groupId>com.github.xiaoymin</groupId>
-                <artifactId>knife4j-dependencies</artifactId>
-                <version>${knife4j.version}</version>
-                <scope>import</scope>
-                <type>pom</type>
-            </dependency>
-            <dependency>
-                <groupId>com.github.therapi</groupId>
-                <artifactId>therapi-runtime-javadoc</artifactId>
-                <version>${therapi.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.github.therapi</groupId>
-                <artifactId>therapi-runtime-javadoc-scribe</artifactId>
-                <version>${therapi.version}</version>
-            </dependency>
-            <dependency>
                 <groupId>com.dtflys.forest</groupId>
                 <artifactId>forest-spring-boot3-starter</artifactId>
                 <version>${forest.version}</version>
@@ -207,11 +210,6 @@
             <dependency>
                 <groupId>com.guanmengyuan.spring-ex</groupId>
                 <artifactId>spring-ex-common-model</artifactId>
-                <version>${revision}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.guanmengyuan.spring-ex</groupId>
-                <artifactId>spring-boot-starter-openapi</artifactId>
                 <version>${revision}</version>
             </dependency>
             <dependency>
@@ -254,11 +252,6 @@
     <build>
         <pluginManagement>
             <plugins>
-                <plugin>
-                    <groupId>org.springframework.boot</groupId>
-                    <artifactId>spring-boot-maven-plugin</artifactId>
-                    <version>${spring-boot.version}</version>
-                </plugin>
                 <plugin>
                     <groupId>org.sonatype.plugins</groupId>
                     <artifactId>nexus-staging-maven-plugin</artifactId>

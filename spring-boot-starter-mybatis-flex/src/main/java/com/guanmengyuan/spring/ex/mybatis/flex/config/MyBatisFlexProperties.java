@@ -1,6 +1,5 @@
 package com.guanmengyuan.spring.ex.mybatis.flex.config;
 
-
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
@@ -9,7 +8,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  */
 @Data
 @ConfigurationProperties(prefix = "mybatis-flex")
-public class MyBatisFlexProperties {
+public class MybatisFlexProperties {
     /**
      * 是否开启sql审计
      */

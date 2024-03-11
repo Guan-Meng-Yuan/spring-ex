@@ -10,6 +10,7 @@ import org.dromara.hutool.core.collection.set.SetUtil;
 import org.dromara.hutool.core.text.StrUtil;
 import org.dromara.hutool.json.JSONUtil;
 import org.springframework.core.MethodParameter;
+import org.springframework.core.annotation.Order;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.server.ServerHttpRequest;
@@ -23,6 +24,7 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
 import com.guanmengyuan.spring.ex.common.model.dto.res.Res;
 
 @RestControllerAdvice
+@Order(-1)
 public class GlobalResponseAdvice implements ResponseBodyAdvice<Object> {
 
     private final Set<String> ignores;

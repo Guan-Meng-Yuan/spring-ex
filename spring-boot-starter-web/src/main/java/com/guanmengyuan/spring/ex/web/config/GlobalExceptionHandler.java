@@ -1,9 +1,11 @@
 package com.guanmengyuan.spring.ex.web.config;
 
+import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.servlet.resource.NoResourceFoundException;
 
 import com.guanmengyuan.spring.ex.common.model.dto.res.Res;
 import com.guanmengyuan.spring.ex.common.model.exception.ServiceException;
@@ -16,6 +18,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @RestControllerAdvice
 @Slf4j
+@Order(-1)
 public class GlobalExceptionHandler {
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
@@ -36,6 +39,15 @@ public class GlobalExceptionHandler {
         if (throwable instanceof ServiceException serviceException) {
             response.setStatus(serviceException.getStatusCode().value());
         }
+        return Res.error(throwable);
+    }
+
+    @ExceptionHandler(NoResourceFoundException.class)
+    public Res<?> handlerNoResourceFoundException(NoResourceFoundException throwable,
+            HttpServletRequest servletRequest, HttpServletResponse response) {
+        String requestURI = servletRequest.getRequestURI();
+        log.error("request error:{},没有资源,status:{}", requestURI, HttpStatus.NOT_FOUND.value());
+        response.setStatus(HttpStatus.NOT_FOUND.value());
         return Res.error(throwable);
     }
 

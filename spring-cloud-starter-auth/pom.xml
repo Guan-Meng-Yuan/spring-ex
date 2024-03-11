@@ -6,7 +6,7 @@
     <parent>
         <groupId>com.guanmengyuan</groupId>
         <artifactId>spring-ex</artifactId>
-        <version>1.2.38</version>
+        <version>1.2.39</version>
     </parent>
 
     <groupId>com.guanmengyuan.spring-ex</groupId>
@@ -21,10 +21,6 @@
         <dependency>
             <groupId>com.guanmengyuan.spring-ex</groupId>
             <artifactId>spring-ex-common-model</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>cn.dev33</groupId>
-            <artifactId>sa-token-reactor-spring-boot3-starter</artifactId>
         </dependency>
         <dependency>
             <groupId>cn.dev33</groupId>
