@@ -12,9 +12,9 @@ import com.mybatisflex.core.logicdelete.impl.BooleanLogicDeleteProcessor;
 import com.mybatisflex.spring.boot.MyBatisFlexCustomizer;
 
 @Configuration
-@EnableConfigurationProperties(MybatisFlexProperties.class)
-public class MybatisFlexConfiguration implements MyBatisFlexCustomizer {
-    public MybatisFlexConfiguration(MybatisFlexProperties myBatisFlexProperties) {
+@EnableConfigurationProperties(MyBatisFlexProperties.class)
+public class MyBatisFlexConfiguration implements MyBatisFlexCustomizer {
+    public MyBatisFlexConfiguration(MyBatisFlexProperties myBatisFlexProperties) {
         AuditManager.setAuditEnable(myBatisFlexProperties.getAuditEnable());
         LogicDeleteManager.setProcessor(new BooleanLogicDeleteProcessor());
     }

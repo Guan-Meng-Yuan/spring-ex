@@ -8,7 +8,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  */
 @Data
 @ConfigurationProperties(prefix = "mybatis-flex")
-public class MybatisFlexProperties {
+public class MyBatisFlexProperties {
     /**
      * 是否开启sql审计
      */

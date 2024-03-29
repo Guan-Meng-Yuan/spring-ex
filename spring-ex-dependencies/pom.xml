@@ -6,7 +6,7 @@
 
     <groupId>com.guanmengyuan</groupId>
     <artifactId>spring-ex-dependencies</artifactId>
-    <version>1.2.39</version>
+    <version>1.2.40</version>
     <packaging>pom</packaging>
     <name>spring-ex-dependencies</name>
     <description>spring ex base pom</description>
@@ -33,35 +33,32 @@
     </scm>
 
     <properties>
-        <revision>1.2.39</revision>
+        <revision>1.2.40</revision>
         <java.version>17</java.version>
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <!--        spring start-->
-        <spring-boot.version>3.2.3</spring-boot.version>
-        <spring-cloud.version>2023.0.0</spring-cloud.version>
-        <spring-cloud-tencent.version>1.13.1-2022.0.4</spring-cloud-tencent.version>
+        <spring-boot.version>3.2.4</spring-boot.version>
+        <spring-cloud.version>2023.0.1</spring-cloud.version>
+        <spring-cloud-tencent.version>1.13.1-2023.0.0</spring-cloud-tencent.version>
         <spring-cloud-alibaba.version>2023.0.0.0-RC1</spring-cloud-alibaba.version>
         <!--        spring end-->
 
-        <mybatis-flex.version>1.8.2</mybatis-flex.version>
+        <mybatis-flex.version>1.8.4</mybatis-flex.version>
         <hutool.version>6.0.0-M11</hutool.version>
-        <knife4j.version>4.5.0</knife4j.version>
-        <therapi.version>0.15.0</therapi.version>
-        <alipay.version>4.38.221.ALL</alipay.version>
+        <alipay.version>4.39.19.ALL</alipay.version>
         <alipay-easy.version>2.2.3</alipay-easy.version>
-        <wx-java.version>4.6.0</wx-java.version>
+        <wx-java.version>4.6.1.B</wx-java.version>
         <dubbo.version>3.2.11</dubbo.version>
         <polaris.version>0.2.0-3.2.7</polaris.version>
         <sa-token.version>1.37.0</sa-token.version>
         <forest.version>1.5.36</forest.version>
-        <aws.version>2.25.6</aws.version>
+        <aws.version>2.25.20</aws.version>
         <flowable.version>7.0.1</flowable.version>
-        <springdoc.version>2.3.0</springdoc.version>
         <!--        build start-->
-        <maven-compiler-plugin.version>3.12.1</maven-compiler-plugin.version>
-        <maven-gpg-plugin.version>3.1.0</maven-gpg-plugin.version>
+        <maven-compiler-plugin.version>3.13.0</maven-compiler-plugin.version>
+        <maven-gpg-plugin.version>3.2.2</maven-gpg-plugin.version>
         <maven-source-plugin.version>3.3.0</maven-source-plugin.version>
         <maven-resources-plugin.version>3.3.1</maven-resources-plugin.version>
         <maven-javadoc-plugin.version>3.6.3</maven-javadoc-plugin.version>
@@ -298,10 +295,6 @@
                             <goals>
                                 <goal>sign</goal>
                             </goals>
-                            <configuration>
-                                <keyname>${gpg.key}</keyname>
-                                <passphraseServerId>${gpg.key}</passphraseServerId>
-                            </configuration>
                         </execution>
                     </executions>
                 </plugin>
