@@ -6,7 +6,7 @@
 
     <groupId>com.guanmengyuan</groupId>
     <artifactId>spring-ex-dependencies</artifactId>
-    <version>1.2.44</version>
+    <version>1.2.45</version>
     <packaging>pom</packaging>
     <name>spring-ex-dependencies</name>
     <description>spring ex base pom</description>
@@ -33,19 +33,19 @@
     </scm>
 
     <properties>
-        <revision>1.2.44</revision>
+        <revision>1.2.45</revision>
         <java.version>17</java.version>
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <!--        spring start-->
-        <spring-boot.version>3.2.4</spring-boot.version>
+        <spring-boot.version>3.2.5</spring-boot.version>
         <spring-cloud.version>2023.0.1</spring-cloud.version>
         <spring-cloud-tencent.version>1.14.0-2023.0.0-RC1</spring-cloud-tencent.version>
         <spring-cloud-alibaba.version>2023.0.0.0-RC1</spring-cloud-alibaba.version>
         <!--        spring end-->
 
-        <mybatis-flex.version>1.8.7</mybatis-flex.version>
+        <mybatis-flex.version>1.8.8</mybatis-flex.version>
         <hutool.version>6.0.0-M11</hutool.version>
         <alipay.version>4.39.42.ALL</alipay.version>
         <alipay-easy.version>2.2.3</alipay-easy.version>
@@ -54,7 +54,7 @@
         <polaris.version>0.3.2-3.2.7</polaris.version>
         <sa-token.version>1.37.0</sa-token.version>
         <forest.version>1.5.36</forest.version>
-        <aws.version>2.25.32</aws.version>
+        <aws.version>2.25.34</aws.version>
         <flowable.version>7.0.1</flowable.version>
         <!--        build start-->
         <maven-compiler-plugin.version>3.13.0</maven-compiler-plugin.version>
