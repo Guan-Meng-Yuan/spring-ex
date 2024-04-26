@@ -6,7 +6,7 @@
 
     <groupId>com.guanmengyuan</groupId>
     <artifactId>spring-ex</artifactId>
-    <version>1.2.45</version>
+    <version>1.2.46</version>
     <packaging>pom</packaging>
 
     <name>spring-ex</name>
@@ -47,7 +47,7 @@
 
 
     <properties>
-        <revision>1.2.45</revision>
+        <revision>1.2.46</revision>
         <java.version>17</java.version>
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
@@ -55,7 +55,7 @@
 
         <!--        build start-->
         <maven-compiler-plugin.version>3.13.0</maven-compiler-plugin.version>
-        <maven-gpg-plugin.version>3.2.3</maven-gpg-plugin.version>
+        <maven-gpg-plugin.version>3.2.4</maven-gpg-plugin.version>
         <maven-source-plugin.version>3.3.1</maven-source-plugin.version>
         <maven-resources-plugin.version>3.3.1</maven-resources-plugin.version>
         <maven-javadoc-plugin.version>3.6.3</maven-javadoc-plugin.version>
