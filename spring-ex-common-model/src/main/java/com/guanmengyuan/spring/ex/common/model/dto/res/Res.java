@@ -44,7 +44,7 @@ public class Res<T> implements Serializable {
     /**
      * 响应数据,所有的数据响应都会在外层包装此类型
      */
-    private T data;
+    private T result;
 
     /**
      * 用户提示
@@ -185,13 +185,13 @@ public class Res<T> implements Serializable {
     /**
      * 成功响应
      *
-     * @param data    数据
+     * @param result  数据
      * @param traceId 请求ID
      * @param <T>     泛型类型
      * @return 响应结果
      */
-    public static <T> Res<T> success(T data, String traceId) {
-        Res<T> res = success(data);
+    public static <T> Res<T> success(T result, String traceId) {
+        Res<T> res = success(result);
         res.setTraceId(traceId);
         return res;
     }
@@ -199,13 +199,13 @@ public class Res<T> implements Serializable {
     /**
      * 成功响应
      *
-     * @param data 数据
-     * @param <T>  数据类型
+     * @param result 数据
+     * @param <T>    数据类型
      * @return 成功的响应
      */
-    public static <T> Res<T> success(T data) {
+    public static <T> Res<T> success(T result) {
         Res<T> res = new Res<>();
-        res.setData(data);
+        res.setResult(result);
         res.setSuccess(Boolean.TRUE);
         setResEnum(res, ResEnum.SUCCESS);
         return res;
