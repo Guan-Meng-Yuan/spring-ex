@@ -18,7 +18,8 @@ public enum ResEnum implements BaseResEnum {
     /**
      * 未授权
      */
-    UNAUTHORIZED(HttpStatus.UNAUTHORIZED, "unauthorized", "暂无权限"),
+    UNAUTHORIZED(HttpStatus.NOT_ACCEPTABLE, "unauthorized", "暂无权限"),
+    NOT_LOGIN(HttpStatus.UNAUTHORIZED, "unauthorized", "未登录"),
     /**
      * 枚举参数不支持
      */

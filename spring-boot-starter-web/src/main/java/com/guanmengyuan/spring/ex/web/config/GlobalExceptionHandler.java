@@ -1,20 +1,18 @@
 package com.guanmengyuan.spring.ex.web.config;
 
+import cn.dev33.satoken.exception.NotLoginException;
+import cn.dev33.satoken.exception.SaTokenException;
+import com.guanmengyuan.spring.ex.common.model.dto.res.Res;
+import com.guanmengyuan.spring.ex.common.model.exception.ServiceException;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.servlet.resource.NoResourceFoundException;
-
-import com.guanmengyuan.spring.ex.common.model.dto.res.Res;
-import com.guanmengyuan.spring.ex.common.model.exception.ServiceException;
-
-import cn.dev33.satoken.exception.NotLoginException;
-import cn.dev33.satoken.exception.SaTokenException;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
-import lombok.extern.slf4j.Slf4j;
 
 @RestControllerAdvice
 @Slf4j
