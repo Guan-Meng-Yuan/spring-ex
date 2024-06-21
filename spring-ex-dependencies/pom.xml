@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.guanmengyuan</groupId>
     <artifactId>spring-ex-dependencies</artifactId>
-    <version>3.3.0.2</version>
+    <version>3.3.1.1</version>
     <packaging>pom</packaging>
     <name>spring-ex-dependencies</name>
     <description>spring ex base pom</description>
@@ -33,13 +32,13 @@
     </scm>
 
     <properties>
-        <revision>3.3.0.2</revision>
+        <revision>3.3.1.1</revision>
         <java.version>17</java.version>
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <!--        spring start-->
-        <spring-boot.version>3.3.0</spring-boot.version>
+        <spring-boot.version>3.3.1</spring-boot.version>
         <spring-cloud.version>2023.0.2</spring-cloud.version>
         <spring-cloud-tencent.version>1.14.0-2023.0.0-RC1</spring-cloud-tencent.version>
         <spring-cloud-alibaba.version>2023.0.1.0</spring-cloud-alibaba.version>
@@ -54,7 +53,7 @@
         <polaris.version>0.3.3-3.2.7</polaris.version>
         <sa-token.version>1.38.0</sa-token.version>
         <forest.version>1.5.36</forest.version>
-        <aws.version>2.26.5</aws.version>
+        <aws.version>2.26.7</aws.version>
         <flowable.version>7.0.1</flowable.version>
         <!--        build start-->
         <maven-compiler-plugin.version>3.13.0</maven-compiler-plugin.version>
