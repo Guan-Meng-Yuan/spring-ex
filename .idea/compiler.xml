@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="spring-boot-starter-alipay" />
+        <module name="spring-boot-starter-web" />
+        <module name="spring-cloud-starter-auth" />
+        <module name="spring-boot-starter-mybatis-flex" />
+        <module name="spring-boot-starter-wx-mini-app" />
+        <module name="spring-ex-common-model" />
+        <module name="spring-boot-starter-oss" />
+        <module name="spring-boot-starter-wx-pay" />
+      </profile>
+    </annotationProcessing>
+  </component>
+</project>
