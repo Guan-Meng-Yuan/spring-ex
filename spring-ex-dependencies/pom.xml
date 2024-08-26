@@ -5,7 +5,7 @@
 
     <groupId>com.guanmengyuan</groupId>
     <artifactId>spring-ex-dependencies</artifactId>
-    <version>3.3.2.1</version>
+    <version>3.3.3.2</version>
     <packaging>pom</packaging>
     <name>spring-ex-dependencies</name>
     <description>spring ex base pom</description>
@@ -32,26 +32,27 @@
     </scm>
 
     <properties>
-        <revision>3.3.2.1</revision>
+        <revision>3.3.3.2</revision>
         <java.version>17</java.version>
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <!--        spring start-->
-        <spring-boot.version>3.3.2</spring-boot.version>
+        <spring-boot.version>3.3.3</spring-boot.version>
         <spring-cloud.version>2023.0.3</spring-cloud.version>
         <spring-cloud-alibaba.version>2023.0.1.2</spring-cloud-alibaba.version>
         <!--        spring end-->
 
-        <mybatis-flex.version>1.9.5</mybatis-flex.version>
+        <mybatis-flex.version>1.9.6</mybatis-flex.version>
         <hutool.version>6.0.0-M15</hutool.version>
-        <alipay.version>4.39.175.ALL</alipay.version>
+        <alipay.version>4.39.186.ALL</alipay.version>
+        <easyexcel.version>4.0.2</easyexcel.version>
         <alipay-easy.version>2.2.3</alipay-easy.version>
         <wx-java.version>4.6.3.B</wx-java.version>
         <dubbo.version>3.2.15</dubbo.version>
         <sa-token.version>1.38.0</sa-token.version>
         <forest.version>1.5.36</forest.version>
-        <aws.version>2.27.4</aws.version>
+        <aws.version>2.27.12</aws.version>
         <flowable.version>7.0.1</flowable.version>
         <!--        build start-->
         <maven-compiler-plugin.version>3.13.0</maven-compiler-plugin.version>
@@ -147,6 +148,11 @@
                 <groupId>com.alipay.sdk</groupId>
                 <artifactId>alipay-easysdk</artifactId>
                 <version>${alipay-easy.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>easyexcel</artifactId>
+                <version>${easyexcel.version}</version>
             </dependency>
             <!--            wechat-->
             <dependency>
