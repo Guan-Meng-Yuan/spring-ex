@@ -1,13 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.guanmengyuan</groupId>
         <artifactId>spring-ex</artifactId>
-        <version>3.3.3.2</version>
+        <version>3.3.4.1</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
+    <url>https://github.com/Guan-Meng-Yuan/spring-ex</url>
+    <licenses>
+        <license>
+            <name>The Apache Software License, Version 2.0</name>
+            <url>https://www.apache.org/licenses/LICENSE-2.0.txt</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+    <description>spring enhance pack</description>
+
+    <developers>
+        <developer>
+            <name>GMY</name>
+            <url>https://github.com/guan-meng-yuan</url>
+            <organization>GMY</organization>
+            <organizationUrl>https://github.com/guan-meng-yuan</organizationUrl>
+        </developer>
+    </developers>
+    <scm>
+        <url>https://github.com/guan-meng-yuan/spring-ex</url>
+        <connection>scm:git:git@github.com:guan-meng-yuan/spring-ex.git</connection>
+        <developerConnection>scm:git:git@github.com:guan-meng-yuan/spring-ex.git</developerConnection>
+    </scm>
+
     <groupId>com.guanmengyuan.spring-ex</groupId>
     <artifactId>spring-boot-starter-mybatis-flex</artifactId>
     <properties>

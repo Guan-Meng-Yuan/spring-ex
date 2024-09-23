@@ -1,9 +1,10 @@
 package com.guanmengyuan.spring.ex.web.config;
 
-import java.util.Collections;
-import java.util.Map;
-import java.util.Objects;
-
+import com.guanmengyuan.spring.ex.common.model.dto.res.Res;
+import com.guanmengyuan.spring.ex.common.model.exception.ServiceException;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import lombok.extern.slf4j.Slf4j;
 import org.dromara.hutool.core.bean.BeanUtil;
 import org.springframework.boot.autoconfigure.web.ServerProperties;
 import org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController;
@@ -14,12 +15,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 
-import com.guanmengyuan.spring.ex.common.model.dto.res.Res;
-import com.guanmengyuan.spring.ex.common.model.exception.ServiceException;
-
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
-import lombok.extern.slf4j.Slf4j;
+import java.util.Collections;
+import java.util.Map;
+import java.util.Objects;
 
 @Slf4j
 public class GlobalErrorController extends BasicErrorController {
@@ -41,7 +39,7 @@ public class GlobalErrorController extends BasicErrorController {
         response.setContentType(MediaType.APPLICATION_JSON_VALUE);
         return (modelAndView != null) ? modelAndView
                 : new ModelAndView(new MappingJackson2JsonView())
-                        .addAllObjects(BeanUtil.beanToMap(Res.error(serviceException), false, true));
+                .addAllObjects(BeanUtil.beanToMap(Res.error(serviceException), false, true));
     }
 
     @Override

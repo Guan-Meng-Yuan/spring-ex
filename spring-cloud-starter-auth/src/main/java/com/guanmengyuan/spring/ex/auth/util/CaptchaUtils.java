@@ -1,10 +1,11 @@
 package com.guanmengyuan.spring.ex.auth.util;
 
-import java.time.Duration;
-import java.util.Map;
-import java.util.Objects;
-import java.util.concurrent.TimeUnit;
-
+import com.guanmengyuan.spring.ex.auth.constant.CacheConstant;
+import com.guanmengyuan.spring.ex.auth.enums.CaptchaType;
+import com.guanmengyuan.spring.ex.auth.model.CaptchaResult;
+import com.guanmengyuan.spring.ex.common.model.exception.ServiceException;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.dromara.hutool.core.cache.CacheUtil;
 import org.dromara.hutool.core.cache.impl.TimedCache;
 import org.dromara.hutool.core.data.id.IdUtil;
@@ -17,23 +18,20 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 
-import com.guanmengyuan.spring.ex.auth.constant.CacheConstant;
-import com.guanmengyuan.spring.ex.auth.enums.CaptchaType;
-import com.guanmengyuan.spring.ex.auth.model.CaptchaResult;
-import com.guanmengyuan.spring.ex.common.model.exception.ServiceException;
-
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
+import java.time.Duration;
+import java.util.Map;
+import java.util.Objects;
+import java.util.concurrent.TimeUnit;
 
 @Component
 @RequiredArgsConstructor
 @Slf4j
 public class CaptchaUtils {
-    private final RedisTemplate<String, String> redisTemplate;
     private static final TimedCache<String, String> IN_MEMORY_CACHE = CacheUtil
             .newTimedCache(Duration.ofMinutes(1).toMillis());
     private static final int DEFAULT_WIDTH = 200;
     private static final int DEFAULT_HEIGHT = 100;
+    private final RedisTemplate<String, String> redisTemplate;
 
     /**
      * 生成验证码
@@ -46,7 +44,7 @@ public class CaptchaUtils {
      * @see CaptchaType#CUSTOM
      */
     public CaptchaResult captchaResult(CaptchaType captchaType, CodeGenerator codeGenerator, Integer width,
-            Integer height) {
+                                       Integer height) {
 
         Map<String, Object> captchaResult = MapUtil.newHashMap();
         String redisKeyID = IdUtil.getSnowflakeNextIdStr();
@@ -62,7 +60,7 @@ public class CaptchaUtils {
                 captcha.setGenerator(codeGenerator);
             }
             default ->
-                throw new ServiceException(HttpStatus.NOT_ACCEPTABLE, "captcha type not support", "验证码不支持");
+                    throw new ServiceException(HttpStatus.NOT_ACCEPTABLE, "captcha type not support", "验证码不支持");
         }
 
         captcha.createCode();

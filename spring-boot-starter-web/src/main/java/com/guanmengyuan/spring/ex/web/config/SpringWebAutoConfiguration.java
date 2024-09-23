@@ -1,5 +1,6 @@
 package com.guanmengyuan.spring.ex.web.config;
 
+import com.guanmengyuan.spring.ex.common.model.converter.AnyToEnumConverterFactory;
 import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
 import org.springframework.boot.autoconfigure.web.ServerProperties;
@@ -15,8 +16,6 @@ import org.springframework.format.FormatterRegistry;
 import org.springframework.lang.NonNull;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
-import com.guanmengyuan.spring.ex.common.model.converter.AnyToEnumConverterFactory;
-
 @Configuration
 @EnableConfigurationProperties(SpringWebProperties.class)
 @ConditionalOnWebApplication(type = ConditionalOnWebApplication.Type.SERVLET)
@@ -25,19 +24,19 @@ import com.guanmengyuan.spring.ex.common.model.converter.AnyToEnumConverterFacto
 public class SpringWebAutoConfiguration implements WebMvcConfigurer {
     private final ServerProperties serverProperties;
 
+    public SpringWebAutoConfiguration(ServerProperties serverProperties) {
+        this.serverProperties = serverProperties;
+    }
+
     @Override
     public void addFormatters(@NonNull FormatterRegistry registry) {
         registry.addConverterFactory(new AnyToEnumConverterFactory());
     }
 
-    public SpringWebAutoConfiguration(ServerProperties serverProperties) {
-        this.serverProperties = serverProperties;
-    }
-
     @Primary
     @Bean
     public BasicErrorController basicErrorController(ErrorAttributes errorAttributes,
-            ObjectProvider<ErrorViewResolver> errorViewResolvers) {
+                                                     ObjectProvider<ErrorViewResolver> errorViewResolvers) {
         return new GlobalErrorController(serverProperties);
     }
 

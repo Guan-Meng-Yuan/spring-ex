@@ -1,11 +1,9 @@
 package com.guanmengyuan.spring.ex.oss.provider;
 
-import org.dromara.hutool.core.date.DateUtil;
-
 import com.guanmengyuan.spring.ex.oss.service.CosSecretInfo;
 import com.guanmengyuan.spring.ex.oss.service.OssSecretRequestService;
-
 import lombok.extern.slf4j.Slf4j;
+import org.dromara.hutool.core.date.DateUtil;
 import software.amazon.awssdk.auth.credentials.AwsCredentials;
 import software.amazon.awssdk.auth.credentials.AwsCredentialsProvider;
 import software.amazon.awssdk.auth.credentials.AwsSessionCredentials;
@@ -15,9 +13,9 @@ import software.amazon.awssdk.auth.credentials.AwsSessionCredentials;
  */
 @Slf4j
 public class DynamicCredentialsProvider implements AwsCredentialsProvider {
-    private CosSecretInfo cosSecretInfo;
     private static DynamicCredentialsProvider dynamicCredentialsProvider;
     private final OssSecretRequestService ossSecretRequestService;
+    private CosSecretInfo cosSecretInfo;
 
     private DynamicCredentialsProvider(OssSecretRequestService ossSecretRequestService) {
         this.ossSecretRequestService = ossSecretRequestService;

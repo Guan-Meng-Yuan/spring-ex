@@ -1,11 +1,10 @@
 package com.guanmengyuan.spring.ex.auth.config;
 
-import java.util.Set;
-
+import lombok.Data;
 import org.dromara.hutool.core.collection.set.SetUtil;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
-import lombok.Data;
+import java.util.Set;
 
 @Data
 @ConfigurationProperties(prefix = "sa-token")

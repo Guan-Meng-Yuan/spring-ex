@@ -1,10 +1,8 @@
 package com.guanmengyuan.spring.ex.oss.config;
 
-import org.springframework.boot.context.properties.ConfigurationProperties;
-
 import com.guanmengyuan.spring.ex.oss.enums.SecretMode;
-
 import lombok.Data;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 
 /**
  * @author guanmengyuan

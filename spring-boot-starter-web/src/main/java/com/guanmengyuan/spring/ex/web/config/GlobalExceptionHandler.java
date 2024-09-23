@@ -21,7 +21,7 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public Res<?> handleMethodArgumentNotValidException(MethodArgumentNotValidException e,
-            HttpServletRequest servletRequest, HttpServletResponse response) {
+                                                        HttpServletRequest servletRequest, HttpServletResponse response) {
         String requestURI = servletRequest.getRequestURI();
         log.error("request error:{}", requestURI, e);
         response.setStatus(HttpStatus.BAD_REQUEST.value());
@@ -30,7 +30,7 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(Throwable.class)
     public Res<?> handlerThrowable(Throwable throwable, HttpServletRequest servletRequest,
-            HttpServletResponse response) {
+                                   HttpServletResponse response) {
         String requestURI = servletRequest.getRequestURI();
         log.error("request error:{}", requestURI, throwable);
         response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR.value());
@@ -42,16 +42,16 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(NoResourceFoundException.class)
     public Res<?> handlerNoResourceFoundException(NoResourceFoundException throwable,
-            HttpServletRequest servletRequest, HttpServletResponse response) {
+                                                  HttpServletRequest servletRequest, HttpServletResponse response) {
         String requestURI = servletRequest.getRequestURI();
         log.error("request error:{},没有资源,status:{}", requestURI, HttpStatus.NOT_FOUND.value());
         response.setStatus(HttpStatus.NOT_FOUND.value());
         return Res.error(throwable);
     }
 
-    @ExceptionHandler({ SaTokenException.class })
+    @ExceptionHandler({SaTokenException.class})
     public Res<?> handlerSaToKen(SaTokenException saTokenException, HttpServletRequest servletRequest,
-            HttpServletResponse response) {
+                                 HttpServletResponse response) {
         String requestURI = servletRequest.getRequestURI();
         log.error("request error:{}", requestURI, saTokenException);
         if (saTokenException instanceof NotLoginException) {

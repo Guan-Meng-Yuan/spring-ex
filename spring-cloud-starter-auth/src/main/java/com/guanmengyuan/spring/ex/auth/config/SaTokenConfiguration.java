@@ -1,21 +1,19 @@
 package com.guanmengyuan.spring.ex.auth.config;
 
-import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.core.annotation.Order;
-
-import com.guanmengyuan.spring.ex.common.model.constant.GlobalResponseConstant;
-import com.guanmengyuan.spring.ex.common.model.enums.ResEnum;
-import com.guanmengyuan.spring.ex.common.model.exception.ServiceException;
-
 import cn.dev33.satoken.SaManager;
 import cn.dev33.satoken.filter.SaServletFilter;
 import cn.dev33.satoken.router.SaRouter;
 import cn.dev33.satoken.same.SaSameUtil;
 import cn.dev33.satoken.stp.StpUtil;
+import com.guanmengyuan.spring.ex.common.model.constant.GlobalResponseConstant;
+import com.guanmengyuan.spring.ex.common.model.enums.ResEnum;
+import com.guanmengyuan.spring.ex.common.model.exception.ServiceException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.core.annotation.Order;
 
 @Configuration
 @EnableConfigurationProperties(AuthConfigProperties.class)

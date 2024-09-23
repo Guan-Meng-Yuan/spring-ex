@@ -1,8 +1,8 @@
 package com.guanmengyuan.spring.ex.common.model.dto.req;
 
-import java.io.Serializable;
-
 import lombok.Data;
+
+import java.io.Serializable;
 
 /**
  * 分页参数

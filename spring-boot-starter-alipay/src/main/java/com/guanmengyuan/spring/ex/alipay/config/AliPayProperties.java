@@ -1,10 +1,9 @@
 package com.guanmengyuan.spring.ex.alipay.config;
 
-import java.util.List;
-
+import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
-import lombok.Data;
+import java.util.List;
 
 /**
  * 支付宝配置

@@ -1,10 +1,6 @@
 package com.guanmengyuan.spring.ex.web.config;
 
-import static com.guanmengyuan.spring.ex.common.model.constant.GlobalResponseConstant.DEFAULT_PATH;
-
-import java.util.Objects;
-import java.util.Set;
-
+import com.guanmengyuan.spring.ex.common.model.dto.res.Res;
 import org.dromara.hutool.core.collection.CollUtil;
 import org.dromara.hutool.core.collection.set.SetUtil;
 import org.dromara.hutool.core.text.StrUtil;
@@ -21,7 +17,10 @@ import org.springframework.util.AntPathMatcher;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
 
-import com.guanmengyuan.spring.ex.common.model.dto.res.Res;
+import java.util.Objects;
+import java.util.Set;
+
+import static com.guanmengyuan.spring.ex.common.model.constant.GlobalResponseConstant.DEFAULT_PATH;
 
 @RestControllerAdvice
 @Order(-1)
@@ -44,19 +43,19 @@ public class GlobalResponseAdvice implements ResponseBodyAdvice<Object> {
 
     @Override
     public boolean supports(@NonNull MethodParameter returnType,
-            @NonNull Class<? extends HttpMessageConverter<?>> converterType) {
+                            @NonNull Class<? extends HttpMessageConverter<?>> converterType) {
         return true;
     }
 
     @Override
     public Object beforeBodyWrite(@Nullable Object body, @NonNull MethodParameter returnType,
-            @NonNull MediaType selectedContentType,
-            @NonNull Class<? extends HttpMessageConverter<?>> selectedConverterType, @NonNull ServerHttpRequest request,
-            @NonNull ServerHttpResponse response) {
+                                  @NonNull MediaType selectedContentType,
+                                  @NonNull Class<? extends HttpMessageConverter<?>> selectedConverterType, @NonNull ServerHttpRequest request,
+                                  @NonNull ServerHttpResponse response) {
         String path = request.getURI().getPath();
         if (!springWebProperties.getEnableGlobalRes() || StrUtil.equals(path, "/error") || body instanceof Res<?>
                 || ignores.stream().anyMatch(
-                        ignore -> antPathMatcher.match(Objects.requireNonNull(ignore), Objects.requireNonNull(path)))) {
+                ignore -> antPathMatcher.match(Objects.requireNonNull(ignore), Objects.requireNonNull(path)))) {
             return body;
         }
         return wrapperBody(body, returnType, response);

@@ -39,7 +39,7 @@ public class WxMiniAppConfiguration {
                             config.setAesKey(a.getAesKey());
                             config.setMsgDataFormat(a.getMsgDataFormat());
                             return config;
-                        }).collect(Collectors.toMap(WxMaDefaultConfigImpl::getAppid, a -> a, (o, n) -> o)),configs.get(0).getAppid());
+                        }).collect(Collectors.toMap(WxMaDefaultConfigImpl::getAppid, a -> a, (o, n) -> o)), configs.get(0).getAppid());
         return maService;
     }
 }

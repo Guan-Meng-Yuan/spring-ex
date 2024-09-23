@@ -1,9 +1,9 @@
 package com.guanmengyuan.spring.ex.alipay.service;
 
-import java.util.List;
-
 import com.alipay.api.AlipayClient;
 import com.guanmengyuan.spring.ex.alipay.config.AliPayProperties;
+
+import java.util.List;
 
 public interface AliPayService {
     /**
