@@ -6,7 +6,7 @@
 
     <groupId>com.guanmengyuan</groupId>
     <artifactId>spring-ex-dependencies</artifactId>
-    <version>3.3.4.1</version>
+    <version>3.3.4.2</version>
     <packaging>pom</packaging>
     <name>spring-ex-dependencies</name>
     <description>spring ex base pom</description>
@@ -33,7 +33,7 @@
     </scm>
 
     <properties>
-        <revision>3.3.4.1</revision>
+        <revision>3.3.4.2</revision>
         <java.version>17</java.version>
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
@@ -45,7 +45,7 @@
         <!--        spring end-->
 
         <mybatis-flex.version>1.9.7</mybatis-flex.version>
-        <hutool.version>6.0.0-M16</hutool.version>
+        <hutool.version>6.0.0-M17</hutool.version>
         <alipay.version>4.39.218.ALL</alipay.version>
         <easyexcel.version>4.0.3</easyexcel.version>
         <alipay-easy.version>2.2.3</alipay-easy.version>
@@ -53,16 +53,16 @@
         <dubbo.version>3.3.0</dubbo.version>
         <sa-token.version>1.39.0</sa-token.version>
         <forest.version>1.5.36</forest.version>
-        <aws.version>2.28.6</aws.version>
-        <flowable.version>7.0.1</flowable.version>
+        <aws.version>2.28.17</aws.version>
+        <flowable.version>7.1.0</flowable.version>
         <!--        build start-->
         <maven-compiler-plugin.version>3.13.0</maven-compiler-plugin.version>
-        <maven-gpg-plugin.version>3.2.6</maven-gpg-plugin.version>
+        <maven-gpg-plugin.version>3.2.7</maven-gpg-plugin.version>
         <maven-source-plugin.version>3.3.1</maven-source-plugin.version>
         <maven-resources-plugin.version>3.3.1</maven-resources-plugin.version>
-        <maven-javadoc-plugin.version>3.8.0</maven-javadoc-plugin.version>
+        <maven-javadoc-plugin.version>3.10.1</maven-javadoc-plugin.version>
         <maven-release-plugin.version>3.1.1</maven-release-plugin.version>
-        <central-publishing-maven-plugin.version>0.5.0</central-publishing-maven-plugin.version>
+        <central-publishing-maven-plugin.version>0.6.0</central-publishing-maven-plugin.version>
         <!--        build end-->
     </properties>
     <dependencyManagement>
