@@ -1,8 +1,9 @@
 package com.guanmengyuan.spring.ex.common.mybatis.flex.listener;
 
+import org.dromara.hutool.core.date.DateUtil;
+
 import com.guanmengyuan.spring.ex.common.model.domain.BaseDomain;
 import com.mybatisflex.annotation.InsertListener;
-import org.dromara.hutool.core.date.DateUtil;
 
 public class BaseInsertListener implements InsertListener {
     @Override

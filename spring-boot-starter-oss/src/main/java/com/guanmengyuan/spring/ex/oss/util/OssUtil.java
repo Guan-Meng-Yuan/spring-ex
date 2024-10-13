@@ -138,19 +138,13 @@ public class OssUtil {
         return upload(file, ossConfigProperties.getDefaultBucket());
     }
 
-
-    public Object getUrl(String key) {
-        return s3Presigner
-                .presignGetObject(
-                        builder -> builder
-                                .signatureDuration(Duration.ofDays(7))
-                                .getObjectRequest(
-                                        builder1 -> builder1.bucket(ossConfigProperties.getDefaultBucket()).key(key)
-                                )
-                ).url().toString();
+    public String getUrl(String key) {
+        return (ossConfigProperties.getEnableHttps() ? "https" : "http") + ossConfigProperties.getEndpoint() + "/"
+                + ossConfigProperties.getDefaultBucket() + "/" + key;
     }
 
     public byte[] getBytes(String key) {
-        return s3Client.getObjectAsBytes(builder -> builder.bucket(ossConfigProperties.getDefaultBucket()).key(key)).asByteArray();
+        return s3Client.getObjectAsBytes(builder -> builder.bucket(ossConfigProperties.getDefaultBucket()).key(key))
+                .asByteArray();
     }
 }

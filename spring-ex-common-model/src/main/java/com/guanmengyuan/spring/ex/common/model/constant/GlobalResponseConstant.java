@@ -1,8 +1,8 @@
 package com.guanmengyuan.spring.ex.common.model.constant;
 
-import org.dromara.hutool.core.collection.set.SetUtil;
-
 import java.util.Set;
+
+import org.dromara.hutool.core.collection.set.SetUtil;
 
 /**
  * 全局白名单路径常量

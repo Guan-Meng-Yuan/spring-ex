@@ -1,9 +1,10 @@
 package com.guanmengyuan.spring.ex.common.model.enums;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
+
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 
 /**
  * 响应枚举
@@ -37,6 +38,7 @@ public enum ResEnum implements BaseResEnum {
      */
     INTERNAL_SERVER_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, "网络异常", "网络异常"),
     ;
+
     private final HttpStatusCode httpStatusCode;
     private final String message;
     private final String tips;
