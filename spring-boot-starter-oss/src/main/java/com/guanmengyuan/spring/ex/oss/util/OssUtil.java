@@ -13,8 +13,11 @@ import org.springframework.web.multipart.MultipartFile;
 import software.amazon.awssdk.core.sync.RequestBody;
 import software.amazon.awssdk.services.s3.S3Client;
 import software.amazon.awssdk.services.s3.model.ObjectIdentifier;
+import software.amazon.awssdk.services.s3.presigner.S3Presigner;
 
 import java.io.File;
+import java.nio.charset.StandardCharsets;
+import java.time.Duration;
 import java.util.List;
 
 /**
@@ -25,6 +28,7 @@ import java.util.List;
 public class OssUtil {
     private final S3Client s3Client;
     private final OssConfigProperties ossConfigProperties;
+    private final S3Presigner s3Presigner;
 
     /**
      * 删除对象
@@ -130,9 +134,23 @@ public class OssUtil {
     }
 
     @SneakyThrows
-
     public String upload(File file) {
         return upload(file, ossConfigProperties.getDefaultBucket());
     }
 
+
+    public Object getUrl(String key) {
+        return s3Presigner
+                .presignGetObject(
+                        builder -> builder
+                                .signatureDuration(Duration.ofDays(7))
+                                .getObjectRequest(
+                                        builder1 -> builder1.bucket(ossConfigProperties.getDefaultBucket()).key(key)
+                                )
+                ).url().toString();
+    }
+
+    public byte[] getBytes(String key) {
+        return s3Client.getObjectAsBytes(builder -> builder.bucket(ossConfigProperties.getDefaultBucket()).key(key)).asByteArray();
+    }
 }

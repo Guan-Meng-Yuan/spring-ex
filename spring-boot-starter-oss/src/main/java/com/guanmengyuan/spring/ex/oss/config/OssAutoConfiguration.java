@@ -14,6 +14,7 @@ import software.amazon.awssdk.auth.credentials.AwsBasicCredentials;
 import software.amazon.awssdk.auth.credentials.StaticCredentialsProvider;
 import software.amazon.awssdk.regions.Region;
 import software.amazon.awssdk.services.s3.S3Client;
+import software.amazon.awssdk.services.s3.presigner.S3Presigner;
 
 import java.net.URI;
 import java.util.Objects;
@@ -52,6 +53,34 @@ public class OssAutoConfiguration {
                 .credentialsProvider(StaticCredentialsProvider.create(AwsBasicCredentials
                         .create(ossConfigProperties.getAccessKey(), ossConfigProperties.getAccessSecret())))
                 .build();
+    }
+
+    @Bean
+    @ConditionalOnProperty(prefix = "oss", name = "secret-mode", havingValue = "usually", matchIfMissing = true)
+    public S3Presigner s3Presigner() {
+        return S3Presigner.builder()
+                .region(Region.of(ossConfigProperties.getRegion()))
+                .endpointOverride(
+                        URI.create(ossConfigProperties.getEnableHttps() ? "https://" + ossConfigProperties.getEndpoint()
+                                : "http://" + ossConfigProperties.getEndpoint()))
+                .credentialsProvider(StaticCredentialsProvider.create(AwsBasicCredentials
+                        .create(ossConfigProperties.getAccessKey(), ossConfigProperties.getAccessSecret())))
+                .build();
+    }
+
+    @Bean
+    @ConditionalOnProperty(prefix = "oss", name = "secret-mode", havingValue = "temporary")
+    public S3Presigner tempModeS3Presigner() {
+        if (null == ossSecretRequestService) {
+            throw new BeanInitializationException("oss secret request service must not be null,please implements");
+        }
+        return S3Presigner.builder()
+                .region(Region.of(ossConfigProperties.getRegion()))
+                .endpointOverride(
+                        URI.create(ossConfigProperties.getEnableHttps() ? "https://" + ossConfigProperties.getEndpoint()
+                                : "http://" + ossConfigProperties.getEndpoint()))
+                .credentialsProvider(DynamicCredentialsProvider.create(ossSecretRequestService)).build();
+
     }
 
     @Bean
