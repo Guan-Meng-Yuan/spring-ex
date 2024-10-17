@@ -16,8 +16,6 @@ import software.amazon.awssdk.services.s3.model.ObjectIdentifier;
 import software.amazon.awssdk.services.s3.presigner.S3Presigner;
 
 import java.io.File;
-import java.nio.charset.StandardCharsets;
-import java.time.Duration;
 import java.util.List;
 
 /**
@@ -139,8 +137,7 @@ public class OssUtil {
     }
 
     public String getUrl(String key) {
-        return (ossConfigProperties.getEnableHttps() ? "https" : "http") + ossConfigProperties.getEndpoint() + "/"
-                + ossConfigProperties.getDefaultBucket() + "/" + key;
+        return s3Client.utilities().getUrl(builder -> builder.bucket(ossConfigProperties.getDefaultBucket()).key(key)).toString();
     }
 
     public byte[] getBytes(String key) {
