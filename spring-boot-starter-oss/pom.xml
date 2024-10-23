@@ -6,7 +6,7 @@
     <parent>
         <groupId>com.guanmengyuan</groupId>
         <artifactId>spring-ex</artifactId>
-        <version>3.3.4.3</version>
+        <version>3.3.4.4</version>
     </parent>
     <url>https://github.com/Guan-Meng-Yuan/spring-ex</url>
     <description>spring enhance pack</description>

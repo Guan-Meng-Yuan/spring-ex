@@ -1,8 +1,8 @@
 package com.guanmengyuan.spring.ex.oss.util;
 
-import com.guanmengyuan.spring.ex.oss.config.OssConfigProperties;
-import lombok.RequiredArgsConstructor;
-import lombok.SneakyThrows;
+import java.io.File;
+import java.util.List;
+
 import org.dromara.hutool.core.collection.CollUtil;
 import org.dromara.hutool.core.collection.ListUtil;
 import org.dromara.hutool.core.data.id.IdUtil;
@@ -10,13 +10,14 @@ import org.dromara.hutool.core.io.file.FileUtil;
 import org.dromara.hutool.core.text.StrUtil;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
+
+import com.guanmengyuan.spring.ex.oss.config.OssConfigProperties;
+
+import lombok.RequiredArgsConstructor;
+import lombok.SneakyThrows;
 import software.amazon.awssdk.core.sync.RequestBody;
 import software.amazon.awssdk.services.s3.S3Client;
 import software.amazon.awssdk.services.s3.model.ObjectIdentifier;
-import software.amazon.awssdk.services.s3.presigner.S3Presigner;
-
-import java.io.File;
-import java.util.List;
 
 /**
  * @author guanmengyuan
@@ -26,7 +27,6 @@ import java.util.List;
 public class OssUtil {
     private final S3Client s3Client;
     private final OssConfigProperties ossConfigProperties;
-    private final S3Presigner s3Presigner;
 
     /**
      * 删除对象
@@ -137,7 +137,8 @@ public class OssUtil {
     }
 
     public String getUrl(String key) {
-        return s3Client.utilities().getUrl(builder -> builder.bucket(ossConfigProperties.getDefaultBucket()).key(key)).toString();
+        return s3Client.utilities().getUrl(builder -> builder.bucket(ossConfigProperties.getDefaultBucket()).key(key))
+                .toString();
     }
 
     public byte[] getBytes(String key) {
