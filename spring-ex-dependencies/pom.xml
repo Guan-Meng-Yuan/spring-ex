@@ -6,7 +6,7 @@
 
     <groupId>com.guanmengyuan</groupId>
     <artifactId>spring-ex-dependencies</artifactId>
-    <version>3.3.5.1</version>
+    <version>3.3.5.2</version>
     <packaging>pom</packaging>
     <name>spring-ex-dependencies</name>
     <description>spring ex base pom</description>
@@ -33,7 +33,7 @@
     </scm>
 
     <properties>
-        <revision>3.3.5.1</revision>
+        <revision>3.3.5.2</revision>
         <java.version>17</java.version>
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
@@ -231,6 +231,7 @@
                     <configuration>
                         <publishingServerId>oss</publishingServerId>
                         <autoPublish>true</autoPublish>
+                        <waitUntil>published</waitUntil>
                     </configuration>
                 </plugin>
                 <plugin>
