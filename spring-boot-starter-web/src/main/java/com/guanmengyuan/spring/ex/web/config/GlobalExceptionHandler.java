@@ -48,7 +48,7 @@ public class GlobalExceptionHandler {
         String requestURI = servletRequest.getRequestURI();
         log.error("request error:{},没有资源,status:{}", requestURI, HttpStatus.NOT_FOUND.value());
         response.setStatus(HttpStatus.NOT_FOUND.value());
-        return Res.error(throwable);
+        return Res.notFound(throwable);
     }
 
     @ExceptionHandler({ SaTokenException.class })

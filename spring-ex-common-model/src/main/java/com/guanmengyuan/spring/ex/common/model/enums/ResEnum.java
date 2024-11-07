@@ -25,6 +25,10 @@ public enum ResEnum implements BaseResEnum {
      */
     NOT_LOGIN(HttpStatus.UNAUTHORIZED, "unauthorized", "未登录"),
     /**
+     * 资源未找到
+     */
+    NOT_FOUND(HttpStatus.NOT_FOUND, "resource not found", "资源未找到"),
+    /**
      * 枚举参数不支持
      */
     NOT_AN_ENUMERATION(HttpStatus.NOT_ACCEPTABLE, "header enum not support", "网络异常"),

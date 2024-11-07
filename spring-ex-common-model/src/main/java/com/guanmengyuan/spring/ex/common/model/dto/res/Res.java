@@ -138,6 +138,15 @@ public class Res<T> implements Serializable {
         return res;
     }
 
+    public static Res<?> notFound(Throwable throwable) {
+        Res<?> res = new Res<>();
+        res.setTips(ResEnum.NOT_FOUND.getTips());
+        res.setHttpStatusCode(ResEnum.NOT_FOUND.getHttpStatusCode());
+        res.setMessage(StrUtil.defaultIfBlank(throwable.getMessage(), ResEnum.NOT_FOUND.getMessage()));
+        res.setSuccess(Boolean.FALSE);
+        return res;
+    }
+
     /**
      * 错误响应
      *
