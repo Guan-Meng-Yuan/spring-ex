@@ -6,7 +6,7 @@
 
     <groupId>com.guanmengyuan</groupId>
     <artifactId>spring-ex-dependencies</artifactId>
-    <version>3.3.5.4</version>
+    <version>3.3.5.5</version>
     <packaging>pom</packaging>
     <name>spring-ex-dependencies</name>
     <description>spring ex base pom</description>
@@ -33,7 +33,7 @@
     </scm>
 
     <properties>
-        <revision>3.3.5.4</revision>
+        <revision>3.3.5.5</revision>
         <java.version>17</java.version>
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
@@ -49,10 +49,10 @@
         <alipay.version>4.39.246.ALL</alipay.version>
         <easyexcel.version>4.0.3</easyexcel.version>
         <wx-java.version>4.6.7.B</wx-java.version>
-        <dubbo.version>3.3.1</dubbo.version>
+        <dubbo.version>3.3.2</dubbo.version>
         <sa-token.version>1.39.0</sa-token.version>
         <forest.version>1.5.36</forest.version>
-        <aws.version>2.29.6</aws.version>
+        <aws.version>2.29.9</aws.version>
         <flowable.version>7.1.0</flowable.version>
         <!--        build start-->
         <maven-compiler-plugin.version>3.13.0</maven-compiler-plugin.version>

@@ -32,6 +32,7 @@ public class BaseDomain<T extends Model<T>> extends Model<T> {
     /**
      * 创建时间
      */
+    @Column(onInsertValue = "now()")
     private Date createTime;
     /**
      * 更新时间
