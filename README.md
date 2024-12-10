@@ -36,7 +36,7 @@
 ```
 
 > * 全局异常拦截
-> * 全局响应
+> * ~~全局响应~~
 
 
 **[spring-boot-starter-mybatis-flex](./spring-boot-starter-mybatis-flex)**: mybatis-flex的增强自动配置组件
@@ -92,21 +92,11 @@
     <artifactId>spring-ex-common-model</artifactId>
 </dependency>
 ```
+**[BaseDomain](./spring-ex-common-model/src/main/java/com/guanmengyuan/spring/ex/common/model/domain/BaseDomain.java)**: 通用父类
 
-> *
-*
+**[TenantDomain](./spring-ex-common-model/src/main/java/com/guanmengyuan/spring/ex/common/model/domain/TenantDomain.java)**: 租户模式下的通用父类
 
-    *[BaseDomain](./spring-ex-common-model/src/main/java/com/guanmengyuan/spring/ex/common/model/domain/BaseDomain.java)
-    **: 通用父类
-
-> *
-*
-
-    *[TenantDomain](./spring-ex-common-model/src/main/java/com/guanmengyuan/spring/ex/common/model/domain/TenantDomain.java)
-    **: 租户模式下的通用父类
-
-> * **[ParamEnum](./spring-ex-common-model/src/main/java/com/guanmengyuan/spring/ex/common/model/enums/ParamEnum.java)
-    **: 通用参数枚举接口,实现该接口可将任意类型的enum作为参数传递
+**[ParamEnum](./spring-ex-common-model/src/main/java/com/guanmengyuan/spring/ex/common/model/enums/ParamEnum.java)**: 通用参数枚举接口,实现该接口可将任意类型的enum作为参数传递
 
 **[spring-boot-starter-oss](./spring-boot-starter-oss)**: AWS s3协议存储通用组件
 
