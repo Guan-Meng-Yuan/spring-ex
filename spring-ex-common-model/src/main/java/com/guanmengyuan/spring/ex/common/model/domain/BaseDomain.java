@@ -1,8 +1,11 @@
 package com.guanmengyuan.spring.ex.common.model.domain;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import com.guanmengyuan.spring.ex.common.model.valid.group.UpdateGroup;
 import com.mybatisflex.annotation.Column;
 import com.mybatisflex.annotation.Id;
@@ -28,7 +31,8 @@ public class BaseDomain<T extends Model<T>> extends Model<T> {
      */
     @Id(keyType = KeyType.Generator, value = KeyGenerators.snowFlakeId)
     @NotNull(groups = UpdateGroup.class, message = "ID不能为空")
-    private String id;
+    @JsonSerialize(using = ToStringSerializer.class)
+    private Long id;
     /**
      * 创建时间
      */
@@ -46,7 +50,7 @@ public class BaseDomain<T extends Model<T>> extends Model<T> {
     @Column(isLogicDelete = true, value = "is_deleted")
     private Boolean deleted;
 
-    public T setId(String id) {
+    public T setId(Long id) {
         this.id = id;
         return (T) this;
     }
