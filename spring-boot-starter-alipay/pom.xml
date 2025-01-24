@@ -6,11 +6,11 @@
     <parent>
         <groupId>com.guanmengyuan</groupId>
         <artifactId>spring-ex</artifactId>
-        <version>3.4.1.4</version>
+        <version>3.4.2.1</version>
     </parent>
     <url>https://github.com/Guan-Meng-Yuan/spring-ex</url>
     <description>支付宝api starter</description>
-    <version>3.4.1.4</version>
+    <version>3.4.2.1</version>
     <licenses>
         <license>
             <name>The Apache Software License, Version 2.0</name>

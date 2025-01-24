@@ -1,6 +1,5 @@
 package com.guanmengyuan.spring.ex.common.model.domain;
 
-import java.io.Serializable;
 import java.util.Date;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;

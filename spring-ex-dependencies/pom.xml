@@ -6,7 +6,7 @@
 
     <groupId>com.guanmengyuan</groupId>
     <artifactId>spring-ex-dependencies</artifactId>
-    <version>3.4.1.4</version>
+    <version>3.4.2.1</version>
     <packaging>pom</packaging>
     <name>spring-ex-dependencies</name>
     <description>spring ex base pom</description>
@@ -33,13 +33,13 @@
     </scm>
 
     <properties>
-        <revision>3.4.1.4</revision>
+        <revision>3.4.2.1</revision>
         <java.version>17</java.version>
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <!--        spring start-->
-        <spring-boot.version>3.4.1</spring-boot.version>
+        <spring-boot.version>3.4.2</spring-boot.version>
         <spring-cloud.version>2024.0.0</spring-cloud.version>
         <spring-cloud-alibaba.version>2023.0.3.2</spring-cloud-alibaba.version>
         <!--        spring end-->
@@ -52,7 +52,7 @@
         <dubbo.version>3.3.2</dubbo.version>
         <sa-token.version>1.39.0</sa-token.version>
         <forest.version>1.6.3</forest.version>
-        <aws.version>2.30.3</aws.version>
+        <aws.version>2.30.5</aws.version>
         <flowable.version>7.1.0</flowable.version>
         <!--        build start-->
         <maven-compiler-plugin.version>3.13.0</maven-compiler-plugin.version>

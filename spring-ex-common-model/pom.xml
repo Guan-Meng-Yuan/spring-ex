@@ -6,9 +6,9 @@
     <parent>
         <groupId>com.guanmengyuan</groupId>
         <artifactId>spring-ex</artifactId>
-        <version>3.4.1.4</version>
+        <version>3.4.2.1</version>
     </parent>
-    <version>3.4.1.4</version>
+    <version>3.4.2.1</version>
     <groupId>com.guanmengyuan.spring-ex</groupId>
     <artifactId>spring-ex-common-model</artifactId>
     <url>https://github.com/Guan-Meng-Yuan/spring-ex</url>
