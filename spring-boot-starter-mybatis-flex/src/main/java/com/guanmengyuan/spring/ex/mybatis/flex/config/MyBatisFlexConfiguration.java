@@ -10,6 +10,6 @@ public class MyBatisFlexConfiguration {
 
     @Bean
     public LogicDeleteProcessor logicDeleteProcessor() {
-        return new BooleanLogicDeleteProcessor();
+        return new MyLogicDeleteProcessor();
     }
 }

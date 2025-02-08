@@ -1,6 +1,6 @@
 package com.guanmengyuan.spring.ex.web.config;
 
-import com.guanmengyuan.spring.ex.common.model.dto.res.Res;
+import com.guanmengyuan.spring.ex.common.model.dto.res.R;
 import com.guanmengyuan.spring.ex.common.model.exception.ServiceException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -39,7 +39,7 @@ public class GlobalErrorController extends BasicErrorController {
         response.setContentType(MediaType.APPLICATION_JSON_VALUE);
         return (modelAndView != null) ? modelAndView
                 : new ModelAndView(new MappingJackson2JsonView())
-                .addAllObjects(BeanUtil.beanToMap(Res.error(serviceException), false, true));
+                .addAllObjects(BeanUtil.beanToMap(R.error(serviceException), false, true));
     }
 
     @Override
@@ -48,6 +48,6 @@ public class GlobalErrorController extends BasicErrorController {
         Map<String, Object> body = getErrorAttributes(request, getErrorAttributeOptions(request, MediaType.ALL));
         ServiceException serviceException = new ServiceException(status, body.get("error").toString(), "网络异常");
         log.error("request error:{}", body.get("path") + ":" + body.get("error"), serviceException);
-        return new ResponseEntity<>(BeanUtil.beanToMap(Res.error(serviceException)), Objects.requireNonNull(status));
+        return new ResponseEntity<>(BeanUtil.beanToMap(R.error(serviceException)), Objects.requireNonNull(status));
     }
 }

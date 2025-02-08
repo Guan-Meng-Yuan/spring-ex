@@ -6,9 +6,9 @@
     <parent>
         <groupId>com.guanmengyuan</groupId>
         <artifactId>spring-ex</artifactId>
-        <version>3.4.2.1</version>
+        <version>3.4.2.2</version>
     </parent>
-    <version>3.4.2.1</version>
+    <version>3.4.2.2</version>
     <url>https://github.com/Guan-Meng-Yuan/spring-ex</url>
     <description>spring enhance pack</description>
 
@@ -37,8 +37,8 @@
     <artifactId>spring-boot-starter-oss</artifactId>
 
     <properties>
-        <maven.compiler.source>17</maven.compiler.source>
-        <maven.compiler.target>17</maven.compiler.target>
+        <maven.compiler.source>21</maven.compiler.source>
+        <maven.compiler.target>21</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 

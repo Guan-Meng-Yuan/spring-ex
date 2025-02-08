@@ -29,12 +29,8 @@ import lombok.Data;
  * @param <T> 任意类型
  */
 @Data
-public class Res<T> implements Serializable {
-    /**
-     * 是否成功<br/>
-     * true 操作成功<br/>
-     * false 操作失败
-     */
+public class R<T> implements Serializable {
+
     private Boolean success;
 
     /**
@@ -45,7 +41,7 @@ public class Res<T> implements Serializable {
     /**
      * 响应数据,所有的数据响应都会在外层包装此类型
      */
-    private T result;
+    private T data;
 
     /**
      * 用户提示
@@ -69,10 +65,10 @@ public class Res<T> implements Serializable {
      * @param traceId 请求ID
      * @return 无数据的正常响应
      */
-    public static Res<?> successNoData(String traceId) {
-        Res<?> res = successNoData();
-        res.setTraceId(traceId);
-        return res;
+    public static R<?> successNoData(String traceId) {
+        R<?> r = successNoData();
+        r.setTraceId(traceId);
+        return r;
     }
 
     /**
@@ -80,11 +76,11 @@ public class Res<T> implements Serializable {
      *
      * @return 无数据的响应
      */
-    public static Res<?> successNoData() {
-        Res<?> res = new Res<>();
-        res.setSuccess(Boolean.TRUE);
-        setResEnum(res, ResEnum.SUCCESS);
-        return res;
+    public static R<?> successNoData() {
+        R<?> r = new R<>();
+        r.setSuccess(Boolean.TRUE);
+        setResEnum(r, ResEnum.SUCCESS);
+        return r;
     }
 
     /**
@@ -94,30 +90,30 @@ public class Res<T> implements Serializable {
      * @param exchange exchange实例
      * @return 错误响应
      */
-    public static Res<?> error(Throwable error, ServerWebExchange exchange) {
-        Res<?> res = new Res<>();
-        res.setSuccess(Boolean.FALSE);
-        res.setTraceId(exchange.getRequest().getId());
-        res.setMessage(StrUtil.format("request path error,path:{},errorMessage:{}", exchange.getRequest().getPath(),
+    public static R<?> error(Throwable error, ServerWebExchange exchange) {
+        R<?> r = new R<>();
+        r.setSuccess(Boolean.FALSE);
+        r.setTraceId(exchange.getRequest().getId());
+        r.setMessage(StrUtil.format("request path error,path:{},errorMessage:{}", exchange.getRequest().getPath(),
                 error.getMessage()));
-        res.setTips(ResEnum.INTERNAL_SERVER_ERROR.getTips());
+        r.setTips(ResEnum.INTERNAL_SERVER_ERROR.getTips());
         if (error instanceof ResponseStatusException responseStatusException) {
-            setRes(error, responseStatusException, res);
+            setRes(error, responseStatusException, r);
         } else {
-            res.setHttpStatusCode(HttpStatus.INTERNAL_SERVER_ERROR);
+            r.setHttpStatusCode(HttpStatus.INTERNAL_SERVER_ERROR);
         }
-        return res;
+        return r;
     }
 
-    private static void setRes(Throwable error, ResponseStatusException responseStatusException, Res<?> res) {
+    private static void setRes(Throwable error, ResponseStatusException responseStatusException, R<?> r) {
         HttpStatusCode statusCode = responseStatusException.getStatusCode();
-        res.setHttpStatusCode(statusCode);
+        r.setHttpStatusCode(statusCode);
         if (error instanceof ServiceException serviceException) {
-            res.setTips(serviceException.getTips());
+            r.setTips(serviceException.getTips());
         } else if (error instanceof WebExchangeBindException webExchangeBindException) {
             List<ObjectError> allErrors = webExchangeBindException.getAllErrors();
             if (CollUtil.isNotEmpty(allErrors)) {
-                res.setTips(StrUtil.defaultIfBlank(allErrors.get(0).getDefaultMessage(),
+                r.setTips(StrUtil.defaultIfBlank(allErrors.get(0).getDefaultMessage(),
                         ResEnum.INTERNAL_SERVER_ERROR.getTips()));
             }
         }
@@ -129,22 +125,22 @@ public class Res<T> implements Serializable {
      * @param serviceException 业务异常
      * @return 错误响应
      */
-    public static Res<?> error(ServiceException serviceException) {
-        Res<?> res = new Res<>();
-        res.setMessage(serviceException.getMessage());
-        res.setTips(serviceException.getTips());
-        res.setHttpStatusCode(serviceException.getStatusCode());
-        res.setSuccess(Boolean.FALSE);
-        return res;
+    public static R<?> error(ServiceException serviceException) {
+        R<?> r = new R<>();
+        r.setMessage(serviceException.getMessage());
+        r.setTips(serviceException.getTips());
+        r.setHttpStatusCode(serviceException.getStatusCode());
+        r.setSuccess(Boolean.FALSE);
+        return r;
     }
 
-    public static Res<?> notFound(Throwable throwable) {
-        Res<?> res = new Res<>();
-        res.setTips(ResEnum.NOT_FOUND.getTips());
-        res.setHttpStatusCode(ResEnum.NOT_FOUND.getHttpStatusCode());
-        res.setMessage(StrUtil.defaultIfBlank(throwable.getMessage(), ResEnum.NOT_FOUND.getMessage()));
-        res.setSuccess(Boolean.FALSE);
-        return res;
+    public static R<?> notFound(Throwable throwable) {
+        R<?> r = new R<>();
+        r.setTips(ResEnum.NOT_FOUND.getTips());
+        r.setHttpStatusCode(ResEnum.NOT_FOUND.getHttpStatusCode());
+        r.setMessage(StrUtil.defaultIfBlank(throwable.getMessage(), ResEnum.NOT_FOUND.getMessage()));
+        r.setSuccess(Boolean.FALSE);
+        return r;
     }
 
     /**
@@ -153,47 +149,47 @@ public class Res<T> implements Serializable {
      * @param throwable 异常接口
      * @return 错误响应
      */
-    public static Res<?> error(Throwable throwable) {
-        Res<?> res = new Res<>();
+    public static R<?> error(Throwable throwable) {
+        R<?> r = new R<>();
         // 如果是内置业务异常
         if (throwable instanceof ServiceException serviceException) {
-            res.setMessage(serviceException.getMessage());
-            res.setTips(serviceException.getTips());
-            res.setHttpStatusCode(serviceException.getStatusCode());
+            r.setMessage(serviceException.getMessage());
+            r.setTips(serviceException.getTips());
+            r.setHttpStatusCode(serviceException.getStatusCode());
             // 如果是参数校验异常
         } else if (throwable instanceof MethodArgumentNotValidException methodArgumentNotValidException) {
-            res.setTips(Objects.requireNonNull(methodArgumentNotValidException.getBindingResult().getFieldError())
+            r.setTips(Objects.requireNonNull(methodArgumentNotValidException.getBindingResult().getFieldError())
                     .getDefaultMessage());
-            res.setHttpStatusCode(HttpStatus.BAD_REQUEST);
-            res.setMessage(throwable.getMessage());
+            r.setHttpStatusCode(HttpStatus.BAD_REQUEST);
+            r.setMessage(throwable.getMessage());
             // 其他异常
         } else if (throwable instanceof SaTokenException saTokenException) {
             if (saTokenException instanceof NotLoginException) {
-                res.setTips(ResEnum.NOT_LOGIN.getTips());
+                r.setTips(ResEnum.NOT_LOGIN.getTips());
             } else {
-                res.setTips(ResEnum.UNAUTHORIZED.getTips());
+                r.setTips(ResEnum.UNAUTHORIZED.getTips());
             }
-            res.setHttpStatusCode(ResEnum.UNAUTHORIZED.getHttpStatusCode());
-            res.setMessage(saTokenException.getMessage());
+            r.setHttpStatusCode(ResEnum.UNAUTHORIZED.getHttpStatusCode());
+            r.setMessage(saTokenException.getMessage());
         } else {
-            res.setTips(ResEnum.INTERNAL_SERVER_ERROR.getTips());
-            res.setHttpStatusCode(ResEnum.INTERNAL_SERVER_ERROR.getHttpStatusCode());
-            res.setMessage(throwable.getMessage());
+            r.setTips(ResEnum.INTERNAL_SERVER_ERROR.getTips());
+            r.setHttpStatusCode(ResEnum.INTERNAL_SERVER_ERROR.getHttpStatusCode());
+            r.setMessage(throwable.getMessage());
         }
-        res.setSuccess(Boolean.FALSE);
-        return res;
+        r.setSuccess(Boolean.FALSE);
+        return r;
     }
 
     /**
      * setRes
      *
-     * @param res     res
+     * @param r       res
      * @param resEnum 响应枚举
      */
-    private static void setResEnum(Res<?> res, ResEnum resEnum) {
-        res.setMessage(resEnum.getMessage());
-        res.setTips(resEnum.getTips());
-        res.setHttpStatusCode(res.httpStatusCode);
+    private static void setResEnum(R<?> r, ResEnum resEnum) {
+        r.setMessage(resEnum.getMessage());
+        r.setTips(resEnum.getTips());
+        r.setHttpStatusCode(r.httpStatusCode);
     }
 
     /**
@@ -204,10 +200,10 @@ public class Res<T> implements Serializable {
      * @param <T>     泛型类型
      * @return 响应结果
      */
-    public static <T> Res<T> success(T result, String traceId) {
-        Res<T> res = success(result);
-        res.setTraceId(traceId);
-        return res;
+    public static <T> R<T> ok(T result, String traceId) {
+        R<T> r = ok(result);
+        r.setTraceId(traceId);
+        return r;
     }
 
     /**
@@ -217,12 +213,12 @@ public class Res<T> implements Serializable {
      * @param <T>    数据类型
      * @return 成功的响应
      */
-    public static <T> Res<T> success(T result) {
-        Res<T> res = new Res<>();
-        res.setResult(result);
-        res.setSuccess(Boolean.TRUE);
-        setResEnum(res, ResEnum.SUCCESS);
-        return res;
+    public static <T> R<T> ok(T result) {
+        R<T> r = new R<>();
+        r.setData(result);
+        r.setSuccess(Boolean.TRUE);
+        setResEnum(r, ResEnum.SUCCESS);
+        return r;
     }
 
 }
