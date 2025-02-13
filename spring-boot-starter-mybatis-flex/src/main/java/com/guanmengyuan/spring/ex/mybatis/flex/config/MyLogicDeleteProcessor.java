@@ -22,7 +22,12 @@ public class MyLogicDeleteProcessor extends BooleanLogicDeleteProcessor {
             sql += "," + dialect.wrap("delete_time") + EQUALS + "now()";
         }
         if (list.contains("delete_user_id")) {
-            sql += "," + dialect.wrap("delete_user_id") + EQUALS + StpUtil.getLoginIdAsLong();
+            try {
+                long loginIdAsLong = StpUtil.getLoginIdAsLong();
+                sql += "," + dialect.wrap("delete_user_id") + EQUALS + loginIdAsLong;
+            } catch (Exception e) {
+                log.warn("stp get loginId unsuccessful");
+            }
         }
         return sql;
     }

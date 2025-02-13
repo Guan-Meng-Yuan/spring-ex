@@ -7,10 +7,7 @@ import com.mybatisflex.core.paginate.Page;
 import com.mybatisflex.core.query.QueryWrapper;
 import com.mybatisflex.core.service.IService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -31,21 +28,21 @@ public abstract class BaseController<T extends BaseDomain<T>> {
     }
 
     public R<Page<T>> page(PageReq pageReq, QueryWrapper queryWrapper) {
-        return R.ok(service.page(Page.of(pageReq.getCurrent(), pageReq.getPageSize()), queryWrapper));
+        return R.ok(service.page(Page.of(pageReq.getCurrentPage(), pageReq.getPageSize()), queryWrapper));
     }
 
     @PostMapping
-    public R<Boolean> save(T param) {
-        return R.ok(service.saveOrUpdate(param));
+    public R<Boolean> save(@RequestBody T param) {
+        return R.ok(param.saveOrUpdate());
     }
 
     @DeleteMapping("{id}")
-    public R<Boolean> remove(@PathVariable Long id) {
+    public R<Boolean> remove(@PathVariable("id") Long id) {
         return R.ok(service.removeById(id));
     }
 
     @GetMapping("{id}")
-    public R<T> one(@PathVariable Long id) {
+    public R<T> one(@PathVariable("id") Long id) {
         return R.ok(service.getById(id));
     }
 }
