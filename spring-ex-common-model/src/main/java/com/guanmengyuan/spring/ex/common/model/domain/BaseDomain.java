@@ -4,7 +4,9 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.mybatisflex.annotation.KeyType;
 import com.mybatisflex.core.activerecord.Model;
 import com.mybatisflex.core.keygen.KeyGenerators;
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Id;
+import jakarta.persistence.MappedSuperclass;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import org.hibernate.annotations.Comment;
@@ -20,6 +22,29 @@ public class BaseDomain<T extends Model<T>> extends Model<T> {
     @com.mybatisflex.annotation.Id(keyType = KeyType.Generator, value = KeyGenerators.snowFlakeId)
     @Comment("id")
     private Long id;
+    @com.mybatisflex.annotation.Column(onInsertValue = "now()")
+    @Comment("创建时间")
+    private Date createTime;
+
+    @Comment("创建人")
+    private Long createUserId;
+
+    @com.mybatisflex.annotation.Column(onUpdateValue = "now()")
+    @Comment("更新时间")
+    private Date updateTime;
+    @Comment("更新人")
+    private Long updateUserId;
+    @Column(name = "is_deleted")
+    @Comment("逻辑删除")
+    @com.mybatisflex.annotation.Column(value = "is_deleted", isLogicDelete = true)
+    @JsonIgnore
+    private Boolean deleted;
+    @Comment("删除时间")
+    @JsonIgnore
+    private Date deleteTime;
+    @Comment("删除人")
+    @JsonIgnore
+    private Long deleteUserId;
 
     public T setId(Long id) {
         this.id = id;
@@ -51,26 +76,15 @@ public class BaseDomain<T extends Model<T>> extends Model<T> {
         return (T) this;
     }
 
-    @com.mybatisflex.annotation.Column(onInsertValue = "now()")
-    @Comment("创建时间")
-    private Date createTime;
-    @com.mybatisflex.annotation.Column(onUpdateValue = "now()")
-    @Comment("更新时间")
-    private Date updateTime;
+    public T setCreateUserId(Long createUserId) {
+        this.createUserId = createUserId;
+        return (T) this;
+    }
 
-    @Column(name = "is_deleted")
-    @Comment("逻辑删除")
-    @com.mybatisflex.annotation.Column(value = "is_deleted", isLogicDelete = true)
-    @JsonIgnore
-    private Boolean deleted;
-
-    @Comment("删除时间")
-    @JsonIgnore
-    private Date deleteTime;
-
-    @Comment("删除人")
-    @JsonIgnore
-    private Long deleteUserId;
+    public T setUpdateUserId(Long updateUserId) {
+        this.updateUserId = updateUserId;
+        return (T) this;
+    }
 
 
 }
