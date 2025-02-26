@@ -1,19 +1,21 @@
 package com.guanmengyuan.spring.ex.common.model.domain;
 
+import java.util.Date;
+
+import org.hibernate.annotations.Comment;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.mybatisflex.annotation.KeyType;
 import com.mybatisflex.core.activerecord.Model;
 import com.mybatisflex.core.keygen.KeyGenerators;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Id;
 import jakarta.persistence.MappedSuperclass;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
-import org.hibernate.annotations.Comment;
 
-import java.util.Date;
-
-@SuppressWarnings({"unchecked", "unused", "UnusedReturnValue"})
+@SuppressWarnings({ "unchecked", "UnusedReturnValue" })
 @MappedSuperclass
 @Getter
 @EqualsAndHashCode(callSuper = true)
@@ -85,6 +87,5 @@ public class BaseDomain<T extends Model<T>> extends Model<T> {
         this.updateUserId = updateUserId;
         return (T) this;
     }
-
 
 }
