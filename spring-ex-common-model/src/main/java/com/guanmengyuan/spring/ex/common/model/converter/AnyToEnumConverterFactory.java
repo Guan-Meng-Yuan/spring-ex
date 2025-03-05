@@ -11,9 +11,14 @@ import com.guanmengyuan.spring.ex.common.model.exception.ServiceException;
 import lombok.SneakyThrows;
 
 /**
- * 任何类型转枚举工厂类
+ * 接收任意枚举参数的转换
  */
 public class AnyToEnumConverterFactory implements ConverterFactory<String, ParamEnum> {
+    /**
+     * 默认构造
+     */
+    public AnyToEnumConverterFactory() {
+    }
 
     @Override
     @NonNull

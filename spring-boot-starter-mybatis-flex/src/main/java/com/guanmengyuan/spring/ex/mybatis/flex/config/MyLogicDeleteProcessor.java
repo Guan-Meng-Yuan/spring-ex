@@ -11,8 +11,17 @@ import java.util.List;
 
 import static com.mybatisflex.core.constant.SqlConsts.EQUALS;
 
+/**
+ * 自定义逻辑删除处理器
+ */
 @Slf4j
 public class MyLogicDeleteProcessor extends BooleanLogicDeleteProcessor {
+    /**
+     * 默认构造
+     */
+    public MyLogicDeleteProcessor() {
+    }
+
     @Override
     public String buildLogicDeletedSet(String logicColumn, TableInfo tableInfo, IDialect dialect) {
         String[] allColumns = tableInfo.getAllColumns();

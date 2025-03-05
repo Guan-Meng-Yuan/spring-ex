@@ -1,9 +1,12 @@
 package com.guanmengyuan.spring.ex.common.model.dto.res;
 
-import java.io.Serializable;
-import java.util.List;
-import java.util.Objects;
-
+import cn.dev33.satoken.exception.NotLoginException;
+import cn.dev33.satoken.exception.SaTokenException;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.guanmengyuan.spring.ex.common.model.enums.ResEnum;
+import com.guanmengyuan.spring.ex.common.model.exception.ServiceException;
+import lombok.Data;
 import org.dromara.hutool.core.collection.CollUtil;
 import org.dromara.hutool.core.text.StrUtil;
 import org.springframework.http.HttpStatus;
@@ -14,14 +17,9 @@ import org.springframework.web.bind.support.WebExchangeBindException;
 import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.server.ServerWebExchange;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.guanmengyuan.spring.ex.common.model.enums.ResEnum;
-import com.guanmengyuan.spring.ex.common.model.exception.ServiceException;
-
-import cn.dev33.satoken.exception.NotLoginException;
-import cn.dev33.satoken.exception.SaTokenException;
-import lombok.Data;
+import java.io.Serializable;
+import java.util.List;
+import java.util.Objects;
 
 /**
  * 统一响应dto
@@ -30,7 +28,15 @@ import lombok.Data;
  */
 @Data
 public class R<T> implements Serializable {
+    /**
+     * 默认构造
+     */
+    public R() {
+    }
 
+    /**
+     * 是否成功
+     */
     private Boolean success;
 
     /**
@@ -66,7 +72,7 @@ public class R<T> implements Serializable {
      * @return 无数据的正常响应
      */
     public static R<?> successNoData(String traceId) {
-        R<?> r = successNoData();
+        R<?> r = okNoData();
         r.setTraceId(traceId);
         return r;
     }
@@ -76,7 +82,7 @@ public class R<T> implements Serializable {
      *
      * @return 无数据的响应
      */
-    public static R<?> successNoData() {
+    public static R<?> okNoData() {
         R<?> r = new R<>();
         r.setSuccess(Boolean.TRUE);
         setResEnum(r, ResEnum.SUCCESS);
@@ -134,6 +140,12 @@ public class R<T> implements Serializable {
         return r;
     }
 
+    /**
+     * 404响应
+     *
+     * @param throwable 404异常
+     * @return this
+     */
     public static R<?> notFound(Throwable throwable) {
         R<?> r = new R<>();
         r.setTips(ResEnum.NOT_FOUND.getTips());
@@ -151,30 +163,37 @@ public class R<T> implements Serializable {
      */
     public static R<?> error(Throwable throwable) {
         R<?> r = new R<>();
-        // 如果是内置业务异常
-        if (throwable instanceof ServiceException serviceException) {
-            r.setMessage(serviceException.getMessage());
-            r.setTips(serviceException.getTips());
-            r.setHttpStatusCode(serviceException.getStatusCode());
-            // 如果是参数校验异常
-        } else if (throwable instanceof MethodArgumentNotValidException methodArgumentNotValidException) {
-            r.setTips(Objects.requireNonNull(methodArgumentNotValidException.getBindingResult().getFieldError())
-                    .getDefaultMessage());
-            r.setHttpStatusCode(HttpStatus.BAD_REQUEST);
-            r.setMessage(throwable.getMessage());
-            // 其他异常
-        } else if (throwable instanceof SaTokenException saTokenException) {
-            if (saTokenException instanceof NotLoginException) {
-                r.setTips(ResEnum.NOT_LOGIN.getTips());
-            } else {
-                r.setTips(ResEnum.UNAUTHORIZED.getTips());
+        switch (throwable) {
+            // 如果是内置业务异常
+            case ServiceException serviceException -> {
+                r.setMessage(serviceException.getMessage());
+                r.setTips(serviceException.getTips());
+                r.setHttpStatusCode(serviceException.getStatusCode());
             }
-            r.setHttpStatusCode(ResEnum.UNAUTHORIZED.getHttpStatusCode());
-            r.setMessage(saTokenException.getMessage());
-        } else {
-            r.setTips(ResEnum.INTERNAL_SERVER_ERROR.getTips());
-            r.setHttpStatusCode(ResEnum.INTERNAL_SERVER_ERROR.getHttpStatusCode());
-            r.setMessage(throwable.getMessage());
+            // 如果是参数校验异常
+            case MethodArgumentNotValidException methodArgumentNotValidException -> {
+                r.setTips(Objects.requireNonNull(methodArgumentNotValidException.getBindingResult().getFieldError())
+                        .getDefaultMessage());
+                r.setHttpStatusCode(HttpStatus.BAD_REQUEST);
+                r.setMessage(throwable.getMessage());
+            }
+            // 其他异常
+            case SaTokenException saTokenException -> {
+                if (saTokenException instanceof NotLoginException) {
+                    r.setTips(ResEnum.NOT_LOGIN.getTips());
+                } else {
+                    r.setTips(ResEnum.UNAUTHORIZED.getTips());
+                }
+                r.setHttpStatusCode(ResEnum.UNAUTHORIZED.getHttpStatusCode());
+                r.setMessage(saTokenException.getMessage());
+            }
+            case null, default -> {
+                r.setTips(ResEnum.INTERNAL_SERVER_ERROR.getTips());
+                r.setHttpStatusCode(ResEnum.INTERNAL_SERVER_ERROR.getHttpStatusCode());
+                if (throwable != null) {
+                    r.setMessage(throwable.getMessage());
+                }
+            }
         }
         r.setSuccess(Boolean.FALSE);
         return r;

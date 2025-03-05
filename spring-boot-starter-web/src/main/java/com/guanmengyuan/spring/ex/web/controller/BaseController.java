@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RequiredArgsConstructor
-public abstract class BaseController<T extends BaseDomain<T>> {
+public abstract class BaseController<T extends BaseDomain<?>> {
 
     private final IService<T> service;
 
