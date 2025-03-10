@@ -2,8 +2,9 @@ package com.guanmengyuan.spring.ex.common.model.domain;
 
 import com.mybatisflex.annotation.Column;
 import com.mybatisflex.core.activerecord.Model;
-import lombok.Data;
+import jakarta.persistence.MappedSuperclass;
 import lombok.EqualsAndHashCode;
+import lombok.Getter;
 import org.hibernate.annotations.Comment;
 
 /**
@@ -11,8 +12,10 @@ import org.hibernate.annotations.Comment;
  *
  * @param <T> 继承的子类类型
  */
-@Data
+@Getter
 @EqualsAndHashCode(callSuper = true)
+@MappedSuperclass
+@SuppressWarnings({"unchecked", "UnusedReturnValue"})
 public class TenantDomain<T extends Model<T>> extends BaseDomain<T> {
     /**
      * 默认构造
@@ -26,4 +29,9 @@ public class TenantDomain<T extends Model<T>> extends BaseDomain<T> {
     @Column(tenantId = true)
     @Comment("租户ID")
     private String tenantId;
+
+    private T setTenantId(String tenantId){
+        this.tenantId=tenantId;
+        return (T)this;
+    }
 }
