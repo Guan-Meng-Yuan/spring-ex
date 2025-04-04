@@ -18,7 +18,7 @@ public class PageReq implements Serializable {
     /**
      * 当前页,默认第一页
      */
-    private Integer currentPage = 1;
+    private Integer page = 1;
     /**
      * 每页条数,默认10条
      */

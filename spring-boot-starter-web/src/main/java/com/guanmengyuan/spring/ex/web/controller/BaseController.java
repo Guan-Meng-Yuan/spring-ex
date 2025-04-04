@@ -28,7 +28,7 @@ public abstract class BaseController<T extends BaseDomain<?>> {
     }
 
     public R<Page<T>> page(PageReq pageReq, QueryWrapper queryWrapper) {
-        return R.ok(service.page(Page.of(pageReq.getCurrentPage(), pageReq.getPageSize()), queryWrapper));
+        return R.ok(service.page(Page.of(pageReq.getPage(), pageReq.getPageSize()), queryWrapper));
     }
 
     @PostMapping

@@ -1,16 +1,5 @@
 package com.guanmengyuan.spring.ex.alipay.service.impl;
 
-import java.nio.charset.StandardCharsets;
-import java.util.List;
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
-
-import org.dromara.hutool.core.io.resource.ResourceUtil;
-import org.dromara.hutool.core.text.StrUtil;
-import org.dromara.hutool.core.util.CharsetUtil;
-import org.dromara.hutool.json.JSON;
-import org.dromara.hutool.json.JSONUtil;
-
 import com.alipay.api.AlipayApiException;
 import com.alipay.api.AlipayClient;
 import com.alipay.api.AlipayConfig;
@@ -20,9 +9,18 @@ import com.alipay.api.request.AlipaySystemOauthTokenRequest;
 import com.alipay.api.response.AlipaySystemOauthTokenResponse;
 import com.guanmengyuan.spring.ex.alipay.config.AliPayProperties;
 import com.guanmengyuan.spring.ex.alipay.service.AliPayService;
-
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
+import org.dromara.hutool.core.io.resource.ResourceUtil;
+import org.dromara.hutool.core.text.StrUtil;
+import org.dromara.hutool.core.util.CharsetUtil;
+import org.dromara.hutool.json.JSON;
+import org.dromara.hutool.json.JSONUtil;
+
+import java.nio.charset.StandardCharsets;
+import java.util.List;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 @RequiredArgsConstructor
 public class DefaultAliPayServiceImpl implements AliPayService {
@@ -106,6 +104,20 @@ public class DefaultAliPayServiceImpl implements AliPayService {
             return response.getByPath("mobile", String.class);
         }
         throw new AlipayApiException("获取手机号失败");
+    }
+
+    @Override
+    @SneakyThrows
+    public String getUserId(String authCode, String appId) {
+        AlipaySystemOauthTokenRequest alipaySystemOauthTokenRequest = new AlipaySystemOauthTokenRequest();
+        alipaySystemOauthTokenRequest.setCode(authCode);
+        alipaySystemOauthTokenRequest.setGrantType("authorization_code");
+        AlipaySystemOauthTokenResponse alipaySystemOauthTokenResponse = clients.get(appId)
+                .certificateExecute(alipaySystemOauthTokenRequest);
+        if (!alipaySystemOauthTokenResponse.isSuccess()) {
+            throw new RuntimeException("获取用户信息失败");
+        }
+        return alipaySystemOauthTokenResponse.getUserId();
     }
 
 }

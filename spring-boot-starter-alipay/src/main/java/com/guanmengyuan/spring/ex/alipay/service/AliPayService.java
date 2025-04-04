@@ -32,4 +32,12 @@ public interface AliPayService {
 
     String getPhoneNumber(String phoneCode, String appId);
 
+    /**
+     * 获取支付宝用户userId
+     * @param authCode
+     * @param appId
+     * @return
+     */
+    String getUserId(String authCode,String appId);
+
 }
