@@ -5,6 +5,9 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 
 import java.util.List;
 
+/**
+ * 微信支付配置类
+ */
 @Data
 @ConfigurationProperties(prefix = "wx.pay")
 public class WxPayProperties {
@@ -14,6 +17,9 @@ public class WxPayProperties {
      */
     private List<Config> configs;
 
+    /**
+     * 配置类
+     */
     @Data
     public static class Config {
         /**

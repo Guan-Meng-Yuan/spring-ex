@@ -13,12 +13,20 @@ import org.springframework.context.annotation.Bean;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * 微信小程序自动配置类
+ */
 @EnableConfigurationProperties(WxMiniAppProperties.class)
 @AutoConfiguration
 @RequiredArgsConstructor
 public class WxMiniAppConfiguration {
     private final WxMiniAppProperties wxMiniAppProperties;
 
+    /**
+     * 条件获取maService
+     *
+     * @return maService
+     */
     @Bean
     @ConditionalOnMissingBean(WxMaService.class)
     public WxMaService wxMaService() {

@@ -1,5 +1,6 @@
 package com.guanmengyuan.spring.ex.common.model.dto.req;
 
+import com.mybatisflex.core.paginate.Page;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -28,4 +29,14 @@ public class PageReq implements Serializable {
      * 查询关键字
      */
     private String keywords;
+
+    /**
+     * 转换page对象方法
+     * @param pageReq page参数
+     * @return page对象
+     */
+    @SuppressWarnings("rawtypes")
+    public static Page of(PageReq pageReq){
+        return Page.of(pageReq.getPage(), pageReq.getPageSize());
+    }
 }

@@ -34,10 +34,11 @@ public interface AliPayService {
 
     /**
      * 获取支付宝用户userId
-     * @param authCode
-     * @param appId
-     * @return
+     *
+     * @param authCode 认证code
+     * @param appId    小程序id
+     * @return 用户Id
      */
-    String getUserId(String authCode,String appId);
+    String getUserId(String authCode, String appId);
 
 }

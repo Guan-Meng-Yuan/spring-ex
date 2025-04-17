@@ -14,12 +14,20 @@ import org.springframework.context.annotation.Bean;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * 微信支付配置
+ */
 @AutoConfiguration
 @EnableConfigurationProperties(WxPayProperties.class)
 @RequiredArgsConstructor
 public class WxPayConfiguration {
     private final WxPayProperties wxPayProperties;
 
+    /**
+     * 条件配置wxPayService
+     *
+     * @return wxPayService
+     */
     @Bean
     @ConditionalOnMissingBean(WxPayService.class)
     public WxPayService wxPayService() {

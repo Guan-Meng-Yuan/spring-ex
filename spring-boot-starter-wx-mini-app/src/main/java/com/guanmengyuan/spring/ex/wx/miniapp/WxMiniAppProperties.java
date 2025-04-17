@@ -5,6 +5,9 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 
 import java.util.List;
 
+/**
+ * 微信小程序配置类
+ */
 @Data
 @ConfigurationProperties(prefix = "wx.mini-app")
 public class WxMiniAppProperties {
@@ -13,6 +16,9 @@ public class WxMiniAppProperties {
      */
     private List<Config> configs;
 
+    /**
+     * 小程序配置
+     */
     @Data
     public static class Config {
         /**

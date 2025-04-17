@@ -9,12 +9,20 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.context.annotation.Bean;
 import org.springframework.util.CollectionUtils;
 
+/**
+ * 支付宝自动配置类
+ */
 @EnableConfigurationProperties(AliPayProperties.class)
 @AutoConfiguration
 @RequiredArgsConstructor
 public class AliPayAutoConfiguration {
     private final AliPayProperties aliPayProperties;
 
+    /**
+     * 条件配置
+     *
+     * @return aliPayService
+     */
     @Bean
     @ConditionalOnMissingBean(AliPayService.class)
     public AliPayService aliPayService() {
