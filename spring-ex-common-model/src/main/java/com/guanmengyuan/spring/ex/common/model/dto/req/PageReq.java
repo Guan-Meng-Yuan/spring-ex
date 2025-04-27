@@ -9,7 +9,7 @@ import java.io.Serializable;
  * 分页参数
  */
 @Data
-public class PageReq implements Serializable {
+public class PageReq<T> implements Serializable {
     /**
      * 默认构造
      */
@@ -32,11 +32,15 @@ public class PageReq implements Serializable {
 
     /**
      * 转换page对象方法
+     *
      * @param pageReq page参数
      * @return page对象
      */
-    @SuppressWarnings("rawtypes")
-    public static Page of(PageReq pageReq){
+    public static <T> Page<T> of(PageReq<T> pageReq) {
         return Page.of(pageReq.getPage(), pageReq.getPageSize());
+    }
+
+    public Page<T> of() {
+        return Page.of(this.page, this.pageSize);
     }
 }

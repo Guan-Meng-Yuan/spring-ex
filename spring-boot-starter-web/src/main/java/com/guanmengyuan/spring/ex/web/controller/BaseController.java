@@ -23,12 +23,12 @@ public abstract class BaseController<T extends BaseDomain<?>> {
     }
 
     @GetMapping
-    public R<Page<T>> page(PageReq pageReq, T param) {
+    public R<Page<T>> page(PageReq<T> pageReq, T param) {
         return page(pageReq, QueryWrapper.create(param));
     }
 
-    public R<Page<T>> page(PageReq pageReq, QueryWrapper queryWrapper) {
-        return R.ok(service.page(Page.of(pageReq.getPage(), pageReq.getPageSize()), queryWrapper));
+    public R<Page<T>> page(PageReq<T> pageReq, QueryWrapper queryWrapper) {
+        return R.ok(service.page(pageReq.of(), queryWrapper));
     }
 
     @PostMapping
