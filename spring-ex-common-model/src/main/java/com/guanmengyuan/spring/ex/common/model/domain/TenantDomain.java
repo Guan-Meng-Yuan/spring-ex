@@ -1,11 +1,13 @@
 package com.guanmengyuan.spring.ex.common.model.domain;
 
+import org.hibernate.annotations.Comment;
+
 import com.mybatisflex.annotation.Column;
 import com.mybatisflex.core.activerecord.Model;
+
 import jakarta.persistence.MappedSuperclass;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
-import org.hibernate.annotations.Comment;
 
 /**
  * 租户下的baseDomain
@@ -15,7 +17,7 @@ import org.hibernate.annotations.Comment;
 @Getter
 @EqualsAndHashCode(callSuper = true)
 @MappedSuperclass
-@SuppressWarnings({"unchecked", "UnusedReturnValue"})
+@SuppressWarnings({"unchecked", "UnusedReturnValue","unused"})
 public class TenantDomain<T extends Model<T>> extends BaseDomain<T> {
     /**
      * 默认构造

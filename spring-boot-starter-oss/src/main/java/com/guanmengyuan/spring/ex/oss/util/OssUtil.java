@@ -1,8 +1,8 @@
 package com.guanmengyuan.spring.ex.oss.util;
 
-import java.io.File;
-import java.util.List;
-
+import com.guanmengyuan.spring.ex.oss.config.OssConfigProperties;
+import lombok.RequiredArgsConstructor;
+import lombok.SneakyThrows;
 import org.dromara.hutool.core.collection.CollUtil;
 import org.dromara.hutool.core.collection.ListUtil;
 import org.dromara.hutool.core.data.id.IdUtil;
@@ -10,14 +10,13 @@ import org.dromara.hutool.core.io.file.FileUtil;
 import org.dromara.hutool.core.text.StrUtil;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
-
-import com.guanmengyuan.spring.ex.oss.config.OssConfigProperties;
-
-import lombok.RequiredArgsConstructor;
-import lombok.SneakyThrows;
 import software.amazon.awssdk.core.sync.RequestBody;
 import software.amazon.awssdk.services.s3.S3Client;
 import software.amazon.awssdk.services.s3.model.ObjectIdentifier;
+
+import java.io.File;
+import java.io.InputStream;
+import java.util.List;
 
 /**
  * @author guanmengyuan
@@ -46,6 +45,14 @@ public class OssUtil {
         }
         return s3Client.deleteObjects(builder -> builder.bucket(bucket).delete(delete -> delete.objects(willDelete)))
                 .hasDeleted();
+    }
+
+    public InputStream getInputStream(String bucket, String key) {
+        return s3Client.getObject(builder -> builder.bucket(bucket).key(key));
+    }
+
+    public InputStream getInputStream(String key) {
+        return s3Client.getObject(builder -> builder.bucket(ossConfigProperties.getDefaultBucket()).key(key));
     }
 
     /**

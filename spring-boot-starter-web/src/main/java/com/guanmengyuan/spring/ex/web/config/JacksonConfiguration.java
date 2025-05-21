@@ -1,15 +1,16 @@
 package com.guanmengyuan.spring.ex.web.config;
 
+import java.text.SimpleDateFormat;
+import java.util.TimeZone;
+
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-
-import java.text.SimpleDateFormat;
-import java.util.TimeZone;
 
 @Configuration
 public class JacksonConfiguration {

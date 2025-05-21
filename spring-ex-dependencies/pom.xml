@@ -6,7 +6,7 @@
 
     <groupId>com.guanmengyuan</groupId>
     <artifactId>spring-ex-dependencies</artifactId>
-    <version>3.4.5.1</version>
+    <version>3.4.5.2</version>
     <packaging>pom</packaging>
     <name>spring-ex-dependencies</name>
     <description>spring ex base pom</description>
@@ -33,7 +33,7 @@
     </scm>
 
     <properties>
-        <revision>3.4.5.1</revision>
+        <revision>3.4.5.2</revision>
         <java.version>21</java.version>
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
@@ -46,15 +46,16 @@
 
         <mybatis-flex.version>1.10.9</mybatis-flex.version>
         <hutool.version>6.0.0-M21</hutool.version>
-        <alipay.version>4.40.165.ALL</alipay.version>
+        <alipay.version>4.40.217.ALL</alipay.version>
         <fastexcel.version>1.2.0</fastexcel.version>
-        <wx-java.version>4.7.4.B</wx-java.version>
+        <wx-java.version>4.7.5-20250516.201941</wx-java.version>
         <dubbo.version>3.3.4</dubbo.version>
-        <sa-token.version>1.42.0</sa-token.version>
+        <sa-token.version>1.43.0</sa-token.version>
         <forest.version>1.6.4</forest.version>
         <aws.version>2.28.24</aws.version>
-        <warm-flow.version>1.7.0</warm-flow.version>
-        <warm-flow-flex.version>1.6.9</warm-flow-flex.version>
+        <warm-flow.version>1.7.2</warm-flow.version>
+        <warm-flow-flex.version>1.7.2</warm-flow-flex.version>
+        <poi.version>5.4.1</poi.version>
         <!--        build start-->
         <maven-compiler-plugin.version>3.14.0</maven-compiler-plugin.version>
         <maven-gpg-plugin.version>3.2.7</maven-gpg-plugin.version>
@@ -115,6 +116,11 @@
                 <version>${mybatis-flex.version}</version>
                 <scope>import</scope>
                 <type>pom</type>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.poi</groupId>
+                <artifactId>poi</artifactId>
+                <version>${poi.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.apache.dubbo</groupId>
