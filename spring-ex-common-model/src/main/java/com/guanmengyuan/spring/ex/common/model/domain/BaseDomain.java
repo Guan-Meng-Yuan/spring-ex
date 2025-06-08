@@ -1,17 +1,19 @@
 package com.guanmengyuan.spring.ex.common.model.domain;
 
+import java.util.Date;
+
+import org.hibernate.annotations.Comment;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.mybatisflex.annotation.KeyType;
 import com.mybatisflex.core.activerecord.Model;
 import com.mybatisflex.core.keygen.KeyGenerators;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Id;
 import jakarta.persistence.MappedSuperclass;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
-import org.hibernate.annotations.Comment;
-
-import java.util.Date;
 
 /**
  * 通用父类,提供公共字段
@@ -39,7 +41,7 @@ public class BaseDomain<T extends Model<T>> extends Model<T> {
     /**
      * 创建时间
      */
-    @com.mybatisflex.annotation.Column(onInsertValue = "now()")
+ 
     @Comment("创建时间")
     private Date createTime;
     /**
@@ -50,7 +52,7 @@ public class BaseDomain<T extends Model<T>> extends Model<T> {
     /**
      * 更新时间
      */
-    @com.mybatisflex.annotation.Column(onUpdateValue = "now()")
+ 
     @Comment("更新时间")
     private Date updateTime;
     /**
