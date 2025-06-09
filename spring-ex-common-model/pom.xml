@@ -8,6 +8,7 @@
         <artifactId>spring-ex</artifactId>
         <version>3.5.0.2</version>
     </parent>
+    <name>spring-ex-common-model</name>
     <version>3.5.0.2</version>
     <groupId>com.guanmengyuan.spring-ex</groupId>
     <artifactId>spring-ex-common-model</artifactId>

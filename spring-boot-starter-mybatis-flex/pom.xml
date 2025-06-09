@@ -10,6 +10,7 @@
         <relativePath>../pom.xml</relativePath>
     </parent>
     <version>3.5.0.2</version>
+    <name>spring-boot-starter-mybatis-flex</name>
     <url>https://github.com/Guan-Meng-Yuan/spring-ex</url>
     <licenses>
         <license>
