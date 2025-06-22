@@ -6,11 +6,11 @@
     <parent>
         <groupId>com.guanmengyuan</groupId>
         <artifactId>spring-ex</artifactId>
-        <version>3.5.0.2</version>
+        <version>3.5.0.3</version>
     </parent>
     <name>spring-boot-starter-alipay</name>
     <url>https://github.com/Guan-Meng-Yuan/spring-ex</url>
-    <description>支付宝api starter</description>
+    <descript3.5.0.3api starter</description>
     <version>3.5.0.2</version>
     <licenses>
         <license>
