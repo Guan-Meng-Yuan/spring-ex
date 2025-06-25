@@ -6,7 +6,7 @@
 
     <groupId>com.guanmengyuan</groupId>
     <artifactId>spring-ex-dependencies</artifactId>
-    <version>3.5.0.3</version>
+    <version>3.5.3.1</version>
     <packaging>pom</packaging>
     <name>spring-ex-dependencies</name>
     <description>spring ex base pom</description>
@@ -33,29 +33,29 @@
     </scm>
 
     <properties>
-        <revision>3.5.0.3</revision>
+        <revision>3.5.3.1</revision>
         <java.version>21</java.version>
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <!--        spring start-->
-        <spring-boot.version>3.5.0</spring-boot.version>
-        <spring-cloud.version>2024.0.1</spring-cloud.version>
-        <spring-cloud-alibaba.version>2023.0.3.2</spring-cloud-alibaba.version>
+        <spring-boot.version>3.5.3</spring-boot.version>
+        <spring-cloud.version>2025.0.0</spring-cloud.version>
+        <spring-cloud-alibaba.version>2023.0.3.3</spring-cloud-alibaba.version>
         <!--        spring end-->
 
         <mybatis-flex.version>1.10.9</mybatis-flex.version>
-        <hutool.version>6.0.0-M21</hutool.version>
-        <alipay.version>4.40.237.ALL</alipay.version>
+        <hutool.version>6.0.0-M22</hutool.version>
+        <alipay.version>4.40.272.ALL</alipay.version>
         <fastexcel.version>1.2.0</fastexcel.version>
-        <wx-java.version>4.7.5-20250528.161554</wx-java.version>
-        <dubbo.version>3.3.4</dubbo.version>
+        <wx-java.version>4.7.6-20250609.143003</wx-java.version>
+        <dubbo.version>3.3.5</dubbo.version>
         <jeepay.version>max-3.8.7</jeepay.version>
-        <sa-token.version>1.43.0</sa-token.version>
-        <forest.version>1.6.4</forest.version>
+        <sa-token.version>1.44.0</sa-token.version>
+        <forest.version>1.7.1</forest.version>
         <aws.version>2.28.24</aws.version>
-        <warm-flow.version>1.7.2</warm-flow.version>
-        <warm-flow-flex.version>1.7.2</warm-flow-flex.version>
+        <warm-flow.version>1.7.3</warm-flow.version>
+        <warm-flow-flex.version>1.7.3</warm-flow-flex.version>
         <poi.version>5.4.1</poi.version>
         <!--        build start-->
         <maven-compiler-plugin.version>3.14.0</maven-compiler-plugin.version>
@@ -64,7 +64,7 @@
         <maven-resources-plugin.version>3.3.1</maven-resources-plugin.version>
         <maven-javadoc-plugin.version>3.11.2</maven-javadoc-plugin.version>
         <maven-release-plugin.version>3.1.1</maven-release-plugin.version>
-        <central-publishing-maven-plugin.version>0.7.0</central-publishing-maven-plugin.version>
+        <central-publishing-maven-plugin.version>0.8.0</central-publishing-maven-plugin.version>
         <!--        build end-->
     </properties>
     <dependencyManagement>

@@ -6,10 +6,10 @@
     <parent>
         <groupId>com.guanmengyuan</groupId>
         <artifactId>spring-ex</artifactId>
-        <version>3.5.0.3</version>
+        <version>3.5.3.1</version>
     </parent>
-    <name>spr3.5.0.3t-starter-wx-pay</name>
-    <version>3.5.0.2</version>
+    <name>spring-boot-starter-wx-pay</name>
+    <version>3.5.3.1</version>
     <groupId>com.guanmengyuan.spring-ex</groupId>
     <artifactId>spring-boot-starter-wx-pay</artifactId>
     <url>https://github.com/Guan-Meng-Yuan/spring-ex</url>
