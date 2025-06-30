@@ -39,7 +39,7 @@ public class SaTokenConfiguration {
                         }
                     });
                 }).setError(e -> {
-                    throw new ServiceException(ResEnum.UNAUTHORIZED);
+                    throw new ServiceException(ResEnum.NOT_LOGIN);
                 });
     }
 }

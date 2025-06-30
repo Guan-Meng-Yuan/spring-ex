@@ -1,12 +1,9 @@
 package com.guanmengyuan.spring.ex.common.model.dto.res;
 
-import cn.dev33.satoken.exception.NotLoginException;
-import cn.dev33.satoken.exception.SaTokenException;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.guanmengyuan.spring.ex.common.model.enums.ResEnum;
-import com.guanmengyuan.spring.ex.common.model.exception.ServiceException;
-import lombok.Data;
+import java.io.Serializable;
+import java.util.List;
+import java.util.Objects;
+
 import org.dromara.hutool.core.collection.CollUtil;
 import org.dromara.hutool.core.text.StrUtil;
 import org.springframework.http.HttpStatus;
@@ -17,9 +14,14 @@ import org.springframework.web.bind.support.WebExchangeBindException;
 import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.server.ServerWebExchange;
 
-import java.io.Serializable;
-import java.util.List;
-import java.util.Objects;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.guanmengyuan.spring.ex.common.model.enums.ResEnum;
+import com.guanmengyuan.spring.ex.common.model.exception.ServiceException;
+
+import cn.dev33.satoken.exception.NotLoginException;
+import cn.dev33.satoken.exception.SaTokenException;
+import lombok.Data;
 
 /**
  * 统一响应dto
@@ -33,6 +35,11 @@ public class R<T> implements Serializable {
      */
     public R() {
     }
+
+    /**
+     * 响应码
+     */
+    private String code;
 
     /**
      * 是否成功
@@ -85,6 +92,7 @@ public class R<T> implements Serializable {
     public static R<?> okNoData() {
         R<?> r = new R<>();
         r.setSuccess(Boolean.TRUE);
+        r.setCode(ResEnum.SUCCESS.getCode());
         setResEnum(r, ResEnum.SUCCESS);
         return r;
     }
@@ -103,6 +111,7 @@ public class R<T> implements Serializable {
         r.setMessage(StrUtil.format("request path error,path:{},errorMessage:{}", exchange.getRequest().getPath(),
                 error.getMessage()));
         r.setTips(ResEnum.INTERNAL_SERVER_ERROR.getTips());
+        r.setCode(ResEnum.INTERNAL_SERVER_ERROR.getCode());
         if (error instanceof ResponseStatusException responseStatusException) {
             setRes(error, responseStatusException, r);
         } else {
@@ -116,11 +125,13 @@ public class R<T> implements Serializable {
         r.setHttpStatusCode(statusCode);
         if (error instanceof ServiceException serviceException) {
             r.setTips(serviceException.getTips());
+            r.setCode(serviceException.getCode());
         } else if (error instanceof WebExchangeBindException webExchangeBindException) {
             List<ObjectError> allErrors = webExchangeBindException.getAllErrors();
             if (CollUtil.isNotEmpty(allErrors)) {
                 r.setTips(StrUtil.defaultIfBlank(allErrors.get(0).getDefaultMessage(),
-                        ResEnum.INTERNAL_SERVER_ERROR.getTips()));
+                        ResEnum.PARAM_EMPTY.getTips()));
+                r.setCode(ResEnum.PARAM_EMPTY.getCode());
             }
         }
     }
@@ -135,6 +146,7 @@ public class R<T> implements Serializable {
         R<?> r = new R<>();
         r.setMessage(serviceException.getMessage());
         r.setTips(serviceException.getTips());
+        r.setCode(serviceException.getCode());
         r.setHttpStatusCode(serviceException.getStatusCode());
         r.setSuccess(Boolean.FALSE);
         return r;
@@ -148,9 +160,10 @@ public class R<T> implements Serializable {
      */
     public static R<?> notFound(Throwable throwable) {
         R<?> r = new R<>();
-        r.setTips(ResEnum.NOT_FOUND.getTips());
-        r.setHttpStatusCode(ResEnum.NOT_FOUND.getHttpStatusCode());
-        r.setMessage(StrUtil.defaultIfBlank(throwable.getMessage(), ResEnum.NOT_FOUND.getMessage()));
+        r.setTips(ResEnum.RESOURCE_NOT_FOUND.getTips());
+        r.setCode(ResEnum.RESOURCE_NOT_FOUND.getCode());
+        r.setHttpStatusCode(ResEnum.RESOURCE_NOT_FOUND.getHttpStatusCode());
+        r.setMessage(StrUtil.defaultIfBlank(throwable.getMessage(), ResEnum.RESOURCE_NOT_FOUND.getMessage()));
         r.setSuccess(Boolean.FALSE);
         return r;
     }
@@ -168,27 +181,32 @@ public class R<T> implements Serializable {
             case ServiceException serviceException -> {
                 r.setMessage(serviceException.getMessage());
                 r.setTips(serviceException.getTips());
+                r.setCode(serviceException.getCode());
                 r.setHttpStatusCode(serviceException.getStatusCode());
             }
             // 如果是参数校验异常
             case MethodArgumentNotValidException methodArgumentNotValidException -> {
                 r.setTips(Objects.requireNonNull(methodArgumentNotValidException.getBindingResult().getFieldError())
                         .getDefaultMessage());
+                r.setCode(ResEnum.PARAM_EMPTY.getCode());
                 r.setHttpStatusCode(HttpStatus.BAD_REQUEST);
                 r.setMessage(throwable.getMessage());
             }
-            // 其他异常
+            // SaToken异常
             case SaTokenException saTokenException -> {
                 if (saTokenException instanceof NotLoginException) {
                     r.setTips(ResEnum.NOT_LOGIN.getTips());
+                    r.setCode(ResEnum.NOT_LOGIN.getCode());
                 } else {
-                    r.setTips(ResEnum.UNAUTHORIZED.getTips());
+                    r.setTips(ResEnum.NO_PERMISSION.getTips());
+                    r.setCode(ResEnum.NO_PERMISSION.getCode());
                 }
-                r.setHttpStatusCode(ResEnum.UNAUTHORIZED.getHttpStatusCode());
+                r.setHttpStatusCode(ResEnum.NOT_LOGIN.getHttpStatusCode());
                 r.setMessage(saTokenException.getMessage());
             }
             case null, default -> {
                 r.setTips(ResEnum.INTERNAL_SERVER_ERROR.getTips());
+                r.setCode(ResEnum.INTERNAL_SERVER_ERROR.getCode());
                 r.setHttpStatusCode(ResEnum.INTERNAL_SERVER_ERROR.getHttpStatusCode());
                 if (throwable != null) {
                     r.setMessage(throwable.getMessage());
@@ -206,9 +224,10 @@ public class R<T> implements Serializable {
      * @param resEnum 响应枚举
      */
     private static void setResEnum(R<?> r, ResEnum resEnum) {
+        r.setCode(resEnum.getCode());
         r.setMessage(resEnum.getMessage());
         r.setTips(resEnum.getTips());
-        r.setHttpStatusCode(r.httpStatusCode);
+        r.setHttpStatusCode(resEnum.getHttpStatusCode());
     }
 
     /**
@@ -237,6 +256,57 @@ public class R<T> implements Serializable {
         r.setData(result);
         r.setSuccess(Boolean.TRUE);
         setResEnum(r, ResEnum.SUCCESS);
+        return r;
+    }
+
+    /**
+     * 根据ResEnum创建错误响应
+     *
+     * @param resEnum 响应枚举
+     * @param <T>     泛型类型
+     * @return 错误响应
+     */
+    public static <T> R<T> error(ResEnum resEnum) {
+        R<T> r = new R<>();
+        r.setSuccess(Boolean.FALSE);
+        setResEnum(r, resEnum);
+        return r;
+    }
+
+    /**
+     * 根据ResEnum创建错误响应（带自定义消息）
+     *
+     * @param resEnum  响应枚举
+     * @param message  自定义消息
+     * @param <T>      泛型类型
+     * @return 错误响应
+     */
+    public static <T> R<T> error(ResEnum resEnum, String message) {
+        R<T> r = new R<>();
+        r.setSuccess(Boolean.FALSE);
+        r.setCode(resEnum.getCode());
+        r.setMessage(message);
+        r.setTips(resEnum.getTips());
+        r.setHttpStatusCode(resEnum.getHttpStatusCode());
+        return r;
+    }
+
+    /**
+     * 根据ResEnum创建错误响应（带自定义消息和提示）
+     *
+     * @param resEnum  响应枚举
+     * @param message  自定义消息
+     * @param tips     自定义提示
+     * @param <T>      泛型类型
+     * @return 错误响应
+     */
+    public static <T> R<T> error(ResEnum resEnum, String message, String tips) {
+        R<T> r = new R<>();
+        r.setSuccess(Boolean.FALSE);
+        r.setCode(resEnum.getCode());
+        r.setMessage(message);
+        r.setTips(tips);
+        r.setHttpStatusCode(resEnum.getHttpStatusCode());
         return r;
     }
 

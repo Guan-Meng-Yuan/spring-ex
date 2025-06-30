@@ -28,4 +28,11 @@ public interface BaseResEnum {
      * @return 用户提示
      */
     String getTips();
+
+    /**
+     * 响应码
+     *
+     * @return 响应码
+     */
+    String getCode();
 }

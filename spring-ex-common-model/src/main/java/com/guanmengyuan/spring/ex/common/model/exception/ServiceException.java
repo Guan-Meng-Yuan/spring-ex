@@ -75,4 +75,13 @@ public class ServiceException extends ResponseStatusException {
         this(HttpStatus.INTERNAL_SERVER_ERROR, reason, tips);
     }
 
+    /**
+     * 获取响应码
+     *
+     * @return 响应码
+     */
+    public String getCode() {
+        return resEnum != null ? resEnum.getCode() : "20300";
+    }
+
 }

@@ -10,5 +10,5 @@ public interface ParamEnum {
      * @param type 类型字段值
      * @return 枚举实例
      */
-    ParamEnum getInstanceByType(String type);
+    ParamEnum getInstanceBy(String type);
 }

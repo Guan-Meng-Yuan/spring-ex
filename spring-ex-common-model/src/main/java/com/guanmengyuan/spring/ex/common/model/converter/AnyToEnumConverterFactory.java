@@ -35,9 +35,9 @@ public class AnyToEnumConverterFactory implements ConverterFactory<String, Param
                 return null;
             }
             if (!enumType.isEnum()) {
-                throw new ServiceException(ResEnum.NOT_AN_ENUMERATION);
+                throw new ServiceException(ResEnum.ENUM_NOT_SUPPORT);
             }
-            return (T) enumType.getEnumConstants()[0].getInstanceByType(source.trim());
+            return (T) enumType.getEnumConstants()[0].getInstanceBy(source.trim());
         }
     }
 }
