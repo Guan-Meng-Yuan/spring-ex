@@ -17,7 +17,7 @@ import lombok.Getter;
 @Getter
 @EqualsAndHashCode(callSuper = true)
 @MappedSuperclass
-@SuppressWarnings({"unchecked", "UnusedReturnValue","unused"})
+@SuppressWarnings({ "unchecked", "UnusedReturnValue", "unused" })
 public class TenantDomain<T extends Model<T>> extends BaseDomain<T> {
     /**
      * 默认构造
@@ -32,8 +32,8 @@ public class TenantDomain<T extends Model<T>> extends BaseDomain<T> {
     @Comment("租户ID")
     private String tenantId;
 
-    private T setTenantId(String tenantId){
-        this.tenantId=tenantId;
-        return (T)this;
+    public T setTenantId(String tenantId) {
+        this.tenantId = tenantId;
+        return (T) this;
     }
 }
