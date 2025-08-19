@@ -44,22 +44,22 @@ public class PageReq<T> implements Serializable {
     /**
      * 每页条数,默认10条
      */
-    private Integer pageSize = 10;
+    private Integer pageSize;
 
     /**
      * 每页条数,默认10条 (兼容size)
      */
-    private Integer size = 10;
+    private Integer size;
 
     /**
      * 每页条数,默认10条 (兼容limit)
      */
-    private Integer limit = 10;
+    private Integer limit;
 
     /**
      * 每页条数,默认10条 (兼容pageCount)
      */
-    private Integer pageCount = 10;
+    private Integer pageCount;
 
     /**
      * 查询关键字
@@ -95,19 +95,19 @@ public class PageReq<T> implements Serializable {
      * 获取当前页码 (优先使用page，其次current，最后pageNumber)
      */
     public Integer getCurrentPage() {
-        if (page != null && page >= 1) {
+        if (page != null && page >= 2) {
             return page;
         }
-        if (current != null && current >= 1) {
+        if (current != null && current >= 2) {
             return current;
         }
-        if (pageNumber != null && pageNumber >= 1) {
+        if (pageNumber != null && pageNumber >= 2) {
             return pageNumber;
         }
-        if (pageNum != null && pageNum >= 1) {
+        if (pageNum != null && pageNum >= 2) {
             return pageNum;
         }
-        if (pageIndex != null && pageIndex >= 1) {
+        if (pageIndex != null && pageIndex >= 2) {
             return pageIndex;
         }
         return 1;
@@ -117,16 +117,16 @@ public class PageReq<T> implements Serializable {
      * 获取每页条数 (优先使用pageSize，其次size，最后limit)
      */
     public Integer getCurrentPageSize() {
-        if (pageSize != null && pageSize >= 1) {
+        if (pageSize != null) {
             return pageSize;
         }
-        if (size != null && size >= 1) {
+        if (size != null) {
             return size;
         }
-        if (limit != null && limit >= 1) {
+        if (limit != null) {
             return limit;
         }
-        if (pageCount != null && pageCount >= 1) {
+        if (pageCount != null) {
             return pageCount;
         }
         return 10;
