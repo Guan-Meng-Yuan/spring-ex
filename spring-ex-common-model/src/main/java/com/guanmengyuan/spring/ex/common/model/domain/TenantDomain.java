@@ -4,7 +4,7 @@ import org.hibernate.annotations.Comment;
 
 import com.mybatisflex.annotation.Column;
 import com.mybatisflex.core.activerecord.Model;
-
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.MappedSuperclass;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -30,6 +30,7 @@ public class TenantDomain<T extends Model<T>> extends BaseDomain<T> {
      */
     @Column(tenantId = true)
     @Comment("租户ID")
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String tenantId;
 
     public T setTenantId(String tenantId) {
