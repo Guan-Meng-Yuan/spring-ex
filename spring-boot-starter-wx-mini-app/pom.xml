@@ -6,11 +6,11 @@
     <parent>
         <groupId>com.guanmengyuan</groupId>
         <artifactId>spring-ex</artifactId>
-        <version>3.5.5.1</version>
+        <version>3.5.5.2</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
     <name>spring-boot-starter-wx-mini-app</name>
-    <version>3.5.5.1</version>
+    <version>3.5.5.2</version>
     <groupId>com.guanmengyuan.spring-ex</groupId>
     <artifactId>spring-boot-starter-wx-mini-app</artifactId>
     <url>https://github.com/Guan-Meng-Yuan/spring-ex</url>

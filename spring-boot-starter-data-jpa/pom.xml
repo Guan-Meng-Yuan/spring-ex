@@ -7,12 +7,11 @@
         <groupId>com.guanmengyuan</groupId>
         <artifactId>spring-ex</artifactId>
         <version>3.5.5.2</version>
+        <relativePath>../pom.xml</relativePath>
     </parent>
     <version>3.5.5.2</version>
-    <name>spring-boot-starter-oss</name>
+    <name>spring-boot-starter-data-jpa</name>
     <url>https://github.com/Guan-Meng-Yuan/spring-ex</url>
-    <description>spring enhance pack</description>
-
     <licenses>
         <license>
             <name>The Apache Software License, Version 2.0</name>
@@ -20,6 +19,8 @@
             <distribution>repo</distribution>
         </license>
     </licenses>
+    <description>spring enhance pack</description>
+
     <developers>
         <developer>
             <name>GMY</name>
@@ -35,39 +36,18 @@
     </scm>
 
     <groupId>com.guanmengyuan.spring-ex</groupId>
-    <artifactId>spring-boot-starter-oss</artifactId>
-
+    <artifactId>spring-boot-starter-data-jpa</artifactId>
     <properties>
         <maven.compiler.source>21</maven.compiler.source>
         <maven.compiler.target>21</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
-
     <dependencies>
-        <dependency>
-            <groupId>software.amazon.awssdk</groupId>
-            <artifactId>s3</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-configuration-processor</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-autoconfigure</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-web</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.dromara.hutool</groupId>
-            <artifactId>hutool-core</artifactId>
-        </dependency>
-    </dependencies>
 
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
+        </dependency>
+
+    </dependencies>
 </project>
