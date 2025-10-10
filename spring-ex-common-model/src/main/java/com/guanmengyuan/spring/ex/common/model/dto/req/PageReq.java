@@ -7,6 +7,8 @@ import java.io.Serializable;
 
 /**
  * 分页参数 - 兼容多种分页参数命名
+ * 
+ * @param <T> 泛型
  */
 @Data
 public class PageReq<T> implements Serializable {
@@ -93,6 +95,8 @@ public class PageReq<T> implements Serializable {
 
     /**
      * 获取当前页码 (优先使用page，其次current，最后pageNumber)
+     * 
+     * @return 当前页码
      */
     public Integer getCurrentPage() {
         if (page != null && page >= 2) {
@@ -115,6 +119,8 @@ public class PageReq<T> implements Serializable {
 
     /**
      * 获取每页条数 (优先使用pageSize，其次size，最后limit)
+     * 
+     * @return 每页条数
      */
     public Integer getCurrentPageSize() {
         if (pageSize != null) {
@@ -134,6 +140,8 @@ public class PageReq<T> implements Serializable {
 
     /**
      * 获取查询关键字 (优先使用keywords，其次keyword，最后search)
+     * 
+     * @return 查询关键字
      */
     public String getSearchKeywords() {
         if (keywords != null && !keywords.trim().isEmpty()) {
@@ -155,6 +163,7 @@ public class PageReq<T> implements Serializable {
      * 转换page对象方法 (兼容旧版本)
      *
      * @param pageReq page参数
+     * @param <T>     泛型
      * @return page对象
      */
     public static <T> Page<T> of(PageReq<T> pageReq) {
@@ -163,6 +172,8 @@ public class PageReq<T> implements Serializable {
 
     /**
      * 转换page对象方法 (推荐使用)
+     *
+     * @return Page 对象
      */
     public Page<T> toPage() {
         return Page.of(getCurrentPage(), getCurrentPageSize());
@@ -170,6 +181,8 @@ public class PageReq<T> implements Serializable {
 
     /**
      * 兼容旧版本的of方法
+     *
+     * @return Page 对象
      */
     public Page<T> of() {
         return toPage();
@@ -177,6 +190,8 @@ public class PageReq<T> implements Serializable {
 
     /**
      * 获取偏移量 (用于数据库查询)
+     *
+     * @return 偏移量
      */
     public Integer getOffset() {
         return (getCurrentPage() - 1) * getCurrentPageSize();
@@ -184,6 +199,9 @@ public class PageReq<T> implements Serializable {
 
     /**
      * 获取总页数 (根据总数计算)
+     *
+     * @param totalCount 总记录数
+     * @return 总页数
      */
     public Integer getTotalPages(Integer totalCount) {
         if (totalCount == null || totalCount <= 0) {

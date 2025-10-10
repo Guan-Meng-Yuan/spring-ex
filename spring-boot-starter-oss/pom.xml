@@ -6,9 +6,9 @@
     <parent>
         <groupId>com.guanmengyuan</groupId>
         <artifactId>spring-ex</artifactId>
-        <version>3.5.5.2</version>
+        <version>3.5.6.1</version>
     </parent>
-    <version>3.5.5.2</version>
+    <version>3.5.6.1</version>
     <name>spring-boot-starter-oss</name>
     <url>https://github.com/Guan-Meng-Yuan/spring-ex</url>
     <description>spring enhance pack</description>

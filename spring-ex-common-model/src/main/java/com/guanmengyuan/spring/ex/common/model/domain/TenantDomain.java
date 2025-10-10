@@ -33,6 +33,12 @@ public class TenantDomain<T extends Model<T>> extends BaseDomain<T> {
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String tenantId;
 
+    /**
+     * 设置租户ID
+     * 
+     * @param tenantId 租户id
+     * @return this
+     */
     public T setTenantId(String tenantId) {
         this.tenantId = tenantId;
         return (T) this;
