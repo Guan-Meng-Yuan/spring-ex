@@ -6,10 +6,10 @@
     <parent>
         <groupId>com.guanmengyuan</groupId>
         <artifactId>spring-ex</artifactId>
-        <version>3.5.6.1</version>
+        <version>3.5.7.1</version>
     </parent>
     <name>spring-cloud-starter-auth</name>
-    <version>3.5.6.1</version>
+    <version>3.5.7.1</version>
     <groupId>com.guanmengyuan.spring-ex</groupId>
     <artifactId>spring-cloud-starter-auth</artifactId>
     <url>https://github.com/Guan-Meng-Yuan/spring-ex</url>
