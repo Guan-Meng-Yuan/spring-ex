@@ -1,5 +1,6 @@
 package com.guanmengyuan.spring.ex.web.config;
 
+import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.TimeZone;
 
@@ -19,6 +20,7 @@ public class JacksonConfiguration {
         ObjectMapper objectMapper = new ObjectMapper();
         SimpleModule module = new SimpleModule();
         module.addSerializer(Long.class, ToStringSerializer.instance);
+        module.addSerializer(BigDecimal.class, ToStringSerializer.instance);
         objectMapper.registerModule(module);
         objectMapper.setDateFormat(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"));
         objectMapper.setTimeZone(TimeZone.getTimeZone("GMT+8"));

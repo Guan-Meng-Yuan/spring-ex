@@ -3,7 +3,7 @@ package com.guanmengyuan.spring.ex.oss.provider;
 import com.guanmengyuan.spring.ex.oss.service.CosSecretInfo;
 import com.guanmengyuan.spring.ex.oss.service.OssSecretRequestService;
 import lombok.extern.slf4j.Slf4j;
-import org.dromara.hutool.core.date.DateUtil;
+import cn.hutool.v7.core.date.DateUtil;
 import software.amazon.awssdk.auth.credentials.AwsCredentials;
 import software.amazon.awssdk.auth.credentials.AwsCredentialsProvider;
 import software.amazon.awssdk.auth.credentials.AwsSessionCredentials;

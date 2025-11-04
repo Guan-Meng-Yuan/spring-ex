@@ -4,8 +4,6 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 
-import org.dromara.hutool.core.collection.CollUtil;
-import org.dromara.hutool.core.text.StrUtil;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.validation.ObjectError;
@@ -21,6 +19,8 @@ import com.guanmengyuan.spring.ex.common.model.exception.ServiceException;
 
 import cn.dev33.satoken.exception.NotLoginException;
 import cn.dev33.satoken.exception.SaTokenException;
+import cn.hutool.v7.core.collection.CollUtil;
+import cn.hutool.v7.core.text.StrUtil;
 import lombok.Data;
 
 /**

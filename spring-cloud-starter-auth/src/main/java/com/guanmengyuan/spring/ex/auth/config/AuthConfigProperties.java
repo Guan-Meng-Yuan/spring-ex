@@ -1,7 +1,7 @@
 package com.guanmengyuan.spring.ex.auth.config;
 
 import lombok.Data;
-import org.dromara.hutool.core.collection.set.SetUtil;
+import cn.hutool.v7.core.collection.set.SetUtil;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 import java.util.Set;

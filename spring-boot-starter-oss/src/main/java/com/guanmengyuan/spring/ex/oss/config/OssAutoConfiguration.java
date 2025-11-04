@@ -3,7 +3,7 @@ package com.guanmengyuan.spring.ex.oss.config;
 import com.guanmengyuan.spring.ex.oss.enums.SecretMode;
 import com.guanmengyuan.spring.ex.oss.provider.DynamicCredentialsProvider;
 import com.guanmengyuan.spring.ex.oss.service.OssSecretRequestService;
-import org.dromara.hutool.core.text.StrUtil;
+import cn.hutool.v7.core.text.StrUtil;
 import org.springframework.beans.factory.BeanInitializationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;

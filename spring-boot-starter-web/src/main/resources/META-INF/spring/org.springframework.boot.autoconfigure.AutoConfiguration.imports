@@ -2,4 +2,4 @@ com.guanmengyuan.spring.ex.web.config.SpringWebAutoConfiguration
 com.guanmengyuan.spring.ex.web.config.GlobalExceptionHandler
 com.guanmengyuan.spring.ex.web.config.JacksonConfiguration
 com.guanmengyuan.spring.ex.web.config.ValidationConfiguration
-org.dromara.hutool.extra.spring.SpringUtil
+cn.hutool.v7.extra.spring.SpringUtil

@@ -5,7 +5,7 @@ import com.guanmengyuan.spring.ex.common.model.exception.ServiceException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
-import org.dromara.hutool.core.bean.BeanUtil;
+import cn.hutool.v7.core.bean.BeanUtil;
 import org.springframework.boot.autoconfigure.web.ServerProperties;
 import org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController;
 import org.springframework.boot.web.servlet.error.DefaultErrorAttributes;

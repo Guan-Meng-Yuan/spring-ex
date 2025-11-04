@@ -6,9 +6,9 @@
     <parent>
         <groupId>com.guanmengyuan</groupId>
         <artifactId>spring-ex</artifactId>
-        <version>3.5.7.1</version>
+        <version>3.5.7.2</version>
     </parent>
-    <version>3.5.7.1</version>
+    <version>3.5.7.2</version>
     <name>spring-boot-starter-web</name>
     <description>spring enhance pack</description>
 
@@ -74,15 +74,15 @@
             <artifactId>spring-ex-common-model</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.dromara.hutool</groupId>
+            <groupId>cn.hutool.v7</groupId>
             <artifactId>hutool-core</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.dromara.hutool</groupId>
+            <groupId>cn.hutool.v7</groupId>
             <artifactId>hutool-extra</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.dromara.hutool</groupId>
+            <groupId>cn.hutool.v7</groupId>
             <artifactId>hutool-json</artifactId>
         </dependency>
         <dependency>

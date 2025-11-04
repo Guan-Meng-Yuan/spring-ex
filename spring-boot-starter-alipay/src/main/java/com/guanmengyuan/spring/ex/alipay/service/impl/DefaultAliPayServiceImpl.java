@@ -11,11 +11,11 @@ import com.guanmengyuan.spring.ex.alipay.config.AliPayProperties;
 import com.guanmengyuan.spring.ex.alipay.service.AliPayService;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
-import org.dromara.hutool.core.io.resource.ResourceUtil;
-import org.dromara.hutool.core.text.StrUtil;
-import org.dromara.hutool.core.util.CharsetUtil;
-import org.dromara.hutool.json.JSON;
-import org.dromara.hutool.json.JSONUtil;
+import cn.hutool.v7.core.io.resource.ResourceUtil;
+import cn.hutool.v7.core.text.StrUtil;
+import cn.hutool.v7.core.util.CharsetUtil;
+import cn.hutool.v7.json.JSON;
+import cn.hutool.v7.json.JSONUtil;
 
 import java.nio.charset.StandardCharsets;
 import java.util.List;
