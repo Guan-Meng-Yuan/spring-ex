@@ -20,7 +20,7 @@ public class JacksonConfiguration {
         ObjectMapper objectMapper = new ObjectMapper();
         SimpleModule module = new SimpleModule();
         module.addSerializer(Long.class, ToStringSerializer.instance);
-        module.addSerializer(BigDecimal.class, ToStringSerializer.instance);
+        module.addSerializer(BigDecimal.class, new BigDecimalStripTrailingZerosSerializer());
         objectMapper.registerModule(module);
         objectMapper.setDateFormat(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"));
         objectMapper.setTimeZone(TimeZone.getTimeZone("GMT+8"));
