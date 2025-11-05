@@ -30,7 +30,7 @@ public class MyInsertListener implements InsertListener {
                 }
             }
         } catch (Exception e) {
-            log.warn("saToken get loginId unsuccessful");
+            log.debug("saToken get loginId unsuccessful");
             if (o instanceof BaseDomain<?> baseDomain) {
                 if (baseDomain.getCreateTime() == null) {
                     baseDomain.setCreateTime(new Date());

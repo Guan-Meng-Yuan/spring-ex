@@ -1,15 +1,16 @@
 package com.guanmengyuan.spring.ex.mybatis.flex.config;
 
-import cn.dev33.satoken.stp.StpUtil;
-import com.mybatisflex.core.dialect.IDialect;
-import com.mybatisflex.core.logicdelete.impl.BooleanLogicDeleteProcessor;
-import com.mybatisflex.core.table.TableInfo;
-import lombok.extern.slf4j.Slf4j;
+import static com.mybatisflex.core.constant.SqlConsts.EQUALS;
 
 import java.util.Arrays;
 import java.util.List;
 
-import static com.mybatisflex.core.constant.SqlConsts.EQUALS;
+import com.mybatisflex.core.dialect.IDialect;
+import com.mybatisflex.core.logicdelete.impl.BooleanLogicDeleteProcessor;
+import com.mybatisflex.core.table.TableInfo;
+
+import cn.dev33.satoken.stp.StpUtil;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * 自定义逻辑删除处理器
@@ -35,7 +36,7 @@ public class MyLogicDeleteProcessor extends BooleanLogicDeleteProcessor {
                 long loginIdAsLong = StpUtil.getLoginIdAsLong();
                 sql += "," + dialect.wrap("delete_user_id") + EQUALS + loginIdAsLong;
             } catch (Exception e) {
-                log.warn("saToken get loginId unsuccessful");
+                log.debug("saToken get loginId unsuccessful");
             }
         }
         return sql;
